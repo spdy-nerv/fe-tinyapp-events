@@ -1,0 +1,19 @@
+<!--footer.wxml-->
+
+<template name="footer">
+<!--底部导航-->
+<view class="footer_container">
+        <view class="foot-item foot1">
+          <image src="../../images/foot-event-icon1.png" />
+          <view>学校事件</view>
+        </view>
+        <view class="foot-item foot2">
+         <image src="../../images/foot-event-icon2.png" />
+         <view class="font-gradient" style="margin-top:-5rpx;">发布</view>
+        </view>
+        <view class="foot-item foot3 current">
+        	<image src="../../images/foot-event-icon3-red.png" />
+       		<view class="font-gradient">我的</view>
+        </view>
+</view>
+</template>
