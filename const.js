@@ -32,14 +32,14 @@ var APIS = {
   CHECK_SESSION: 						reqHost + '/wx/checkSession',
   GET_EVENTS_LIST_BY_MONTH: reqHost + '/getEventsListByMonth',
   
-	GET_EVENT_BASE: 					reqHost + 'getEventBase', //事件详情页
-	GET_COMMENtT_MODULE: 			reqHost + 'getCommentModule',//获取评论模块
-	ADD_STAR:									reqHost + 'addStar',//点赞接口
-	FOLLOW_EVENT: 						reqHost + 'followEvent',//关注事件
-	UN_FOLLOW_EVENT:					reqHost + 'unfollowEvent',//取消关注
-	GET_DESCRIPTION_MODULE:		reqHost + 'getDescriptionModule', //获取事件详情模块
-	GET_ENROLL_MODULE: 				reqHost +'getEnrollModule',//获取报名模块
-	ADD_ENROLL: 							reqHost +'addEnroll' //报名
+	GET_EVENT_BASE: 					reqHost + '/getEventBase', //事件详情页
+	GET_COMMENT_MODULE: 			reqHost + '/getCommentModule',//获取评论模块
+	ADD_STAR:									reqHost + '/addStar',//点赞接口
+	FOLLOW_EVENT: 						reqHost + '/followEvent',//关注事件
+	UN_FOLLOW_EVENT:					reqHost + '/unfollowEvent',//取消关注
+	GET_DESCRIPTION_MODULE:		reqHost + '/getDescriptionModule', //获取事件详情模块
+	GET_ENROLL_MODULE: 				reqHost +'/getEnrollModule',//获取报名模块
+	ADD_ENROLL: 							reqHost +'/addEnroll' //报名
 };
 
 module.exports = {
