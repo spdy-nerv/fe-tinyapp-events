@@ -1,0 +1,186 @@
+<!--detail.wxml-->
+<view class="banner-container">
+  <image src="../../images/banner.png"></image>
+</view>
+
+<view class="title-box">
+  <view class="title-box-left">
+     <view class="eng">Oct</view>
+     <view class="chiness">11</view>
+  </view>
+  <view class="title-box-right">
+    <view class="right1">2017年中欧新生入学2017年中…</view>
+    <view class="right2">
+    <text>浦东新区 红枫路699号</text>
+     <image src="../../images/location1.png"></image>
+    </view>
+   </view>
+</view>
+
+<!--分享、点赞部分-->
+<view class="share-box">
+   <view class="share-item">
+     <image src="../../images/icon5.png"></image>
+     <view>分享</view>
+   </view>
+   <view class="share-item"> <image src="../../images/icon6.png"></image>
+   <view>已参加</view>
+   </view>
+   <view class="share-item"> <image src="../../images/icon3.png"></image>
+   <view>已关注</view>
+   </view>
+   <view class="share-item">
+    <image src="../../images/icon4.png"></image>
+   
+     <view>188</view>
+   </view>
+</view>
+
+<!--投票、地址等模块-->
+<view class="mg20">
+<view class=" model-top">
+  <view class="model-left ">
+     <image src="../../images/d-icon1.png"></image>
+  </view>
+  <view class="model-right">
+    <view class="right1">2017年09月01日</view>
+    <view class="right2">
+   上午9：00-下午17：00
+    </view>
+   </view>
+</view>
+
+<view class=" model-top">
+  <view class="model-left ">
+     <image src="../../images/d-icon2.png" class="m-img2"></image>
+  </view>
+  <view class="model-right">
+    <view class="right1">浦东新区 红枫路699号</view>
+    <view class="right2">
+   骏源支行、恒源支行、暑前路支行、东晓南
+支行、天河南支行
+    </view>
+   </view>
+</view>
+
+<view class="model">
+  <view class="model-left ">
+     <image src="../../images/d-icon3.png"></image>
+  </view>
+  <view class="model-right">
+    <view class="right1">事件投票模块</view>
+   
+   </view>
+   <view class="arr">
+   <text class="wb_arrow_right"></text>
+   </view>
+</view>
+
+<view class="model">
+  <view class="model-left ">
+     <image src="../../images/d-icon4.png"></image>
+  </view>
+  <view class="model-right">
+    <view class="right1">问卷调查</view>
+   
+   </view>
+   <view class="arr">
+   <text class="wb_arrow_right"></text>
+   </view>
+</view>
+
+
+<view class="model">
+  <view class="model-left ">
+     <image src="../../images/d-icon5.png" class="m-img5"></image>
+  </view>
+  <view class="model-right">
+    <view class="right1">事件评价模块</view>
+   
+   </view>
+   <view class="arr">
+   <text class="wb_arrow_right"></text>
+   </view>
+</view>
+</view>
+
+<!-- 上拉查看图文详情 -->
+<view class="pull-up-show-detail mg20">
+  <view class="classname">
+  <text class="wb_arrow_up"></text>
+  上拉查看图文详情</view>
+</view>
+<!--此处为自定义图文详情内容区-->
+<view class="detail_box">
+  <image src="../../images/pic.png"></image>
+</view>
+<!--评论-->
+<view class="comment-container">
+ <view class="comment_title">评论<text>（128）</text></view>
+ <view class="comment-box">
+  <view class="comment-left">
+    <image src="../../images/icon2.png"></image>
+    <text>天涯明月刀</text>
+    <time class="fr">2017-04-11</time>
+  </view>
+  <view class="comment_cont">
+    <text>​​人工智能的时代已经到来。越来越多的AI技术改变了现代人的生活、学习和工作。中文进英文出、一边说话一边文字自动显示出来，这些技术被形容为“黑科技”，其实，包括上述技术在内的多种应用AI技术的产品已经被中国智能语音与人工智能企业科大讯飞股份有限公司（iFLYTEK Co., Ltd.）（以下简称科大讯飞）推向海外</text>
+  </view>
+  </view>
+
+  <view class="comment-box">
+  <view class="comment-left">
+    <image src="../../images/icon2.png"></image>
+    <text>天涯明月刀</text>
+    <time class="fr">2017-04-11</time>
+  </view>
+  <view class="comment_cont">
+    <text>​​人工智能的时代已经到来。越来越多的AI技术改变了现代人的生活、学习和工作。中文进英文出、一边说话一边文字自动显示出来，这些技术被形容为“黑科技”，其实，包括上述技术在内的多种应用AI技术的产品已经被中国智能语音与人工智能企业科大讯飞股份有限公司（iFLYTEK Co., Ltd.）（以下简称科大讯飞）推向海外</text>
+  </view>
+  </view>
+
+  <view class="comment-box">
+  <view class="comment-left">
+    <image src="../../images/icon2.png"></image>
+    <text>天涯明月刀</text>
+    <time class="fr">2017-04-11</time>
+  </view>
+  <view class="comment_cont">
+    <text>​​人工智能的时代已经到来。越来越多的AI技术改变了现代人的生活、学习和工作。中文进英文出、一边说话一边文字自动显示出来，这些技术被形容为“黑科技”，其实，包括上述技术在内的多种应用AI技术的产品已经被中国智能语音与人工智能企业科大讯飞股份有限公司（iFLYTEK Co., Ltd.）（以下简称科大讯飞）推向海外</text>
+    <image src="../../images/pic2.png"></image>
+  </view>
+  </view>
+
+  <view class="comment-box">
+  <view class="comment-left">
+    <image src="../../images/icon2.png"></image>
+    <text>天涯明月刀</text>
+    <time class="fr">2017-04-11</time>
+  </view>
+  <view class="comment_cont">
+    <text>​​人工智能的时代已经到来。越来越多的AI技术改变了现代人的生活、学习和工作。中文进英文出、一边说话一边文字自动显示出来，这些技术被形容为“黑科技”，其实，包括上述技术在内的多种应用AI技术的产品已经被中国智能语音与人工智能企业科大讯飞股份有限公司（iFLYTEK Co., Ltd.）（以下简称科大讯飞）推向海外</text>
+  </view>
+  </view>
+</view>
+
+
+<!-- 查看更多评论 -->
+<view class="pull-up-show-detail">
+  <view class="classname">
+  查看更多评论<text class="wb_arrow_right"></text></view>
+</view>
+<!--底部浮动评论输入框-->
+
+<view class="footer_container mg20" style=" position: relative;">
+        <view class="foot-item comment1">
+          <view class="input_box">
+           <image src="../../images/c_icon3.png"></image>
+             <input placeholder="写评论…"  placeholder-class="String"/>
+           </view>
+        </view>
+        <view class="foot-item comment2">
+          <text class="comment_num">132</text>
+          <image src="../../images/c_icon1.png"></image>
+        </view>
+        <view class="foot-item comment3"> <image src="../../images/c_icon2.png"></image></view>
+</view>
