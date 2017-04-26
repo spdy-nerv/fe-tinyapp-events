@@ -1,0 +1,3 @@
+ .center_top{
+     min-height: 500rpx;
+ }
