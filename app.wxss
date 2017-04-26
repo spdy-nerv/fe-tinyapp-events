@@ -8,3 +8,39 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+
+page{
+  background-color:#eeeff1; 
+  width: 100%;
+  color: #2d2e33;
+   font-family: 'Arial','Microsoft Yahei', "Helvetica Neue", Helvetica, Tahoma, sans-serif; 
+   font-size: 30rpx;
+}
+
+/**底部导航**/
+.footer_container{
+	display: flex;
+  justify-content: space-between;
+	position: fixed;
+	height: 100rpx;
+	width: 100%;
+	background: #ffffff;
+  border-top:solid 1rpx #e3e3e3;
+  color: #5a595f;
+	bottom: 0;
+	left:0;
+   z-index: 999;
+}
+
+.foot-item{
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;/*column;/*row*/
+  width: 100%;  
+   -webkit-align-items: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  justify-content: center;
+ 
+}
