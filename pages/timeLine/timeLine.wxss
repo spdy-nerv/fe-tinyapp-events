@@ -97,7 +97,7 @@ page{
 
 .time-line-container{
   box-sizing: border-box;
-  padding-bottom: 120rpx;
+  padding-bottom: 170rpx;
   overflow-y: hidden;
   height: 100%;
 }

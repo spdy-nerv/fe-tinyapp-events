@@ -1,4 +1,7 @@
+var user = require('./user');
+
 /**
+ * 对wx.request进行二次封装，统一处理登录、跳转、错误提示等问题
  * obj
  *  url
  *  data
@@ -23,7 +26,7 @@ function request(obj, needLogin = true, ctx) {
                     mask: true,
                     title: '用户登录失效，重新登录中！'
                 });
-                user.login(loginCallback, ctx);
+                user.login(obj.loginCallback, ctx);
             // 未认证或未绑定
             } else if (d.errCode == '0013') {
                 // TODO
