@@ -376,20 +376,3 @@ page{
   float: right; 
 }
 
-
-/**底部导航**/
-/**底部样式**/
-
-.foot1 image{
-  width: 86rpx;
-  height: 60rpx;
-}
-.foot2 image{
-  width: 120rpx;
-  height: 130rpx;
-  margin-top: -60rpx;
-}
-.foot3 image{
-  width: 44rpx;
-  height: 72rpx;
-}

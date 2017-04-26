@@ -75,14 +75,24 @@
 
 </view>
 <!--底部导航-->
-
 <view class="footer_container">
         <view class="foot-item foot1">
-          <image src="../../images/f1.png"></image>
+          <image src="../../images/foot-event-icon1-red.png" />
+          <view  class="font-gradient">学校事件</view>
         </view>
-        <view class="foot-item foot2"><image src="../../images/f2.png"></image></view>
-        <view class="foot-item foot3"><image src="../../images/f3.png"></image></view>
-    </view>
+        <view class="foot-item foot2">
+         <image src="../../images/foot-event-icon2.png" />
+         <view class="font-gradient" style="margin-top:-5rpx;">发布</view>
+        </view>
+        
+          <view class="foot-item foot3">
+          <navigator url="../personCenter/personCenter">
+            <image src="../../images/foot-event-icon3.png" />
+            <view>我的</view>
+            </navigator>
+          </view>
+        
+</view>
 
 <view class="filter-mask" bindtap="onCloseFilterPanel" animation="{{filterMaskAnim}}" style="display:{{filterMaskDisplay}};"></view>
 <view class="filter-panel" animation="{{filterPanelAnim}}">
