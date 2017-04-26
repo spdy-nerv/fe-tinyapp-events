@@ -1,8 +1,10 @@
 {
   "pages":[
-     "pages/timeLine/timeLine",
-     "pages/detail/detail",
-    "pages/index/index",
+	"pages/timeLine/timeLine",
+	"pages/index/index",
+	"pages/personCenter/personCenter",
+	"pages/detail/detail",
+	"pages/myCard/myCard",
     "pages/logs/logs"
   ],
   "window":{
