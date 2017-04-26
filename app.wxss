@@ -78,7 +78,7 @@ page{
    align-items: center;
    justify-content: center;
    text-align:center;
-   font-size:28rpx;
+   font-size:24rpx;
    font-weight:bolder;
    color:#5d5f6a;
    margin-top:13rpx;
@@ -174,7 +174,7 @@ page{
 }
 .personCenter_list .fr input{
   text-align: right;
-	display: inline-block;
+  display: inline-block;
   vertical-align: middle;
 }
 .personCenter_list .fr icon{
