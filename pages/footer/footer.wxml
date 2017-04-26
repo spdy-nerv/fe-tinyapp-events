@@ -11,7 +11,7 @@
          <image src="../../images/foot-event-icon2.png" />
          <view class="font-gradient" style="margin-top:-5rpx;">发布</view>
         </view>
-        <view class="foot-item foot3 current">
+        <view class="foot-item foot3">
         	<image src="../../images/foot-event-icon3-red.png" />
        		<view class="font-gradient">我的</view>
         </view>
