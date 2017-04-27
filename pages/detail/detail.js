@@ -34,16 +34,16 @@ Page({
 			}
 		},
 		detail: {
-			eventName: "12", //事件名称
+			eventName: "", //事件名称
 			startTime: "",
 			endTime: "",
 			address: "",
 			formatedMonth: '',
 			//评论数据
 			commentData: {
-				totalCount:122,
+				totalCount:'',
 				hasMore:true,
-				size:20,
+				size:'',
 				offset:0,
 				commentsList:[]
 			},
@@ -81,11 +81,13 @@ Page({
 		this.setData({
 			eventId:options.eventId
 		});
+		
 		wx.showLoading({
 	      mask: true,
 	      title: '数据加载中'
 	    });
 	    user.login(this.onLoadData, this, true);
+	    
 	},
 	//页面加载的函数
 	onLoadData: function() {
@@ -127,9 +129,14 @@ Page({
 						"detail.isStar": datas.isStar, //是否点赞了
 						"detail.starCount": datas.starCount //点赞总数，默认0
 				});
+				//设置导航条标题
+				/*wx.setNavigationBarTitle({
+				  title: datas.eventName
+				})*/
 				//获取报名模块数据
 				that.getEnrollModuleData();
 				wx.hideLoading();
+				
 			}
 		});
 		

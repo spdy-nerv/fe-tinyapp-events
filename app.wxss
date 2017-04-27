@@ -1,4 +1,5 @@
-/**app.wxss**/
+/**app.wxss
+@import 'weui.wxss';**/
 .container {
   height: 100%;
   display: flex;
@@ -202,8 +203,9 @@ page{
   
 }
 .save_button button{
-  height: 100rpx;
-  line-height: 100rpx;
+  font-size: 36rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   background: -webkit-linear-gradient(left, #fd4748, #c52424);
 	/* Safari 5.1 - 6.0 */
 	background: -o-linear-gradient(right, #fd4748, #c52424);

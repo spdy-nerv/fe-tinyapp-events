@@ -1,13 +1,14 @@
 {
   "pages":[
+    
+    	"pages/timeLine/timeLine",
+    	"pages/verify/verify",
+      "pages/personCenter/personCenter",
+    	"pages/index/index",
+    	"pages/myCard/myCard",
+    	"pages/detail/detail",
     	
-	"pages/timeLine/timeLine",
-	"pages/index/index",
-"pages/personCenter/personCenter",
-    "pages/myCard/myCard",
-	"pages/detail/detail",
-	
-    "pages/logs/logs"
+    	"pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
