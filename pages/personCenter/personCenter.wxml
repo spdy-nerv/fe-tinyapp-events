@@ -1,17 +1,23 @@
 <!--personCenter.wxml-->
 <view class="center_top">
 	<view class="center_info">
-		<image src="../../images/icon2.png" class="icon"></image>
-		<view>John Doe</view>
-		<!--<view class="verify"> 
-			<image src="../../images/no-verify.png" />
-		</view>-->
-		<view class="verified"> 
-			<image src="../../images/verified.png" />
-			<text>中欧国际工商学院</text>
-		</view>
+		<image src="{{headerImg}}" class="icon"></image>
+		<view>{{nick}}</view>
+		<block wx:if="{{!isCertification}}">
+			<view class="verify"> 
+				<image src="../../images/no-verify.png" />
+			</view>
+		</block>
+		<block wx:else>
+			<view class="verified"> 
+				<image src="../../images/verified.png" />
+				<text>{{roleName}}</text>
+			</view>
+		</block>
 	</view>
-	<view class="center_bg"></view>
+	<view class="center_bg">
+		<image src="../../images/center_bg.png" />
+	</view>
 </view>
 <navigator url="../myCard/myCard">
 <view class="personCenter_list mg_top30">

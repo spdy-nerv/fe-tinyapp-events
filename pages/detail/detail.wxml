@@ -20,7 +20,7 @@
 <template name="1">
 <view class="title-box">
   <view class="title-box-left">
-     <view class="eng">Oct</view>
+     <view class="eng">{{formatedMonth}}</view>
      <view class="chiness">{{startTime.month}}</view>
   </view>
   <view class="title-box-right">
@@ -77,7 +77,7 @@
      <image src="../../images/d-icon1.png"></image>
   </view>
   <view class="model-right">
-    <view class="right1">{{startTime.year}}年{{startTime.month}}月{{startTime.day}}日 {{startTime.hours}}</view>
+    <view class="right1">开始时间：{{startTime.year}}年{{startTime.month}}月{{startTime.day}}日 {{startTime.hours}}</view>
     <view class="right2">
   结束时间： {{endTime.year}}年{{endTime.month}}月{{endTime.day}}日  {{endTime.hours}}
     </view>

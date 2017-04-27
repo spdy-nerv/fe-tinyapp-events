@@ -3,18 +3,14 @@
 /*var app = getApp()*/
 
 
-var { APIS } = require('../../const');
+var { monthFormatList, dayFormatList, APIS } = require('../../const');
 var util = require('../../utils/util');
 var user = require('../../libs/user');
 var { request } = require('../../libs/request');
 
 Page({
 	data: {
-		pictureUrls: [  //事情图片
-        	'../../images/banner.png',  
-          	'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',  
-         	'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'   
-    	],  
+		pictureUrls: [],  //事情图片
 	    indicatorDots: true,  
 	    autoplay: true,  
 	    interval: 5000,  
@@ -42,8 +38,7 @@ Page({
 			startTime: "",
 			endTime: "",
 			address: "",
-			
-			
+			formatedMonth: '',
 			//评论数据
 			commentData: {
 				totalCount:122,
@@ -79,48 +74,21 @@ Page({
 		},
 
 		//模块Id, moduleType 1:详情事件，2:评论，3：报名，4：投票，5:问卷，6：评价
-		modules: [{
-			moduleType: 1,
-			moduleId: 234123
-		}, {
-			moduleType: 4,
-			moduleId: 234123
-		}, {
-			moduleType: 5,
-			moduleId: 234123
-		}, {
-			moduleType: 6,
-			moduleId: 234123
-		}, {
-			moduleType: 2,
-			moduleId: 1
-		}]
-	},
-	//图片轮播
-	changeIndicatorDots: function(e) {
-		this.setData({
-			indicatorDots: !this.data.indicatorDots
-		})
-	},
-	changeAutoplay: function(e) {
-		this.setData({
-			autoplay: !this.data.autoplay
-		})
-	},
-	intervalChange: function(e) {
-		this.setData({
-			interval: e.detail.value
-		})
-	},
-	durationChange: function(e) {
-		this.setData({
-			duration: e.detail.value
-		})
+		modules: []
 	},
 
+	onLoad: function(options){
+		this.setData({
+			eventId:options.eventId
+		});
+		wx.showLoading({
+	      mask: true,
+	      title: '数据加载中'
+	    });
+	    user.login(this.onLoadData, this, true);
+	},
 	//页面加载的函数
-	onLoad: function() {
-	console.log(this.data.detail.pictureUrls);
+	onLoadData: function() {
 		const that = this;
 		const getEventBaseParams = {
 			sid: wx.getStorageSync('sid') || '',
@@ -133,34 +101,35 @@ Page({
 			url: APIS.GET_EVENT_BASE,
 			data: getEventBaseParams,
 			method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-			// header: {}, // 设置请求的 header
 			success: function(res) {
 				// success
-				console.log(res);
-
+				var datas=res.data.resultData;
+				var en = parseInt(datas.startTime.substring(5, 7));
 				that.setData({
-						"modules":res.data.resultData.modules,
-						"detail.eventName": res.data.resultData.name,
-						"detail.address": res.data.resultData.address,
+						"modules":datas.modules,
+						"detail.eventName": datas.name,
+						"detail.address": datas.address,
+						"detail.formatedMonth": monthFormatList[en].simpleEng,
 						"detail.startTime": { //开始时间
-							"year": res.data.resultData.startTime.substring(0, 4), //年份
-							"month": res.data.resultData.startTime.substring(5, 7),
-							"day": res.data.resultData.startTime.substring(8, 10),
-							"hours": res.data.resultData.startTime.substring(11, 16)
+							"year": datas.startTime.substring(0, 4), //年份
+							"month": datas.startTime.substring(5, 7),
+							"day": datas.startTime.substring(8, 10),
+							"hours": datas.startTime.substring(11, 16)
 						},
 						"detail.endTime": { //结束时间
-							"year": res.data.resultData.endTime.substring(0, 4), //年份
-							"month": res.data.resultData.endTime.substring(5, 7),
-							"day": res.data.resultData.endTime.substring(8, 10),
-							"hours": res.data.resultData.endTime.substring(11, 16)
+							"year": datas.endTime.substring(0, 4), //年份
+							"month": datas.endTime.substring(5, 7),
+							"day": datas.endTime.substring(8, 10),
+							"hours": datas.endTime.substring(11, 16)
 						},
-						"pictureUrls" :res.data.resultData.pictureUrls,
-						"detail.isFollow": res.data.resultData.isFollow, //是否关注了事件，默认false
-						"detail.isStar": res.data.resultData.isStar, //是否点赞了
-						"detail.starCount": res.data.resultData.starCount //点赞总数，默认0
+						"pictureUrls" :datas.pictureUrls,
+						"detail.isFollow": datas.isFollow, //是否关注了事件，默认false
+						"detail.isStar": datas.isStar, //是否点赞了
+						"detail.starCount": datas.starCount //点赞总数，默认0
 				});
 				//获取报名模块数据
 				that.getEnrollModuleData();
+				wx.hideLoading();
 			}
 		});
 		
@@ -387,13 +356,14 @@ Page({
 	//点击分享
 	clickShareBtn:function(e){
 		console.log("分享",e);
+		wx.showShareMenu();
 	},
 	onShareAppMessage: function() {
 		// 用户点击右上角分享
 		console.log('onShareAppMessage')
 		return {
 			desc: '分享给大家看看吧', // 分享描述
-			path: '/detail/detail' // 分享路径
+			path: '/detail/detail?eventId='+this.data.eventId+'?eventName='+this.data.detail.eventName // 分享路径
 		}
 	}
 })

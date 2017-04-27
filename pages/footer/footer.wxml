@@ -4,8 +4,10 @@
 <!--底部导航-->
 <view class="footer_container">
         <view class="foot-item foot1">
+        <navigator url="../timeLine/timeLine">
           <image src="../../images/foot-event-icon1.png" />
           <view>学校事件</view>
+        </navigator>
         </view>
         <view class="foot-item foot2">
          <image src="../../images/foot-event-icon2.png" />
