@@ -42,8 +42,9 @@ var APIS = {
 	ADD_ENROLL: 							reqHost +'/addEnroll', //报名
 	
 	MY_CENTER: 						 		reqHost +'/myCenter', //个人中心
-	MY_CARD: 									reqHost +'/myCard'//我的名片
-
+	MY_CARD: 									reqHost +'/myCard',//我的名片
+	 
+	CERTIFICATION: 						reqHost +'/certification' //认证
 	 
 };
 
