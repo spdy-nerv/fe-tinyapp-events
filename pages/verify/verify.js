@@ -29,14 +29,25 @@ Page({
 		roleId: "stu",
 		tips:"",
 		isHideT:true,
-
+		isUP:true,
 		plain: false,
 		disabled: false,
 		loading: false
 	},
 	onLoad: function() {
-		
+		//this.disableButton();
 	},
+	//没有输入必填项提交按钮置灰色
+	/*disableButton: function(inputType,value){
+		console.log(value);
+		
+		if(value){
+			this.setData({
+				disabled:!this.data.disabled,
+				plain: !this.data.plain
+			});
+		}
+	},*/
 	//单选框
 	radioChange: function(e) {
 		console.log('携带value值为：', e.detail.value);
@@ -53,11 +64,11 @@ Page({
 			    tips:"输入11位有效的数字！",
 			    isHideT:!that.data.isHideT
 			   });
-			/*setTimeout(function() {
+			setTimeout(function() {
 			   that.setData({
 			    isHideT:!that.data.isHideT
 			   })
-		  }, 3000);*/
+		  }, 3000);
            return false;
 		}
 		return true;
@@ -71,7 +82,7 @@ Page({
 			    tips:"正确邮箱地址！",
 			    isHideT:!that.data.isHideT
 			   })
-			setTimeout(function() {
+			setTimeout(function(){
 			   that.setData({
 			    isHideT:!that.data.isHideT
 			   })
@@ -81,8 +92,63 @@ Page({
 		return true;
 	},
 
+	verifyRealName: function(realName){
+		var that = this;
+		
+		if(realName.length==0){
+			 that.setData({
+			    tips:"请输入您的真实姓名！",
+			    isHideT:!that.data.isHideT
+			   })
+			setTimeout(function(){
+			   that.setData({
+			    isHideT:!that.data.isHideT
+			   })
+		  }, 3000)
+           return false;
+		}
+		return true;
+	},
+	
+	bindPhoneInput: function(e){
+		this.setData({
+	      phone: e.detail.value
+	    })
+	},
+	
+	getCode:function(e){
+		var that = this;
+		that.setData({
+			plain: !that.data.plain,
+			disabled: !that.data.disabled,
+			loading: !that.data.loading
+		});
+		request({
+				url: APIS.SEND_SMS,
+				data: {phone:this.data.phone},
+				method: 'POST',
+				realSuccess: function(res) {
+					that.setData({
+						plain: !that.data.plain,
+						disabled: !that.data.disabled,
+						loading: !that.data.loading
+					});
+					console.log(res);
+				},
+				realFail: function(msg) {
+					wx.hideLoading();
+					wx.showToast({
+						title: msg
+					});
+					that.setData({
+						loading:!that.data.loading
+					});
+				}
+			}, false);
+	},
+	
 	formSubmit: function(e) {
-		console.log('form发生了submit事件，携带数据为：', e.detail.value)
+		console.log('数据为：', e.detail.value)
 		var that = this;
 		var params = {
 			sid: wx.getStorageSync('sid'),
@@ -94,12 +160,18 @@ Page({
 				realName: e.detail.value.realName,
 			}
 		};
-		if(this.verfyPhone(e.detail.value.phone) && this.verfyEmail(e.detail.value.email)){
+		if(that.verifyRealName(e.detail.value.realName) && that.verfyPhone(e.detail.value.phone) && that.verfyEmail(e.detail.value.email) ){
+			that.setData({
+				loading:!that.data.loading
+			});
 			request({
 				url: APIS.CERTIFICATION,
 				data: params,
 				method: 'POST',
-				realSuccess: function(data) {
+				realSuccess: function(res) {
+					that.setData({
+						loading:!that.data.loading
+					});
 					console.log(res);
 				},
 				realFail: function(msg) {
@@ -107,8 +179,17 @@ Page({
 					wx.showToast({
 						title: msg
 					});
+					that.setData({
+						loading:!that.data.loading
+					});
 				}
 			}, false);
 		}
+	},
+	
+	confirmTap: function(e){
+		this.setData({
+			isUP:!this.data.isUP
+		});
 	}
 })

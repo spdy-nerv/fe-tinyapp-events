@@ -7,24 +7,25 @@
 <view class="personCenter_list mg_top30 border_bottom">
 	<text>姓名</text>
 	<view class="right">
-		<input  type="text" name="realName"  placeholder="{{realName?realName:'请输入您的真实姓名'}}" />
+		<input  type="text" value="{{realName}}" name="realName" placeholder="{{realName?realName:'请输入您的真实姓名'}}" />
 	</view>
 </view>
 <view class="personCenter_list border_bottom">
 	<text>手机</text>
 	<view class="right">
-		<input type="number" name="phone"  placeholder="{{phone?phone:'请输入您的手机号码'}}" />
+		<input type="number" bindinput="bindPhoneInput" name="phone"   placeholder="{{phone?phone:'请输入您的手机号码'}}" />
 	</view>
 </view>
 
 <view class="personCenter_list border_bottom">
 	<text>验证码</text>
 	<view class="right">
-		<input type="number" name="code"  placeholder="{{code?code:'请输入验证码'}}" />
+		<input type="number" name="code"   placeholder="{{code?code:'请输入验证码'}}" />
 	</view>
 	<view class="code">
-	<button type="primary"
-        bindtap="getCode" >获取 </button>
+	<button type="primary" loading="{{loading}}" plain="{{plain}}"
+ disabled="{{disabled}}" bindtap="getCode" >获取 </button>
+        
 	</view>
 </view>
 
@@ -32,7 +33,7 @@
 <view class="personCenter_list ">
 	<text>个人邮箱</text>
 	<view class="right">
-		<input type="text" name="email"   placeholder="{{email?email:'请输入您的邮箱地址'}}" />
+		<input type="text" name="email" value="{{email}}"  placeholder="{{email?email:'请输入您的邮箱地址'}}" />
 	</view>
 </view>
 
@@ -50,9 +51,25 @@
 <!--<button type="primary" size="default" loading="{{loading}}" plain="{{plain}}
         disabled="{{disabled}}"  bindtap="clickSaveButton" hover-class="other-button-hover">绑定 </button>
 	-->	
-	<button formType="submit" type="primary">绑定</button>
+	<button formType="submit" type="primary" >绑定</button>
 	</view>
 </form>
 <!--底部导航-->
 <import src="../footer/footer.wxml" />
 <template is="footer" data=""/>
+
+<view class="modal-comfirm" hidden="{{isUP}}">
+   <view class="content">
+     <view class="img">
+	 	<image src="../../images/ic_bdzh_cg.png"></image>
+	 </view>
+	 <view class="t1">
+	 提交成功
+	 </view>
+	 <view class="t2 save_button">
+	 	系统已向您填写的邮箱发送验证信息，
+请到你的邮箱进行激活 
+<button  type="primary" bindtap="confirmTap" >确定</button>
+	 </view>
+   </view>
+</view>

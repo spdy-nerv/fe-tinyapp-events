@@ -44,7 +44,10 @@ var APIS = {
 	MY_CENTER: 						 		reqHost +'/myCenter', //个人中心
 	MY_CARD: 									reqHost +'/myCard',//我的名片
 	 
-	CERTIFICATION: 						reqHost +'/certification' //认证
+	CERTIFICATION: 						reqHost +'/certification', //认证
+	SEND_SMS: 							 	reqHost +'/sendSms', //短信认证
+	EDIT_CARD: 							 	reqHost +'/editCard',// 编辑我的名片
+	FILE_UPLOAD: 							reqHost +'/fileUpload'
 	 
 };
 

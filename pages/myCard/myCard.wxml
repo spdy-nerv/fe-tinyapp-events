@@ -1,67 +1,71 @@
 <!--myCard.wxml-->
+<form bindsubmit="formSubmit" bindreset="formReset">
 <view class="center_top">
-	<view class="center_info">
+	<view class="center_info" bindtap="chooseimage">
 		<image src = "{{photo?photo:'../../images/nomal.jpg'}}" class="icon"></image>
 		<view>上传头像</view>
 	</view>
 </view>
 <view class="personCenter_list mg_top30 border_bottom">
-	<text>姓名</text>
+	<view class="left"><text>姓名</text></view>
 	<view class="fr">
-	{{realName}}
+	<input name="realName" type="text" value="{{realName}}" placeholder="{{realName?realName:'请输入您的真实姓名'}}" />
 	<text class="wb_arrow_right "></text>
 	</view>
 	
 </view>
 <view class="personCenter_list  border_bottom">
-	<text>手机号码</text>
+	<view class="left"><text>手机号码</text></view>
 	<view class="fr">
-		{{phone}}
+		<input name="phone"  value="{{phone}}" placeholder="{{phone?phone:'请输入您的手机号码'}}" />
 	<text class="wb_arrow_right "></text>
 	</view>
 </view>
 <view class="personCenter_list ">
-	<text>个人邮箱</text>
+	<view class="left"><text>个人邮箱</text></view>
 	<view class="fr">
-		<input placeholder="{{email?email:'请输入您的邮箱地址'}}" />
+		<input name="email" value="{{email}}" placeholder="{{email?email:'请输入您的邮箱地址'}}" />
 	<text class="wb_arrow_right "></text>
 	</view>
 </view>
 
 <view class="personCenter_list mg_top30 border_bottom">
-	<text>毕业院校</text>
+	<view class="left"><text>毕业院校</text></view>
 	<view class="fr" >
-		<input placeholder="{{school?school:'请输入您的毕业院校'}}" />
+		<input name="school" value="{{school}}" placeholder="{{school?school:'请输入您的毕业院校'}}" />
 	<text class="wb_arrow_right "></text>
 	</view>
 </view>
 <view class="personCenter_list ">
-	<text>我的学历</text>
+	<view class="left"><text>我的学历</text></view>
 	<view class="fr">
-		<input placeholder="{{degree?degree:'请输入您的学历'}}" />
+		<input name="degree"  value="{{degree}}" placeholder="{{degree?degree:'请输入您的学历'}}" />
 	<text class="wb_arrow_right "></text>
 	</view>
 </view>
 
 <view class="personCenter_list mg_top30 border_bottom">
-	<text>兴趣爱好</text>
+	<view class="left"><text>兴趣爱好</text></view>
 	<view class="fr">
-	<block  wx:for="{{hobbies}}" wx:key="unique">
-		{{item}}<icon type="clear" size="20" color="#d7dcf5" />
+	<block  wx:for="{{hobbies}}" wx:for-index="idx" >
+		{{item}}<icon type="clear" size="20" color="#d7dcf5" bindtap="clickClose" data-id="{{idx}}"/>
 	</block>
 	<text class="wb_arrow_right "></text>
 	</view>
 </view>
+<navigator url="../declaration/declaration?declaration={{declaration}}">
 <view class="personCenter_list ">
 	<text>加友宣言</text>
 	<view class="fr">
 		<text class="wb_arrow_right "></text>
 	</view>
 </view>
+</navigator>
 <view class="save_button">
-<button type="primary" size="default" 
-         bindtap="default" hover-class="other-button-hover"> 保存 </button>
-		</view>
+	<button formType="submit" type="primary"> 保存 </button>
+</view>
+		
+</form>
 <!--底部导航-->
 <import src="../footer/footer.wxml" />
 <template is="footer" data=""/>

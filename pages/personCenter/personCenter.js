@@ -6,7 +6,7 @@ Page({
   data: {
     nick:"",  //昵称
 	  headerImg:"",
-	  isCertification:false,   //是否认证
+	  isCertification:true,   //是否认证
 	  roleName:"",
 	  isUp:false //弹窗
   },
@@ -30,7 +30,7 @@ Page({
         that.setData({
         	nick:							data.nick,
         	headerImg:				data.headerImg,
-        	isCertification:	data.isCertification,
+        	//isCertification:	data.isCertification,
         	roleName:					data.roleName
         });
         wx.hideLoading();
@@ -45,6 +45,7 @@ Page({
   },
   
   toMyCard: function(e){
+  	console.log(this.data.isCertification);
   	//弹出认证提示
   	if(!this.data.isCertification){
   		wx.showModal({
