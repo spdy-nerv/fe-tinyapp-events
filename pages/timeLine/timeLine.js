@@ -212,7 +212,8 @@ Page({
     this.setData({
       toggleCalBundary: e.detail.scrollTop,
       onBindScroll: 'onBindScroll',
-      verticalScrollAnim: true
+      verticalScrollAnim: true,
+      isShowSimpleCal: 'block'
     });
     setTimeout(function() {
       that.setData({

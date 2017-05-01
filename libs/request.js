@@ -34,7 +34,7 @@ function request(obj, needLogin = true, ctx) {
                     title: '跳转到个人中心！'
                 });
             } else {
-                typeof obj.realFail == "function" && obj.realFail('数据获取失败！' + d.resultMsg || '');
+                typeof obj.realFail == "function" && obj.realFail('数据获取失败！' + d.resultMsg || '', d.errCode);
             }
         }
     };

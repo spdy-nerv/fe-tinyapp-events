@@ -42,7 +42,23 @@ var APIS = {
 	ADD_ENROLL: 							reqHost +'/addEnroll', //报名
 	
 	MY_CENTER: 						 		reqHost +'/myCenter', //个人中心
-	MY_CARD: 									reqHost +'/myCard'//我的名片
+	MY_CARD: 									reqHost +'/myCard', //我的名片
+
+  // 获取投票模块
+  GET_VOTE_MODULE: reqHost +'/getVoteModule',
+  // 提交投票结果 
+  ADD_VOTE: reqHost +'/addVote',
+
+  // 获取问卷模块
+  GET_TEST_MODULE: reqHost + '/getTestModule',
+  // 提交问卷
+  SUBMIT_QUESTION: reqHost + '/submitQuestion',
+
+  // 上传图片
+  FILE_UPLOAD: reqHost + '/fileUpload',
+
+  // 提交评论
+  ADD_COMMENT: reqHost + '/addComment'
 
 	 
 };

@@ -1,18 +1,18 @@
 {
   "pages":[
-    	
-	"pages/timeLine/timeLine",
-	"pages/index/index",
-"pages/personCenter/personCenter",
+	  "pages/timeLine/timeLine",
+	  "pages/index/index",
+    "pages/personCenter/personCenter",
     "pages/myCard/myCard",
-	"pages/detail/detail",
-	
-    "pages/logs/logs"
+	  "pages/detail/detail",
+    "pages/logs/logs",
+    "pages/commentSubmit/commentSubmit",
+    "pages/voteModule/voteModule",
+    "pages/testModule/testModule"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#eeeff1",
-    "navigationBarTitleText": "中欧",
     "navigationBarTextStyle":"black"
   }
 }

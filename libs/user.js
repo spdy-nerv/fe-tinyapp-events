@@ -28,6 +28,7 @@ function rawLogin(cb, ctx) {
                             user_raw: res.userInfo,
                             signature: res.signature
                         }
+                        wx.setStorageSync('userInfo', res.userInfo);
                         doAppLogin(d, cb, ctx);
                     }
                 });
@@ -81,7 +82,6 @@ function doAppLogin(data, cb, ctx) {
         if (d.errCode == '0000' && d.resultData) {
             var sid = d.resultData.sid;
             wx.setStorageSync('sid', sid);
-            console.log(wx.getStorageSync('sid'));
             typeof cb == "function" && cb.call(ctx);
         } else {
             wx.showToast({
