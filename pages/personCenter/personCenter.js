@@ -5,9 +5,10 @@ var { request } = require('../../libs/request');
 Page({
   data: {
     nick:"",  //昵称
-	  headerImg:"",   //头像
-	  isCertification:false,   //是否认证
-	  roleName:""   //角色名称
+	  headerImg:"",
+	  isCertification:true,   //是否认证
+	  roleName:"",
+	  isUp:false //弹窗
   },
   onLoad: function () {
   	wx.showLoading({
@@ -29,7 +30,7 @@ Page({
         that.setData({
         	nick:							data.nick,
         	headerImg:				data.headerImg,
-        	isCertification:	data.isCertification,
+        	//isCertification:	data.isCertification,
         	roleName:					data.roleName
         });
         wx.hideLoading();
@@ -41,5 +42,28 @@ Page({
         });
       }
     }, true);
+  },
+  
+  toMyCard: function(e){
+  	console.log(this.data.isCertification);
+  	//弹出认证提示
+  	if(!this.data.isCertification){
+  		wx.showModal({
+				 title: '温馨提示！',
+				 content: '您还没有身份认证，点击确认去认证',
+				 success: function(res) {
+				  if (res.confirm) {
+				   wx.navigateTo({
+						  url: '../verify/verify'
+						});
+				  }
+				 }
+			})
+  		
+  	}else{
+  		wx.navigateTo({
+			  url: '../myCard/myCard'
+			});
+  	}
   }
 })

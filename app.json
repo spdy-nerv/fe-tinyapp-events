@@ -1,9 +1,10 @@
 {
   "pages":[
 	  "pages/timeLine/timeLine",
-	  "pages/index/index",
     "pages/personCenter/personCenter",
     "pages/myCard/myCard",
+    "pages/declaration/declaration",
+    "pages/verify/verify",
 	  "pages/detail/detail",
     "pages/logs/logs",
     "pages/commentSubmit/commentSubmit",

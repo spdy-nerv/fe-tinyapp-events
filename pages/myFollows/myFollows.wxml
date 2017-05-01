@@ -1,0 +1,67 @@
+<!--myCard.wxml-->
+<view class="center_top">
+	<view class="center_info">
+		<image src = "{{photo?photo:'../../images/nomal.jpg'}}" class="icon"></image>
+		<view>上传头像</view>
+	</view>
+</view>
+<view class="personCenter_list mg_top30 border_bottom">
+	<text>姓名</text>
+	<view class="fr">
+	{{realName}}
+	<text class="wb_arrow_right "></text>
+	</view>
+	
+</view>
+<view class="personCenter_list  border_bottom">
+	<text>手机号码</text>
+	<view class="fr">
+		{{phone}}
+	<text class="wb_arrow_right "></text>
+	</view>
+</view>
+<view class="personCenter_list ">
+	<text>个人邮箱</text>
+	<view class="fr">
+		<input placeholder="{{email?email:'请输入您的邮箱地址'}}" />
+	<text class="wb_arrow_right "></text>
+	</view>
+</view>
+
+<view class="personCenter_list mg_top30 border_bottom">
+	<text>毕业院校</text>
+	<view class="fr" >
+		<input placeholder="{{school?school:'请输入您的毕业院校'}}" />
+	<text class="wb_arrow_right "></text>
+	</view>
+</view>
+<view class="personCenter_list ">
+	<text>我的学历</text>
+	<view class="fr">
+		<input placeholder="{{degree?degree:'请输入您的学历'}}" />
+	<text class="wb_arrow_right "></text>
+	</view>
+</view>
+
+<view class="personCenter_list mg_top30 border_bottom">
+	<text>兴趣爱好</text>
+	<view class="fr">
+	<block  wx:for="{{hobbies}}" wx:key="unique">
+		{{item}}<icon type="clear" size="20" color="#d7dcf5" />
+	</block>
+	<text class="wb_arrow_right "></text>
+	</view>
+</view>
+<view class="personCenter_list ">
+	<text>加友宣言</text>
+	<view class="fr">
+		<text class="wb_arrow_right "></text>
+	</view>
+</view>
+<view class="save_button">
+<button type="primary" size="default" 
+         bindtap="default" hover-class="other-button-hover"> 保存 </button>
+		</view>
+<!--底部导航-->
+<import src="../footer/footer.wxml" />
+<template is="footer" data=""/>

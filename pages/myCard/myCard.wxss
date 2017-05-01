@@ -1,0 +1,11 @@
+
+.personCenter_list {
+    display: flex;
+}
+.left{
+    width: 30%;
+}
+.personCenter_list .fr{
+    width: 70%;
+    text-align: right;
+}

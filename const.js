@@ -43,6 +43,9 @@ var APIS = {
 	
 	MY_CENTER: 						 		reqHost +'/myCenter', //个人中心
 	MY_CARD: 									reqHost +'/myCard', //我的名片
+	CERTIFICATION: 						reqHost +'/certification', //认证
+	SEND_SMS: 							 	reqHost +'/sendSms', //短信认证
+	EDIT_CARD: 							 	reqHost +'/editCard',// 编辑我的名片
 
   // 获取投票模块
   GET_VOTE_MODULE: reqHost +'/getVoteModule',
@@ -59,8 +62,7 @@ var APIS = {
 
   // 提交评论
   ADD_COMMENT: reqHost + '/addComment'
-
-	 
+	
 };
 
 module.exports = {

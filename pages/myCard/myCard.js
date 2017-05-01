@@ -2,6 +2,7 @@
 var { APIS } = require('../../const');
 var user = require('../../libs/user');
 var { request } = require('../../libs/request');
+var { validate } = require('../../libs/validate');
 Page({
   data: {
     realName:"",  
@@ -13,16 +14,19 @@ Page({
 	  hobbies:[
 	  	"篮球",
       "麻将"
-	  ] 
+	  ],
+	  declaration:''
   },
-  onLoad: function () {
+  onLoad: function (options) {
+  	
   	wx.showLoading({
 	      mask: true,
 	      title: '数据加载中'
 	    });
-	    user.login(this.onLoadData, this, true);
+	    user.login(this.onLoadData(options), this, true);
+	    
   },
-  onLoadData: function(){
+  onLoadData: function(opt){
   	var that = this;
   	var params = {
   		sid: wx.getStorageSync('sid')
@@ -32,6 +36,7 @@ Page({
       data: params,
       method: 'POST',
       realSuccess: function(data){
+      	console.log("pic",data);
       	that.setData({
         	realName:	data.realName,
         	photo:		data.photo,
@@ -39,8 +44,14 @@ Page({
         	email:		data.email,
         	degree:		data.degree,
         	school:		data.school,
-        	hobbies:	data.hobbies
+        	hobbies:	data.hobbies,
+        	declaration: data.declaration
         });
+        if(opt.declaration){
+        	that.setData({
+			  		declaration:opt.declaration
+			  	});
+        }
         wx.hideLoading();
       },
       realFail: function(msg) {
@@ -50,5 +61,86 @@ Page({
         });
       }
     }, false);
-  }
+  },
+  
+  clickClose: function(e){
+  	var cid = e.currentTarget.dataset.id;
+    this.data.hobbies.splice(cid,1);
+  	this.setData({
+  		hobbies:this.data.hobbies
+  	});
+  },
+  
+  
+  
+  
+  chooseimage: function () {  
+    var _this = this;  
+    wx.chooseImage({
+      count: 1, // 默认9  
+		  success: function(resp) {
+			    var tempFilePaths = resp.tempFilePaths;
+			    wx.showToast({
+				    icon: "loading",
+				    title: "正在上传"
+				  }),
+			    wx.uploadFile({
+			      url: APIS.FILE_UPLOAD,
+			      filePath: tempFilePaths[0],
+			      header: { "Content-Type": "multipart/form-data" },
+			      name: 'file',
+			      success: function(res){
+			        var data = res.data;
+			        console.log("dadasfasdf",data);
+			        if (res.statusCode != 200) { 
+			          wx.showModal({
+			            title: '提示',
+			            content: '上传失败',
+			            showCancel: false
+			          })
+			          return;
+			        }
+			        /*_this.setData({  
+			          photo:res.tempFilePaths  
+			        })*/
+			      }
+			    })
+			  }
+		})
+  },
+  
+  formSubmit: function(e) {
+		var that = this;
+		var params = {
+			sid: wx.getStorageSync('sid'),
+			data: {
+				realName: e.detail.value.realName,
+				photo: that.data.photo,
+				phone: e.detail.value.phone,
+				email: e.detail.value.email,
+				degree: e.detail.value.degree,
+				school: e.detail.value.school,
+				hobbies: that.data.hobbies,
+				declaration: that.data.declaration
+			}
+		};
+		console.log(params);
+			request({
+				url: APIS.EDIT_CARD,
+				data: params,
+				method: 'POST',
+				realSuccess: function(res) {
+					wx.showToast({
+	          title: "修改成功！",
+	          icon: 'success',
+	          duration: 2000,
+	      	});
+				},
+				realFail: function(msg) {
+					wx.showToast({
+						title: msg
+					});
+				}
+			}, false);
+	}
 })
