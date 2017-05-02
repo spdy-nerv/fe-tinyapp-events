@@ -70,7 +70,22 @@ var APIS = {
   ADD_EVENT_DETAILED: reqHost + '/addEventdetailed',
 
   // 添加投票模块
-  ADD_VOTE_CONFIG: reqHost + '/addVotoConfig'
+  ADD_VOTE_CONFIG: reqHost + '/addVotoConfig',
+
+  // 添加问卷模块
+  ADD_TEST_CONFIG: reqHost + '/addTestConfig',
+
+  // 添加报名模块
+  ADD_ENROLL_CONFIG: reqHost + '/addEnrolModulConfig',
+
+  // 添加评论模块
+  ADD_COMMENT_CONFIG: reqHost + '/addCommentConfig',
+
+  // 添加评价模块
+  ADD_EVALUATION_CONFIG: reqHost + '/addEvaluationConfig',
+
+  // 删除模块关联
+  REMOVE_MODULE: reqHost + '/removeModule'
 	
 };
 

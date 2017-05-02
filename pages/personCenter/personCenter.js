@@ -4,6 +4,9 @@ var user = require('../../libs/user');
 var { request } = require('../../libs/request');
 Page({
   data: {
+		footerConfig: { 
+      pagePersonal: true
+    },
     nick:"",  //昵称
 	  headerImg:"",
 	  isCertification:true,   //是否认证

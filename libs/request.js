@@ -15,7 +15,7 @@ var user = require('./user');
 function request(obj, needLogin = true, ctx) {
     obj.success = function(res) {
         var d = res.data;
-        if (d.errCode == '0000' && d.resultData) {
+        if (d.errCode == '0000') {
             typeof obj.realSuccess == "function" && obj.realSuccess(d.resultData);
         } else {
             if (needLogin &&

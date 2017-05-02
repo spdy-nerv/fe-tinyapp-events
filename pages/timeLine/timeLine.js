@@ -11,6 +11,9 @@ var app = getApp();
 
 Page({
   data: {
+    footerConfig: {
+      pageEvent: true
+    },
     year: 0,
     month: 0,
     formatedMonth: '',
@@ -27,7 +30,7 @@ Page({
     scrollLeft: 0,
     verticalScrollAnim: false,
     filterMaskAnim: {},
-    fitlerPanelAnim: {},
+    filterPanelAnim: {},
     filterMaskDisplay: 'none',
     eventTypeList: [
       {typeId: '', typeName: '全部'}

@@ -36,4 +36,4 @@
 </view>
 <!--底部导航-->
 <import src="../footer/footer.wxml" />
-<template is="footer" data=""/>
+<template is="footer" data="{{...footerConfig}}"/>

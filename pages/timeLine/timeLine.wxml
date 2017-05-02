@@ -12,7 +12,7 @@
     </view>
   </view>
 <scroll-view scroll-x="true" scroll-left="{{scrollLeft}}" scroll-with-animation="true" style="width: 100%" class="horizontal-cal clearfix" style="display:{{isShowSimpleCal}}">
-    <view wx:for="{{calendar}}" class="item" data-offset-left="{{item.offsetLeft}}">
+    <view wx:for="{{calendar}}" wx:key="unique" class="item" data-offset-left="{{item.offsetLeft}}">
       <view class="item-title">{{item.daySimpleName}}</view>
       <view class="item-value">
         <text wx:if="{{item.mode == 'last' || item.mode == 'next'}}" class="item-other-month">{{item.date}}</text>
@@ -36,7 +36,7 @@
 </view>
 
 <view class="time-container time-number clearfix">
-  <block wx:for="{{calendar}}">
+  <block wx:for="{{calendar}}" wx:key="unique">
   <view class="item" id="{{item.initPos}}">
     <text wx:if="{{item.mode == 'last' || item.mode == 'next'}}" class="item-other-month">{{item.date}}</text>
     <text wx:elif="{{item.date == todayDate && item.mode == 'current'}}" class="current-month current" data-date="{{item.date}}" bindtap="onSelectDate">{{item.date}}</text>
@@ -48,7 +48,7 @@
 
 <view id="listWrapper">
 
-  <block wx:for="{{events}}">
+  <block wx:for="{{events}}" wx:key="unique">
     <view wx:if="{{item.isFirstEventInDay}}" class="events-title-container">
       <view class="events-list-title">{{item.month}}月{{item.date}}日，{{item.dayName}}</view>
       <view class="anchor" id="anchor{{item.date}}"></view>
@@ -61,7 +61,7 @@
         <view class="events-tit">{{item.name}}</view>
         <view class="events-add">{{item.address}}</view>
         <view class="events-member">
-          <view wx:for="{{item.followInfo.avatars}}" wx:for-item="a" class="img" style="z-index:99;"><image src="{{a}}"></image></view>
+          <view wx:for="{{item.followInfo.avatars}}" wx:key="unique" wx:for-item="a" class="img" style="z-index:99;"><image src="{{a}}"></image></view>
           <text class="events-member-num">{{item.followInfo.total}}人关注</text>
         </view>
       </view> 
@@ -74,7 +74,11 @@
 </scroll-view> 
 
 </view>
+
 <!--底部导航-->
+<import src="../footer/footer.wxml" />
+<template is="footer" data="{{...footerConfig}}"/>
+<!--
 <view class="footer_container">
         <view class="foot-item foot1">
           <image src="../../images/foot-event-icon1-red.png" />
@@ -93,6 +97,7 @@
           </view>
         
 </view>
+-->
 
 <view class="filter-mask" bindtap="onCloseFilterPanel" animation="{{filterMaskAnim}}" style="display:{{filterMaskDisplay}};"></view>
 <view class="filter-panel" animation="{{filterPanelAnim}}">

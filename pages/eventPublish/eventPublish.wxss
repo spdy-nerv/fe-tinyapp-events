@@ -196,12 +196,12 @@ swiper-item {
 }
 
 .publish-btn-wrap {
-    padding: 26rpx 30rpx;
-    background-color: #ffffff;
+    width: 100%;
+    height: 98rpx;
+    display: flex;
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 100%;
     box-sizing: border-box;
     z-index: 999;
     box-shadow: 0rpx 5rpx 20rpx #999999;
@@ -216,4 +216,29 @@ swiper-item {
     color: #ffffff;
     text-align: center;
     border-radius: 8rpx;
+}
+
+.btn-save {
+    flex: 1;
+    background-color: #ffffff;
+    font-size: 36rpx;
+    color: #00b371;
+    height: 98rpx;
+    line-height: 98rpx;
+    text-align: center;
+}
+
+.btn-publish {
+    flex: 1;
+    background-color: #c52424;
+    font-size: 36rpx;
+    color: #ffffff;
+    height: 98rpx;
+    line-height: 98rpx;
+    text-align: center;
+}
+
+.new-event-tips {
+    padding: 50rpx 30rpx;
+    color: #00b371;
 }

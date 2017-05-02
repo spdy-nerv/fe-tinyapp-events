@@ -5,6 +5,9 @@ var { request } = require('../../libs/request');
 var { validate } = require('../../libs/validate');
 Page({
   data: {
+		footerConfig: { 
+      pagePersonal: true
+    },
     realName:"",  
 	  photo:"",   
 	  phone:"",   

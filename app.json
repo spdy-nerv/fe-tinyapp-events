@@ -1,10 +1,12 @@
 {
   "pages":[
+    "pages/timeLine/timeLine",
     "pages/eventPublish/eventPublish",
     "pages/descriptionModuleAdd/descriptionModuleAdd",
     "pages/voteModuleAdd/voteModuleAdd",
     "pages/testModuleAdd/testModuleAdd",
-    "pages/timeLine/timeLine",
+    "pages/enrollModuleAdd/enrollModuleAdd",
+    
     "pages/personCenter/personCenter",
     "pages/myCard/myCard",
     "pages/declaration/declaration",

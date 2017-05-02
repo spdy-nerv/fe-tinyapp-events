@@ -28,6 +28,16 @@
             <text class="wb_arrow_right"></text>
         </view>
     </view>
+    <view class="bi-field bi-createtime">
+        <text class="bi-field-left">发布时间</text>
+        <view class="bi-field-mid bi-createtime-mid">
+            <picker mode="date" value="{{cYear + '-' + cMonth + '-' + cDate}}" start="2017-01-01" end="2099-12-31" bindchange="bindCreateTimeChange" class="filter-date">
+                <view class="picker">
+                    <text class="picker-text">{{cYear}}/{{cMonth}}/{{cDate}}</text><view class="cal-icon"></view>
+                </view>
+            </picker>
+        </view>
+    </view>
     <view class="bi-field bi-starttime">
         <text class="bi-field-left">开始时间</text>
         <view class="bi-field-mid bi-starttime-mid">
@@ -75,7 +85,9 @@
     </view>
 </view>
 
-<view class="base-info-wrap ext-info">
+<view wx:if="{{!eventId}}" class="new-event-tips">新创建的事件点击“保存”后，可继续添加事件附加模块。</view>
+
+<view wx:if="{{eventId}}" class="base-info-wrap ext-info">
     <view class="bi-marker-wrap">
         <view class="bi-marker-text">事件附加模块</view>
         <view class="bi-marker-border"></view>
@@ -97,6 +109,7 @@
         </view>
     </view>
     </navigator>
+    <navigator wx:if="{{needEnrollModule}}" url="../enrollModuleAdd/enrollModuleAdd?eventId={{eventId}}&moduleId={{enrollModuleId}}">
     <view wx:if="{{needEnrollModule}}" class="bi-field">
         <text class="bi-field-left">报名模块配置</text>
         <text class="bi-field-mid bi-description-mid">让你的事件可以报名</text>
@@ -104,7 +117,8 @@
             <text class="wb_arrow_right"></text>
         </view>
     </view>
-    <navigator wx:if="{{needVoteModule}}" url="../voteModuleAdd/voteModuleAdd?eventId={{eventId}}&moduleId={{voteModuleId}}&startTime={{startTime}}&endTime={{endTime}}&allowViewId={{allowViewId}}">
+    </navigator>
+    <navigator wx:if="{{needVoteModule}}" url="../voteModuleAdd/voteModuleAdd?eventId={{eventId}}&moduleId={{voteModuleId}}">
     <view class="bi-field">
         <text class="bi-field-left">投票模块配置</text>
         <text class="bi-field-mid bi-description-mid">为你的事件提供投票模块</text>
@@ -113,7 +127,7 @@
         </view>
     </view>
     </navigator>
-    <navigator wx:if="{{needTestModule}}" url="../testModuleAdd/testModuleAdd?eventId={{eventId}}&moduleId={{testModuleId}}&startTime={{startTime}}&endTime={{endTime}}&allowViewId={{allowViewId}}">
+    <navigator wx:if="{{needTestModule}}" url="../testModuleAdd/testModuleAdd?eventId={{eventId}}&moduleId={{testModuleId}}">
     <view wx:if="{{needTestModule}}" class="bi-field">
         <text class="bi-field-left">问卷模块配置</text>
         <text class="bi-field-mid bi-description-mid">为你的事件提供问卷模块</text>
@@ -125,5 +139,6 @@
 </view>
 
 <view class="publish-btn-wrap">
-    <view class="publish-btn" bindtap="onTapPublish">确认发布</view>
+        <view class="btn-save" bindtap="onTapSave">保存</view>
+        <view class="btn-publish" bindtap="onTapPublish">发布</view>
 </view>
