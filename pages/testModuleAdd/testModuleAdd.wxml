@@ -1,0 +1,36 @@
+<view class="test-wrap">
+    <input type="text" class="test-input test-title" placeholder="问卷标题（限20字内）" maxlength="20" placeholder-style="color:#b4b8cc;" value="{{title}}" bindinput="onInputTitle"/>
+
+    <textarea class="test-textarea" placeholder="请输入内容描述（限200字内）" maxlength="200" placeholder-style="color:#b4b8cc;" value="{{description}}" bindinput="onInputDescription"/>
+
+    <view class="question-wrap">
+        <view class="question-title">一加一等于多少？</view>
+        <view class="question-option-wrap">
+            <view class="question-option">
+                <view class="qo-icon"></view>
+                <text class="qo-text">1</text>
+            </view>
+            <view class="question-option">
+                <view class="qo-icon"></view>
+                <text class="qo-text">2</text>
+            </view>
+            <view class="question-option">
+                <view class="qo-icon"></view>
+                <text class="qo-text">11</text>
+            </view>
+            <view class="question-option">
+                <view class="qo-icon"></view>
+                <text class="qo-text">不知道</text>
+            </view>
+        </view>
+        <view class="question-option-index"></view>
+        <view class="question-option-delete"></view>
+        <view class="question-option-edit"></view>
+    </view>
+
+    <view class="option-add-btn" bindtap="onAddOption">+ 添加新题</view>
+</view>
+
+<view class="publish-btn-wrap">
+    <view class="publish-btn" bindtap="onTapPublish">确认</view>
+</view>

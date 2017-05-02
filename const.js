@@ -61,7 +61,16 @@ var APIS = {
   FILE_UPLOAD: reqHost + '/fileUpload',
 
   // 提交评论
-  ADD_COMMENT: reqHost + '/addComment'
+  ADD_COMMENT: reqHost + '/addComment',
+
+  // 发布事件
+  ADD_EVENT_BASE: reqHost + '/addEventBase',
+
+  // 添加事件详情
+  ADD_EVENT_DETAILED: reqHost + '/addEventdetailed',
+
+  // 添加投票模块
+  ADD_VOTE_CONFIG: reqHost + '/addVotoConfig'
 	
 };
 

@@ -2,6 +2,7 @@
 var { APIS } = require('../../const');
 var util = require('../../utils/util');
 var user = require('../../libs/user');
+var { uploadPic } = require('../../libs/upload');
 var { request } = require('../../libs/request');
 var Q = require('../../libs/q/q');
 
@@ -67,6 +68,7 @@ Page({
     })
   },
 
+/*
   uploadPic: function(path) {
     var defer = Q.defer();
     wx.uploadFile({
@@ -108,6 +110,7 @@ Page({
 
     return defer.promise;
   },
+  */
 
   onInput: function(e) {
     this.setData({
@@ -128,7 +131,7 @@ Page({
 
     var fnArr = [];
     for (var i in this.data.picPaths) {
-      fnArr.push(this.uploadPic(this.data.picPaths[i]));
+      fnArr.push(uploadPic(this.data.picPaths[i]));
     }
     wx.showLoading({
       mask: true,

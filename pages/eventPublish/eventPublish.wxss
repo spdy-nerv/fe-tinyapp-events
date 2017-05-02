@@ -1,0 +1,219 @@
+page {
+    background-color: #eeeff1;
+    padding-bottom: 160rpx;
+}
+
+swiper {
+    height: 0rpx;
+}
+
+swiper-item {
+    width: 100%;
+    height: 100%;
+    background-color: #666666;
+    position: relative;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+}
+
+.preview-delete {
+    position: absolute;
+    width: 30rpx;
+    height: 30rpx;
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/delete_pic.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    bottom: 30rpx;
+    right: 30rpx;
+}
+
+.add-pic-btn-wrap {
+    padding: 30rpx;
+    background-color: #ffffff;
+}
+
+.add-pic-btn {
+    background-color: #c52424;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    color: #ffffff;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 8rpx;
+}
+
+.bi-marker-wrap {
+    height: 60rpx;
+    position: relative;
+    background-color: #ffffff;
+    padding-bottom: 30rpx;
+}
+
+.bi-marker-text {
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 24rpx;
+    color: #878a99;
+    text-align: center;
+    background-color: #ffffff;
+    width: 182rpx;
+    margin: auto;
+    z-index: 10;
+    position: relative;
+}
+
+.bi-marker-border {
+    width: 280rpx;
+    border-bottom: 1rpx solid #878a99;
+    position: absolute;
+    left: 50%;
+    top: 30rpx;
+    margin-left: -140rpx;
+}
+
+.bi-field {
+    height: 100rpx;
+    padding: 0 30rpx;
+    border-top: 1rpx solid #d9d9d9;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+}
+
+.bi-title-input {
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+}
+
+.bi-field-left {
+    font-size: 30rpx;
+    color: #4c4d4e;
+    line-height: 100rpx;
+    margin-right: 64rpx;
+}
+
+.bi-field-mid {
+    flex: 1;
+    font-size: 30rpx;
+    line-height: 100rpx;
+}
+
+.bi-field-right {
+    width: 32rpx;
+    height: 100rpx;
+    padding-top: 32rpx;
+    box-sizing: border-box;
+}
+
+.bi-description-mid {
+    color: #bfc2d3;
+}
+
+.bi-address-icon {
+    width: 36rpx;
+    height: 43rpx;
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/d-icon2.png);
+    background-size: 100%;
+    margin-top: 28rpx;
+}
+
+.picker-text {
+    height: 100rpx;
+    display: inline-block;
+    margin-right: 17rpx;
+}
+
+.cal-icon {
+    display: inline-block;
+    width: 34rpx;
+    height: 100rpx;
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/cal-icon.png);
+    background-size: 34rpx 34rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-top: -10rpx;
+}
+
+.role-info {
+    margin-top: 30rpx;
+}
+
+.bi-type {
+    border-top: 0rpx;
+}
+
+.bi-role {
+    height: auto;
+}
+
+.role-item {
+    float: left;
+    margin-right: 62rpx;
+}
+
+.role-text {
+    display: inline-block;
+    height: 100rpx;
+}
+
+.role-check {
+    display: inline-block;
+    width: 30rpx;
+    height: 100rpx;
+    margin-right: 16rpx;
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/pub_check.png);
+    background-size: 30rpx 30rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-top: -10rpx;
+}
+
+.role-check-selected {
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/pub_check_selected.png);
+}
+
+.ext-info {
+    margin-top: 30rpx;
+}
+
+.ext-info .bi-marker-wrap {
+    padding-top: 30rpx;
+}
+
+.ext-info .bi-marker-wrap .bi-marker-border {
+    top: 60rpx;
+}
+
+.bi-module-type {
+    height: auto;
+}
+
+.publish-btn-wrap {
+    padding: 26rpx 30rpx;
+    background-color: #ffffff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 999;
+    box-shadow: 0rpx 5rpx 20rpx #999999;
+}
+
+.publish-btn {
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    background-color: #c52424;
+    font-size: 36rpx;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 8rpx;
+}
