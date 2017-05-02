@@ -4,6 +4,9 @@ var user = require('../../libs/user');
 var { request } = require('../../libs/request');
 Page({
   data: {
+		footerConfig: { 
+      pagePersonal: true
+    },
   	isNoData:"",
   	list:[]
 		 //status:'0' //0审核中 1 已发布 2未通过 3已完成

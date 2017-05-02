@@ -4,6 +4,9 @@ var user = require('../../libs/user');
 var { request } = require('../../libs/request');
 Page({
   data: {
+		footerConfig: { 
+      pagePersonal: true
+    },
   	isNoData:"",
   	list:[]
   },

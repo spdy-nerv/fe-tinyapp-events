@@ -6,7 +6,7 @@ var { request } = require('../../libs/request');
 Page({
   data:{
     // TMP
-    moduleId: 'ab808ef22b1011e79f5352540035fdcd',
+    moduleId: '',
     isActive: true,
     isAllowTest: true,
     hasTested: false,
@@ -64,11 +64,9 @@ Page({
   },
   onLoad:function(options){
     // 生命周期函数--监听页面加载
-    /*
     this.setData({
       moduleId: options.moduleId
     });
-    */
     /*
     wx.showLoading({
       mask: true,
@@ -230,7 +228,6 @@ Page({
           onInputFnName: '',
           isInputDisabled: true
         });
-
         wx.hideLoading();
       },
       loginCallback: this.onSubmitTest,

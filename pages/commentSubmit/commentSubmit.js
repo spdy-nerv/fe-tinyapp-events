@@ -9,7 +9,7 @@ var Q = require('../../libs/q/q');
 Page({
   data:{
     // TMP
-    moduleId: '1',
+    moduleId: '',
     avatarUrl: '',
     nickName: '',
     submitDate: '',
@@ -18,11 +18,9 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    /*
     this.setData({
       moduleId: options.moduleId
     });
-    */
     // 保证必须有userInfo
     user.login(this.getUserInfo, this, true);
   },
@@ -161,8 +159,8 @@ Page({
         realSuccess: function(data) {
           // TODO
           // 成功后返回上一页
-          //wx.navigateBack();
-          console.log('success');
+          wx.navigateBack();
+          //console.log('success');
           wx.hideLoading();
           wx.showToast({
             title: '成功'

@@ -111,7 +111,7 @@ Page({
 						"modules":datas.modules,
 						"detail.eventName": datas.name,
 						"detail.address": datas.address,
-						"detail.formatedMonth": monthFormatList[en].simpleEng,
+						"detail.formatedMonth": monthFormatList[en-1].simpleEng,
 						"detail.startTime": { //开始时间
 							"year": datas.startTime.substring(0, 4), //年份
 							"month": datas.startTime.substring(5, 7),
@@ -135,6 +135,7 @@ Page({
 				})*/
 				//获取报名模块数据
 				that.getEnrollModuleData();
+				that.getCommentData();
 				wx.hideLoading();
 				
 			}
