@@ -6,6 +6,7 @@ Page({
   data: {
   	isNoData:"",
   	list:[]
+		 //status:'0' //0审核中 1 已发布 2未通过 3已完成
   },
   onLoad: function () {
   	wx.showLoading({
@@ -32,7 +33,7 @@ Page({
       	});
       	if(data.list.length==0){
       		that.setData({
-	      		isNoData:"暂时没有关注任何事件！"
+	      		isNoData:"暂时没有发布任何事件！"
 	      	});
       	}
         wx.hideLoading();

@@ -46,12 +46,45 @@ Page({
       }
     }, true);
   },
-  
+  //我的卡片
   toMyCard: function(e){
   	console.log(this.data.isCertification);
   	//弹出认证提示
   	if(!this.data.isCertification){
-  		wx.showModal({
+  		this.showModal();
+  	}else{
+  		wx.navigateTo({
+			  url: '../myCard/myCard'
+			});
+  	}
+  },
+  //我的关注
+  toMyFollows: function(e){
+  	console.log(this.data.isCertification);
+  	//弹出认证提示
+  	if(!this.data.isCertification){
+  		this.showModal();
+  	}else{
+  		wx.navigateTo({
+			  url: '../myFollows/myFollows'
+			});
+  	}
+  },
+  //我的发布
+  toMyPublic: function(e){
+  	console.log(this.data.isCertification);
+  	//弹出认证提示
+  	if(!this.data.isCertification){
+  		this.showModal();
+  	}else{
+  		wx.navigateTo({
+			  url: '../myPublished/myPublished'
+			});
+  	}
+  },
+  
+  showModal: function(){
+  	wx.showModal({
 				 title: '温馨提示！',
 				 content: '您还没有身份认证，点击确认去认证',
 				 success: function(res) {
@@ -62,11 +95,5 @@ Page({
 				  }
 				 }
 			})
-  		
-  	}else{
-  		wx.navigateTo({
-			  url: '../myCard/myCard'
-			});
-  	}
   }
 })

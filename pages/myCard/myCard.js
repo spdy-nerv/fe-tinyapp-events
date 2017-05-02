@@ -50,6 +50,7 @@ Page({
         	hobbies:	data.hobbies,
         	declaration: data.declaration
         });
+        console.log(that.data.photo);
         if(opt.declaration){
         	that.setData({
 			  		declaration:opt.declaration
@@ -78,7 +79,7 @@ Page({
   
   
   chooseimage: function () {  
-    var _this = this;  
+    var that = this;  
     wx.chooseImage({
       count: 1, // 默认9  
 		  success: function(resp) {
@@ -93,9 +94,17 @@ Page({
 			      header: { "Content-Type": "multipart/form-data" },
 			      name: 'file',
 			      success: function(res){
-			        var data = res.data;
-			        console.log("dadasfasdf",data);
-			        if (res.statusCode != 200) { 
+			        var img = JSON.parse(res.data).resultData.imgUrl;
+				       console.log(img);
+				       that.setData({
+				        	photo:img
+				        });
+				        wx.showToast({
+							    icon: "loading",
+							    title: "正在成功！"
+							  });
+							  console.log("上传后",that.data.photo);
+			       if (res.statusCode != 200) {
 			          wx.showModal({
 			            title: '提示',
 			            content: '上传失败',
