@@ -122,6 +122,11 @@ swiper-item {
     margin-top: 28rpx;
 }
 
+.filter-date {
+    float: left;
+    margin-right: 40rpx;
+}
+
 .picker-text {
     height: 100rpx;
     display: inline-block;
@@ -138,6 +143,10 @@ swiper-item {
     background-repeat: no-repeat;
     vertical-align: middle;
     margin-top: -10rpx;
+}
+
+.clock-icon {
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/clock_icon.png);  
 }
 
 .role-info {

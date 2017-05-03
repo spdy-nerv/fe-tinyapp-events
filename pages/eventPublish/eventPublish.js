@@ -12,15 +12,6 @@ Page({
     picPaths: [],
     eventName: '',
     address: '广西南宁大学东路100号',
-    cYear: '',
-    cMonth: '',
-    cDate: '',
-    sYear: '',
-    sMonth: '',
-    sDate: '',
-    eYear: '',
-    eMonth: '',
-    eDate: '',
     eventTypeList: [],
     eventTypeIndex: 0,
     roleList: [],
@@ -62,7 +53,10 @@ Page({
     allowViewId: [],
     createTime: '',
     startTime: '',
-    endTime: ''
+    endTime: '',
+    createClock: '',
+    startClock: '',
+    endClock: ''
   },
   onLoad:function(options){
     // 生命周期函数--监听页面加载
@@ -143,22 +137,16 @@ Page({
   },
 
   handleTime: function(times) {
-    var ct = times.createTime.split(' ')[0].split('-');
-    var st = times.startTime.split(' ')[0].split('-');
-    var et = times.endTime.split(' ')[0].split('-');
+    var createClockArr = times.createTime.split(' ')[1].split(':');
+    var startClockArr = times.startTime.split(' ')[1].split(':');
+    var endClockArr = times.endTime.split(' ')[1].split(':');
     this.setData({
-      cYear: +ct[0],
-      cMonth: +ct[1],
-      cDate: +ct[2],
-      sYear: +st[0],
-      sMonth: +st[1],
-      sDate: +st[2],
-      eYear: +et[0],
-      eMonth: +et[1],
-      eDate: +et[2],
-      createTime: times.createTime,
-      startTime: times.startTime,
-      endTime: times.endTime
+      createTime: times.createTime.split(' ')[0],
+      startTime: times.startTime.split(' ')[0],
+      endTime: times.endTime.split(' ')[0],
+      createClock: createClockArr[0] + ':' + createClockArr[1],
+      startClock: startClockArr[0] + ':' + startClockArr[1],
+      endClock: endClockArr[0] + ':' + endClockArr[1]
     });
   },
 
@@ -241,15 +229,12 @@ Page({
   renderCal: function() {
       var today = new Date();
       this.setData({
-        cYear: today.getFullYear(),
-        cMonth: today.getMonth() + 1,
-        cDate: today.getDate(),
-        sYear: today.getFullYear(),
-        sMonth: today.getMonth() + 1,
-        sDate: today.getDate(),
-        eYear: today.getFullYear(),
-        eMonth: today.getMonth() + 1,
-        eDate: today.getDate()
+        createTime: util.formatDate(today),
+        startTime: util.formatDate(today),
+        endTime: util.formatDate(today),
+        createClock: util.formatClock(today),
+        startClock: util.formatClock(today),
+        endClock: util.formatClock(today)
       });
   },
 
@@ -328,32 +313,38 @@ Page({
   },
 
   bindCreateTimeChange: function(e) {
-    var dateArr = e.detail.value.split('-');
     this.setData({
-      cYear: +dateArr[0],
-      cMonth: +dateArr[1],
-      cDate: +dateArr[2],
-      createTime: +dateArr[0] + '-' + (+dateArr[1]) + '-' + (+dateArr[2]) + ' 00:00:00'
+      createTime: e.detail.value
     });
   },
 
   bindStartTimeChange: function(e) {
-    var dateArr = e.detail.value.split('-');
     this.setData({
-      sYear: +dateArr[0],
-      sMonth: +dateArr[1],
-      sDate: +dateArr[2],
-      startTime: +dateArr[0] + '-' + (+dateArr[1]) + '-' + (+dateArr[2]) + ' 00:00:00'
+      startTime: e.detail.value
     });
   },
 
   bindEndTimeChange: function(e) {
-    var dateArr = e.detail.value.split('-');
     this.setData({
-      eYear: +dateArr[0],
-      eMonth: +dateArr[1],
-      eDate: +dateArr[2],
-      endTime: +dateArr[0] + '-' + (+dateArr[1]) + '-' + (+dateArr[2]) + ' 23:59:59'
+      endTime: e.detail.value
+    });
+  },
+
+  bindCreateClockChange: function(e) {
+    this.setData({
+      createClock: e.detail.value
+    });
+  },
+
+  bindStartClockChange: function(e) {
+    this.setData({
+      startClock: e.detail.value
+    });
+  },
+
+  bindEndClockChange: function(e) {
+    this.setData({
+      endClock: e.detail.value
     });
   },
 
@@ -554,6 +545,9 @@ Page({
             //isFirstTapExt: false,
             eventId: data.eventId
           });
+          if (isPublish) {
+            wx.navigateBack();
+          }
         },
         loginCallback: function() {
             that.saveEventBase(isPublish);
@@ -581,9 +575,9 @@ Page({
           eventName: d.eventName,
           address: d.address,
           eventPics: [],
-          createTime: d.cYear + '-' + d.cMonth + '-' + d.cDate + ' 00:00:00',
-          startTime: d.sYear + '-' + d.sMonth + '-' + d.sDate + ' 00:00:00',
-          endTime: d.eYear + '-' + d.eMonth + '-' + d.eDate + ' 23:59:59',
+          createTime: d.createTime + ' ' + d.createClock + ':00',
+          startTime: d.startTime + ' ' + d.startClock + ':00',
+          endTime: d.endTime + ' ' + d.endClock + ':00',
           typeId: d.eventTypeList[d.eventTypeIndex].typeId
       };
       var roleArr = [];
@@ -595,9 +589,6 @@ Page({
       info.allowViewId = roleArr;
 
       this.setData({
-        createTime: info.createTime,
-        startTime: info.startTime,
-        endTime: info.endTime,
         allowViewId: info.allowViewId
       });
 

@@ -31,9 +31,14 @@
     <view class="bi-field bi-createtime">
         <text class="bi-field-left">发布时间</text>
         <view class="bi-field-mid bi-createtime-mid">
-            <picker mode="date" value="{{cYear + '-' + cMonth + '-' + cDate}}" start="2017-01-01" end="2099-12-31" bindchange="bindCreateTimeChange" class="filter-date">
+            <picker mode="date" value="{{createTime}}" start="2017-01-01" end="2099-12-31" bindchange="bindCreateTimeChange" class="filter-date">
                 <view class="picker">
-                    <text class="picker-text">{{cYear}}/{{cMonth}}/{{cDate}}</text><view class="cal-icon"></view>
+                    <text class="picker-text">{{createTime}}</text><view class="cal-icon"></view>
+                </view>
+            </picker>
+            <picker mode="time" value="{{createClock}}" start="00:00" end="23:59" bindchange="bindCreateClockChange" class="filter-date">
+                <view class="picker">
+                    <text class="picker-text">{{createClock}}</text><view class="cal-icon clock-icon"></view>
                 </view>
             </picker>
         </view>
@@ -41,9 +46,14 @@
     <view class="bi-field bi-starttime">
         <text class="bi-field-left">开始时间</text>
         <view class="bi-field-mid bi-starttime-mid">
-            <picker mode="date" value="{{sYear + '-' + sMonth + '-' + sDate}}" start="2017-01-01" end="2099-12-31" bindchange="bindStartTimeChange" class="filter-date">
+            <picker mode="date" value="{{startTime}}" start="2017-01-01" end="2099-12-31" bindchange="bindStartTimeChange" class="filter-date">
                 <view class="picker">
-                    <text class="picker-text">{{sYear}}/{{sMonth}}/{{sDate}}</text><view class="cal-icon"></view>
+                    <text class="picker-text">{{startTime}}</text><view class="cal-icon"></view>
+                </view>
+            </picker>
+            <picker mode="time" value="{{startClock}}" start="00:00" end="23:59" bindchange="bindStartClockChange" class="filter-date">
+                <view class="picker">
+                    <text class="picker-text">{{startClock}}</text><view class="cal-icon clock-icon"></view>
                 </view>
             </picker>
         </view>
@@ -51,9 +61,14 @@
     <view class="bi-field bi-endtime">
         <text class="bi-field-left">结束时间</text>
         <view class="bi-field-mid bi-endtime-mid">
-            <picker mode="date" value="{{eYear + '-' + eMonth + '-' + eDate}}" start="2017-01-01" end="2099-12-31" bindchange="bindEndTimeChange" class="filter-date">
+            <picker mode="date" value="{{endTime}}" start="2017-01-01" end="2099-12-31" bindchange="bindEndTimeChange" class="filter-date">
                 <view class="picker">
-                    <text class="picker-text">{{eYear}}/{{eMonth}}/{{eDate}}</text><view class="cal-icon"></view>
+                    <text class="picker-text">{{endTime}}</text><view class="cal-icon"></view>
+                </view>
+            </picker>
+            <picker mode="time" value="{{endClock}}" start="00:00" end="23:59" bindchange="bindEndClockChange" class="filter-date">
+                <view class="picker">
+                    <text class="picker-text">{{endClock}}</text><view class="cal-icon clock-icon"></view>
                 </view>
             </picker>
         </view>

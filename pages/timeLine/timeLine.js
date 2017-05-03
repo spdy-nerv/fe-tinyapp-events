@@ -56,6 +56,10 @@ Page({
     user.login(this.renderUI, this, true);
   },
 
+  onShow: function() {
+    this.getEventList();
+  },
+
   renderUI: function () {
     this.setData({
       screenWidth: wx.getSystemInfoSync().screenWidth
