@@ -5,19 +5,15 @@
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
       <block wx:for="{{pictureUrls}}" wx:key="unique">  
         <swiper-item>  
-            <image mode="aspectFit" src="{{item}}" class="slide-image" width="100%" height="100%"/>  
+            <image src="{{item}}" class="slide-image" width="100%" height="100%"/>  
         </swiper-item>  
       </block>  
 </swiper>
 </view>
 
-<!-- 循环modules -->
-<block  wx:for="{{modules}}" wx:key="unique">
-<template is="{{item.moduleType}}" data="{{...detail, ...item}}"/>
-</block >
 
 <!--事件投票模块 moduleType :1-->
-<template name="1">
+
 <view class="title-box">
   <view class="title-box-left">
      <view class="eng">{{formatedMonth}}</view>
@@ -26,8 +22,9 @@
   <view class="title-box-right">
     <view class="right1">{{eventName}}</view>
     <view class="right2">
-    <text>{{address}}</text>
-     <image src="../../images/location1.png"></image>
+    <navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}" redirect>
+    	<text>{{address}}</text><image src="../../images/location1.png" />
+     </navigator>
     </view>
    </view>
 </view>
@@ -84,19 +81,24 @@
    </view>
 </view>
 
-<view class=" model">
+
+<navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}" redirect>
+ <view class=" model">
   <view class="model-left ">
      <image src="../../images/d-icon2.png" class="m-img2"></image>
   </view>
   <view class="model-right">
     <view class="right1">{{address}}</view>
-    
    </view>
 </view>
-</template>
+</navigator>
 <!--详情默认模块 end-->
 
 
+<!-- 循环modules -->
+<block  wx:for="{{modules}}" wx:key="unique">
+<template is="{{item.moduleType}}" data="{{...des,...item}}"/>
+</block >
 
 <!--事件投票模块 moduleType :4-->
 <template name="4">
@@ -149,37 +151,43 @@
 </view>
 </template>
 
+<template name="1">
 <!-- 上拉查看图文详情 -->
-<view class="pull-up-show-detail mg20">
+<view class="pull-up-show-detail mg20" bindtap="clickShowInfo">
   <view class="classname">
-  <text class="wb_arrow_up"></text>
-  上拉查看图文详情</view>
+  <text class="{{isShowBottom?'wb_arrow_up':'wb_arrow_down'}}"></text>
+  点击查看图文详情</view>
 </view>
 <!--此处为自定义图文详情内容区-->
-<view class="detail_box" hidden="{{isShowBottom ? true : false}}">
-<block  wx:for="{{description.data.paragraphs}}" wx:key="unique">
-	<view wx:if="{{item.type==1}}" class="detail_box_p"><text>{{item.value}}</text></view>
-	<view wx:if="{{item.type==2}}" class="detail_box_p">
-		 <image src="{{item.value}}" mode="aspectFill"/> 
+<view class="detail_box" hidden="{{isShowBottom}}">
+<block  wx:for="{{description.paragraphs}}" wx:key="unique">
+	<view wx:if="{{item.type==1}}" ><text>{{item.value}}</text></view>
+	<view wx:if="{{item.type==2}}">
+		 <image src="{{item.value}}" width="100%" height="100%"/> 
 	</view>
 </block>
 </view>
-
+</template>
 <!--评论模块 ：moduleType:2-->
 <template name="2">
 <!--评论-->
 <view class="comment-container">
- <view class="comment_title">评论<text>（{{commentData.totalCount}}）</text></view>
+ <view class="comment_title">评论<text>（{{commentData.data.totalCount}}）</text></view>
 
-<block  wx:for="{{commentData.commentList}}" wx:key="unique">
+<block  wx:for="{{commentData.data.commentList}}" wx:for-item="item1">
  <view class="comment-box">
   <view class="comment-left">
-    <image src="{{item.avatar}}"></image>
-    <text>{{item.nick}}</text>
-    <time class="fr">{{item.createAt}}</time>
+    <image src="{{item1.avatar}}"></image>
+    <text>{{item1.nick}}</text>
+    <time class="fr">{{item1.createAt}}</time>
   </view>
   <view class="comment_cont">
-    <text>​​{{item.content}}</text>
+  <block  wx:for="{{item1.content}}" wx:for-item="itemC">
+    <text wx:if="{{itemC.type==1}}">​​{{itemC.value}}</text>
+	<text wx:if="{{itemC.type==2}}">
+		 <image src="{{itemC.value}}" width="100%" height="100%"/> 
+	</text>
+  </block>
   </view>
   </view>
 </block>
@@ -199,18 +207,20 @@
 </view>
 
 <!--底部浮动评论输入框-->
+<view class="footer_container mg20" hidden="{{isAllowComment}}">
+        
 
-<view class="footer_container mg20">
-        <navigator url="../commentSubmit/commentSubmit?moduleId={{moduleId}}">
         <view class="foot-item comment1">
           <view class="input_box">
+          <navigator url="../commentSubmit/commentSubmit?moduleId={{moduleId}}">
            <image src="../../images/c_icon3.png"></image>
              <input placeholder="写评论…"  placeholder-class="String"/>
-           </view>
+          
+           </navigator>
+            </view>
         </view>
-        </navigator>
         <view class="foot-item comment2">
-          <text class="comment_num">132</text>
+          <text class="comment_num">{{commentData.data.totalCount}}</text>
           <image src="../../images/c_icon1.png"></image>
         </view>
         <view class="foot-item comment3" bindtap="clickFollowEventBtn"> 
@@ -221,5 +231,6 @@
        	 	<image src="../../images/c_icon2.png"></image>
        	</block>
         </view>
+        
 </view>
 </template>

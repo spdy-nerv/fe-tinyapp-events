@@ -17,61 +17,42 @@ Page({
 	    duration: 1000,
     
 		eventId: "1",
-		isShowBottom:true,
-		isOnReachBottom: true,//是否显示底部详情
-		description:{
-			data:{
-				paragraphs:[
-				  {
-				  	type:1,
-				  	value:"这是一段文字"
-				  },
-				  {
-				  	type:2,
-				  	value:"http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"
-				  }
-				]
-			}
-		},
-		detail: {
-			eventName: "", //事件名称
-			startTime: "",
-			endTime: "",
-			address: "",
-			formatedMonth: '',
+		
+		des:{
+			isShowBottom:true,
+			description:'',
 			//评论数据
-			commentData: {
-				totalCount:'',
-				hasMore:true,
-				size:'',
-				offset:0,
-				commentsList:[]
-			},
-			startTime: { //开始时间
-				year: "", //年份
-				month: "",
-				day: "",
-				hours:"23"
-			},
-			endTime: { //开始时间
-				year: "", //年份
-				month: "",
-				day: "",
-				hours:"23"
-			},
-			isFollow: false, //是否关注了事件，默认false
-			isStar: false, //是否点赞了
-			starCount: 0, //点赞总数，默认0
-			enrollModuleId:"",
-			enrollData:{
-				resultData:{
-					data:{
-						hasEnrolled:true,//当前用户是否报名
-					}
-					
-				}
-			},
+			commentData: {},
+			isAllowComment:true
 		},
+		
+		eventName: "", //事件名称
+		startTime: "",
+		endTime: "",
+		address: "",
+		formatedMonth: '',
+		
+		startTime: { //开始时间
+			year: "", //年份
+			month: "",
+			day: "",
+			hours:"23"
+		},
+		endTime: { //开始时间
+			year: "", //年份
+			month: "",
+			day: "",
+			hours:"23"
+		},
+		isFollow: false, //是否关注了事件，默认false
+		isStar: false, //是否点赞了
+		starCount: 0, //点赞总数，默认0
+		isAllow:true,
+		isEnrolled:false,
+		enrollModuleId:"",
+		enrollData:{},
+		latitude:'',
+		longitude:'',
 
 		//模块Id, moduleType 1:详情事件，2:评论，3：报名，4：投票，5:问卷，6：评价
 		modules: []
@@ -104,30 +85,32 @@ Page({
 			data: getEventBaseParams,
 			method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
 			success: function(res) {
-				// success
+				console.log(res);
 				var datas=res.data.resultData;
 				var en = parseInt(datas.startTime.substring(5, 7));
 				that.setData({
 						"modules":datas.modules,
-						"detail.eventName": datas.name,
-						"detail.address": datas.address,
-						"detail.formatedMonth": monthFormatList[en-1].simpleEng,
-						"detail.startTime": { //开始时间
+						"eventName": datas.name,
+						"address": datas.address,
+						"formatedMonth": monthFormatList[en].simpleEng,
+						"startTime": { //开始时间
 							"year": datas.startTime.substring(0, 4), //年份
 							"month": datas.startTime.substring(5, 7),
 							"day": datas.startTime.substring(8, 10),
 							"hours": datas.startTime.substring(11, 16)
 						},
-						"detail.endTime": { //结束时间
+						"endTime": { //结束时间
 							"year": datas.endTime.substring(0, 4), //年份
 							"month": datas.endTime.substring(5, 7),
 							"day": datas.endTime.substring(8, 10),
 							"hours": datas.endTime.substring(11, 16)
 						},
 						"pictureUrls" :datas.pictureUrls,
-						"detail.isFollow": datas.isFollow, //是否关注了事件，默认false
-						"detail.isStar": datas.isStar, //是否点赞了
-						"detail.starCount": datas.starCount //点赞总数，默认0
+						"isFollow": datas.isFollow, //是否关注了事件，默认false
+						"isStar": datas.isStar, //是否点赞了
+						"starCount": datas.starCount, //点赞总数，默认0
+						"latitude":datas.latitude,
+						"longitude":datas.longitude
 				});
 				//设置导航条标题
 				/*wx.setNavigationBarTitle({
@@ -159,8 +142,9 @@ Page({
 					data: getEnrollModuleParams,
 					method: 'POST',
 					success: function(res) {
+						console.log("bm",res);
 						that.setData({
-							"detail.enrollData": res.data,
+							"detail.enrollData": res.data.resultData,
 							"enrollModuleId": that.data.modules[i].moduleId //把moduleId保存，报名的时候用到
 						});
 						console.log("获取报名模块数据！",that.data.detail);
@@ -173,36 +157,34 @@ Page({
 	},
 	//参加点击报名
 	clickEnrollBtn: function(e) {
-		console.log("参加", this.data.modules);
 		let that = this;
-		let isAllow = that.data.detail.enrollData.config.isAllowEnroll;
-		let isEnrolled = that.data.detail.enrollData.resultData.data.hasEnrolled;
 		//如果该用户允许报名
 		const addEnrollParams = {
 			sid: wx.getStorageSync('sid') || '',
 			moduleId:that.data.enrollModuleId
 		};
 		
-		if(isAllow && !isEnrolled){
+		if(that.data.isAllow && !that.data.isEnrolled){
 			wx.request({
 				url: APIS.ADD_ENROLL,
 				data: addEnrollParams,
 				method: 'POST', 
 				success: function(res) {
-					
+					console.log("报名",res);
 					wx.showToast({
 		              title: res.data.resultMsg,
 		              icon: 'success',
 		              duration: 2000,
 		          	});
 		          that.setData({
-						"detail.enrollData.resultData.data.hasEnrolled": !isEnrolled
+		          		"isAllow": res.data.isAllow,
+						"hasEnrolled": res.data.isEnrolled
 					});
 				}
 			})
 		}else{
 			wx.showToast({
-              title: "您已经报名或者你没有权限",
+              title: "您已经报名！",
               icon: 'success',
               duration: 2000,
           	});
@@ -218,7 +200,7 @@ Page({
 			eventId: that.data.eventId
 		};
 		
-		if(that.data.detail.isFollow){
+		if(that.data.isFollow){
 			//true 就取消关注
 			wx.request({
 				url: APIS.UN_FOLLOW_EVENT,
@@ -232,7 +214,7 @@ Page({
 		              duration: 2000,
 		          	});
 		          that.setData({
-						"detail.isFollow": !that.data.detail.isFollow
+						"isFollow": !that.data.isFollow
 					});
 				}
 			})
@@ -250,7 +232,7 @@ Page({
 		              duration: 2000,
 		          	});
 		          	that.setData({
-						"detail.isFollow": !that.data.detail.isFollow
+						"isFollow": !that.data.isFollow
 					});
 				}
 			})
@@ -271,7 +253,8 @@ Page({
 			success: function(res) {
 				console.log(res);
 				that.setData({
-					"detail.starCount": res.data.resultData.starCount
+					"starCount": res.data.resultData.starCount,
+					"isStar":!data.data.isStar
 				});
 				// success
 			}
@@ -300,9 +283,10 @@ Page({
 					success: function(res) {
 						console.log("获取评论数据！",res);
 						that.setData({
-							"detail.commentData": res.data.resultData.data
+							"des.commentData": res.data.resultData,
+							"des.isAllowComment":!res.data.resultData.config.isAllowComment
 						});
-						console.log(that.data.detail);
+						console.log(that.data.des.commentData);
 						// success
 					}
 				})
@@ -310,53 +294,30 @@ Page({
 			}
 		}
 	},
-
-	onReady: function(e) {},
-	//页面展示
-	onShow: function() {
-		this.getCommentData();
-	},
-	onHide: function() {
-		// 生命周期函数--监听页面隐藏
-		console.log('onHide')
-	},
-	onUnload: function() {
-		// 生命周期函数--监听页面卸载
-		console.log('onUnload')
-	},
-	onPullDownRefresh: function() {
-		// 页面相关事件处理函数--监听用户下拉动作
-		console.log('onPullDownRefresh')
-	},
-	onReachBottom: function() {
-		// 页面上拉触底事件的处理函数,滚动到底部获取事件详情模块
-		console.log('onReachBottom');
+	clickShowInfo: function() {
 		let that = this;
-		if(that.data.isOnReachBottom){//true
-			let mL = that.data.modules.length;
-			that.setData({
-				"isOnReachBottom":false,
-				"isShowBottom":false
-			});
-			for(let i=0;i<mL;i++){
-				if(that.data.modules[i].moduleType=="1"){
-					const getDescriptionModuleParams = {
-						sid: wx.getStorageSync('sid') || '',
-						moduleId: that.data.modules[i].moduleId
-					};
-					wx.request({
-						url: APIS.GET_DESCRIPTION_MODULE,
-						data: getDescriptionModuleParams,
-						method: 'POST',
-						success: function(res) {
-							console.log("详情！",res);
-							that.setData({
-								"description":res.data.resultData
-							});
-						}
-					})
-					break;
-				}
+		let mL = that.data.modules.length;
+		that.setData({
+			"des.isShowBottom":!that.data.des.isShowBottom
+		});
+		for(let i=0;i<mL;i++){
+			if(that.data.modules[i].moduleType=="1"){
+				const getDescriptionModuleParams = {
+					sid: wx.getStorageSync('sid') || '',
+					moduleId: that.data.modules[i].moduleId
+				};
+				wx.request({
+					url: APIS.GET_DESCRIPTION_MODULE,
+					data: getDescriptionModuleParams,
+					method: 'POST',
+					success: function(res) {
+						console.log("详情！",res);
+						that.setData({
+							"des.description":res.data.resultData.data
+						});
+					}
+				})
+				break;
 			}
 		}
 		
@@ -366,12 +327,16 @@ Page({
 		console.log("分享",e);
 		wx.showShareMenu();
 	},
+	//页面展示
+	onShow: function() {
+		
+	},
 	onShareAppMessage: function() {
 		// 用户点击右上角分享
 		console.log('onShareAppMessage')
 		return {
 			desc: '分享给大家看看吧', // 分享描述
-			path: '/detail/detail?eventId='+this.data.eventId+'?eventName='+this.data.detail.eventName // 分享路径
+			path: '/detail/detail?eventId='+this.data.eventId+'&eventName='+this.data.eventName // 分享路径
 		}
 	}
 })

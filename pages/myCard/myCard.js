@@ -5,9 +5,6 @@ var { request } = require('../../libs/request');
 var { validate } = require('../../libs/validate');
 Page({
   data: {
-		footerConfig: { 
-      pagePersonal: true
-    },
     realName:"",  
 	  photo:"",   
 	  phone:"",   
@@ -21,6 +18,7 @@ Page({
 	  declaration:''
   },
   onLoad: function (options) {
+  	
   	
   	wx.showLoading({
 	      mask: true,
@@ -51,11 +49,18 @@ Page({
         	declaration: data.declaration
         });
         console.log(that.data.photo);
-        if(opt.declaration){
+        if(opt.type==0){//0:宣言
         	that.setData({
 			  		declaration:opt.declaration
 			  	});
         }
+        if(opt.type==1){//1:兴趣爱好
+					var  h = opt.hobbies.split(",");
+					that.setData({
+			  		hobbies:h
+			  	});
+			  	console.log("hobbies",that.data.hobbies);
+		  	}
         wx.hideLoading();
       },
       realFail: function(msg) {

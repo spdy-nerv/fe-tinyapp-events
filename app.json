@@ -6,16 +6,19 @@
     "pages/voteModuleAdd/voteModuleAdd",
     "pages/testModuleAdd/testModuleAdd",
     "pages/enrollModuleAdd/enrollModuleAdd",
-    
+    "pages/hobbiesLable/hobbiesLable",
+    "pages/map/map",
     "pages/personCenter/personCenter",
     "pages/myCard/myCard",
     "pages/declaration/declaration",
     "pages/verify/verify",
-	  "pages/detail/detail",
+	"pages/detail/detail",
     "pages/logs/logs",
     "pages/commentSubmit/commentSubmit",
     "pages/voteModule/voteModule",
-    "pages/testModule/testModule"
+    "pages/testModule/testModule",
+    "pages/myFollows/myFollows",
+    "pages/myPublished/myPublished"
   ],
   "window":{
     "backgroundTextStyle":"light",

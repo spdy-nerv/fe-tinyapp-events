@@ -22,8 +22,8 @@ Page({
 		this.setData({
 			declaration:dec
 		});
-		wx.navigateTo({
-		  url: '../myCard/myCard?declaration='+dec
+		wx.redirectTo({
+		  url: '../myCard/myCard?declaration='+dec+'&type=0'
 		});
 	}
 	

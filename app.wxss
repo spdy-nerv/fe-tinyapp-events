@@ -70,6 +70,21 @@ page{
 	border-right: 2px solid transparent;
 	border-bottom: 2px solid transparent;
 }
+.wb_arrow_down {
+  margin-top: -10rpx;
+  margin-right: 10rpx;
+ vertical-align: middle;
+	display: inline-block;
+	border-right: 1px solid #adadad;
+	border-bottom: 1px solid #adadad;
+	height: 10px;
+	width: 10px;
+	transform: rotate(deg);
+	-webkit-transform: rotate(45deg);
+	/*不加这两个属性三角会比上一个略丑*/
+	border-left: 2px solid transparent;
+	border-top: 2px solid transparent;
+}
 /**底部导航**/
 .footer_container{
 	display: flex;

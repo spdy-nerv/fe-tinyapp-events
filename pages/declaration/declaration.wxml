@@ -2,9 +2,7 @@
 <form bindsubmit="formSubmit" bindreset="formReset">
 <view class="top_banner">
 	<view class="left">
-	<navigator url="../myCard/myCard">
-	<text class="wb_arrow_left"></text>返回
-	</navigator>
+	
 	</view>
 	<view class="center">
 		加友宣言
@@ -14,6 +12,6 @@
 	</view>
 </view>
 <view class="section">
-  <textarea name="declaration" value="{{declaration}}"   auto-height placeholder="{{declaration?declaration:'说点啥！'}}" />
+  <textarea name="declaration" value="{{declaration}}"   auto-height placeholder="说点啥！" />
 </view>
 </form>
