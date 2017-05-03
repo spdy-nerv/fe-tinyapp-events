@@ -1,8 +1,7 @@
 {
   "pages":[
-    "pages/eventPublish/eventPublish",
     "pages/timeLine/timeLine",
-    
+    "pages/eventPublish/eventPublish",
     "pages/descriptionModuleAdd/descriptionModuleAdd",
     "pages/voteModuleAdd/voteModuleAdd",
     "pages/testModuleAdd/testModuleAdd",
