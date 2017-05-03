@@ -61,7 +61,9 @@
         <view class="events-tit">{{item.name}}</view>
         <view class="events-add">{{item.address}}</view>
         <view class="events-member">
+        <view class="img-box">
           <view wx:for="{{item.followInfo.avatars}}" wx:key="unique" wx:for-item="a" class="img" style="z-index:99;"><image src="{{a}}"></image></view>
+         </view>
           <text class="events-member-num">{{item.followInfo.total}}人关注</text>
         </view>
       </view> 

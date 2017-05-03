@@ -230,7 +230,10 @@ page{
   color: #5d5f6a;
   font-size: 30rpx;
 }
-
+.img-box{
+  display: inline-block;
+  margin-right:20rpx;
+}
 .events-member .img{
   position: relative;
   width: 48rpx;
@@ -241,24 +244,22 @@ page{
   align-items: center;
   justify-content: center;
   vertical-align: top;
+  
 }
 .events-member image{
   width: 52rpx;
   height: 52rpx;
   border:solid 3rpx #ffffff;
   border-radius: 50%;
-  
 }
 .events-tit{
   font-size: 34rpx;
   font-weight: bolder;
 }
 .events-member-num{
- 
-
   display: inline-block;
-  margin-left: 20rpx;
   color: #686a74;
+  line-height:65rpx;
 }
 
 .filter-mask {
