@@ -7,20 +7,20 @@
 <view class="personCenter_list mg_top30 border_bottom">
 	<text>姓名</text>
 	<view class="right">
-		<input  type="text" value="{{realName}}" name="realName" placeholder="{{realName?realName:'请输入您的真实姓名'}}" />
+		<input  type="text" value="{{realName}}" name="realName" value="{{realName}}" placeholder="请输入您的真实姓名" />
 	</view>
 </view>
 <view class="personCenter_list border_bottom">
 	<text>手机</text>
 	<view class="right">
-		<input type="number" bindinput="bindPhoneInput" name="phone"   placeholder="{{phone?phone:'请输入您的手机号码'}}" />
+		<input type="number" bindinput="bindPhoneInput" name="phone" value="{{phone}}"  placeholder="请输入您的手机号码" />
 	</view>
 </view>
 
 <view class="personCenter_list border_bottom">
 	<text>验证码</text>
 	<view class="right">
-		<input type="number" name="code"   placeholder="{{code?code:'请输入验证码'}}" />
+		<input type="number" name="code" value="{{code}}"   placeholder="请输入验证码" />
 	</view>
 	<view class="code">
 	<button type="primary" loading="{{loading}}" plain="{{plain}}"
@@ -33,7 +33,7 @@
 <view class="personCenter_list ">
 	<text>个人邮箱</text>
 	<view class="right">
-		<input type="text" name="email" value="{{email}}"  placeholder="{{email?email:'请输入您的邮箱地址'}}" />
+		<input type="text" name="email" value="{{email}}"  placeholder="请输入您的邮箱地址" />
 	</view>
 </view>
 
