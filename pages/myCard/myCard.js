@@ -5,6 +5,9 @@ var { request } = require('../../libs/request');
 var { validate } = require('../../libs/validate');
 Page({
   data: {
+  	footerConfig: {
+      pagePersonal: true
+    },
     realName:"",  
 	  photo:"",   
 	  phone:"",   
@@ -142,22 +145,37 @@ Page({
 			}
 		};
 		console.log(params);
-			request({
-				url: APIS.EDIT_CARD,
-				data: params,
-				method: 'POST',
-				realSuccess: function(res) {
-					wx.showToast({
-	          title: "修改成功！",
-	          icon: 'success',
-	          duration: 2000,
-	      	});
-				},
-				realFail: function(msg) {
-					wx.showToast({
-						title: msg
-					});
-				}
-			}, false);
+		var corr_email = validate.email(e.detail.value.email);
+		var corr_phone = validate.phone(e.detail.value.phone);
+		
+		if(!corr_phone){
+			wx.showToast({
+			  title: '请输入正确手机号码'
+			})
+			return;
+		}
+		if(!corr_email){
+			wx.showToast({
+			  title: '请输入正确邮箱地址'
+			})
+			return;
+		}
+		request({
+			url: APIS.EDIT_CARD,
+			data: params,
+			method: 'POST',
+			realSuccess: function(res) {
+				wx.showToast({
+          title: "修改成功！",
+          icon: 'success',
+          duration: 2000,
+      	});
+			},
+			realFail: function(msg) {
+				wx.showToast({
+					title: msg
+				});
+			}
+		}, false);
 	}
 })

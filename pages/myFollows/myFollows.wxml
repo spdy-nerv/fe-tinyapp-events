@@ -2,7 +2,7 @@
 <block  wx:for="{{list}}" wx:key="unique">
 <view class="follow_list">
 	<view class="f_img">
-		<view class="icon"></view>
+		<!--<view class="icon"></view>-->
 		<image class="img" src="{{item.pictureUrl}}" />
 	</view>
 	<view class="t1">
@@ -10,10 +10,7 @@
 	</view>
 	<view class="t2"><image src="../../images/d-icon1.png"></image> 06月18号    19: 00</view>
 	 <view class="t2">
-	 <image src="../../images/d-icon2.png"></image> 滨江大桥       1.5km
-	 <view class="f_button fr">
-	 	<button formType="submit" type="primary" >已发布</button>
-	 </view>
+	 <image src="../../images/d-icon2.png"></image>{{item.address}}
 	</view>
 </view>
 </block >

@@ -317,6 +317,5 @@ top:10rpx;
   width: 44rpx;
   height: 44rpx;
 }
-.comment3{
-  vertical-align: middle;
-   width: 80rpx;}
+.comment3{ border-right: none;
+  }

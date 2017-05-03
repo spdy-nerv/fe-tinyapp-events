@@ -69,20 +69,20 @@
 </view>
 
 <!--投票、地址等模块-->
-<view class=" model-top mg20">
+<view class="model mg20">
   <view class="model-left ">
      <image src="../../images/d-icon1.png"></image>
   </view>
   <view class="model-right">
     <view class="right1">开始时间：{{startTime.year}}年{{startTime.month}}月{{startTime.day}}日 {{startTime.hours}}</view>
-    <view class="right2">
-  结束时间： {{endTime.year}}年{{endTime.month}}月{{endTime.day}}日  {{endTime.hours}}
+    <view class="right1">
+  结束时间：{{endTime.year}}年{{endTime.month}}月{{endTime.day}}日  {{endTime.hours}}
     </view>
    </view>
 </view>
 
 
-<navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}" redirect>
+<navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}">
  <view class=" model">
   <view class="model-left ">
      <image src="../../images/d-icon2.png" class="m-img2"></image>
@@ -160,7 +160,7 @@
 </view>
 <!--此处为自定义图文详情内容区-->
 <view class="detail_box" hidden="{{isShowBottom}}">
-<block  wx:for="{{description.paragraphs}}" wx:key="unique">
+<block  wx:for="{{description.paragraphs}}">
 	<view wx:if="{{item.type==1}}" ><text>{{item.value}}</text></view>
 	<view wx:if="{{item.type==2}}">
 		 <image src="{{item.value}}" width="100%" height="100%"/> 
@@ -172,7 +172,7 @@
 <template name="2">
 <!--评论-->
 <view class="comment-container">
- <view class="comment_title">评论<text>（{{commentData.data.totalCount}}）</text></view>
+ <view class="comment_title">评论<text>({{commentData.data.totalCount}})</text></view>
 
 <block  wx:for="{{commentData.data.commentList}}" wx:for-item="item1">
  <view class="comment-box">
@@ -223,7 +223,7 @@
           <text class="comment_num">{{commentData.data.totalCount}}</text>
           <image src="../../images/c_icon1.png"></image>
         </view>
-        <view class="foot-item comment3" bindtap="clickFollowEventBtn"> 
+        <view class="foot-item comment2 comment3" bindtap="clickFollowEventBtn"> 
         <block wx:if="{{isFollow}}">
        	 	<image src="../../images/c_icon2_after.png"></image>
        	</block>

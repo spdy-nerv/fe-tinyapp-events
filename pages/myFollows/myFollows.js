@@ -2,6 +2,8 @@
 var { APIS } = require('../../const');
 var user = require('../../libs/user');
 var { request } = require('../../libs/request');
+var { validate } = require('../../libs/validate');
+
 Page({
   data: {
 		footerConfig: { 
@@ -9,6 +11,7 @@ Page({
     },
   	isNoData:"",
   	list:[]
+  	
   },
   onLoad: function () {
   	wx.showLoading({
@@ -21,7 +24,7 @@ Page({
   	var that = this;
   	var params = {
   		sid: wx.getStorageSync('sid'),
-  		offset:0,
+  		offset:1,
 			size:20
   	};
   	 request({
@@ -29,7 +32,7 @@ Page({
       data: params,
       method: 'POST',
       realSuccess: function(data){
-      	console.log("我的发布",data);
+      	console.log("我的关注",data);
       	that.setData({
       		list:data.list
       	});

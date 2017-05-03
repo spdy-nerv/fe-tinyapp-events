@@ -16,13 +16,14 @@ Page({
 	    interval: 5000,  
 	    duration: 1000,
     
-		eventId: "1",
+		eventId: "",
 		
 		des:{
 			isShowBottom:true,
 			description:'',
 			//评论数据
 			commentData: {},
+			createAt:'',
 			isAllowComment:true
 		},
 		
@@ -159,6 +160,7 @@ Page({
 	clickEnrollBtn: function(e) {
 		let that = this;
 		//如果该用户允许报名
+		if(that.data.enrollModuleId){
 		const addEnrollParams = {
 			sid: wx.getStorageSync('sid') || '',
 			moduleId:that.data.enrollModuleId
@@ -187,6 +189,11 @@ Page({
               title: "您已经报名！",
               icon: 'success',
               duration: 2000,
+          	});
+		}
+		}else{
+			wx.showToast({
+              title: "暂不能报名！",
           	});
 		}
 	},
