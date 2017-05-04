@@ -201,7 +201,7 @@ Page({
 		}
 		}else{
 			wx.showToast({
-              title: "暂不能报名！",
+              title: "事件发布者暂时没有开通报名模块！",
           	});
 		}
 	},
