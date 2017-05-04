@@ -26,7 +26,7 @@ Page({
 			size:20
   	};
   	 request({
-      url: APIS.MY_FOLLOWS,
+      url: APIS.MY_PUBLISHED,
       data: params,
       method: 'POST',
       realSuccess: function(data){

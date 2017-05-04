@@ -2,7 +2,6 @@
 <form bindsubmit="formSubmit" bindreset="formReset">
 <view class="top_banner">
 	<view class="left">
-	
 	</view>
 	<view class="center">
 		加友宣言

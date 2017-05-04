@@ -36,7 +36,7 @@
      <view>分享</view>
    </view>
    <view class="share-item" bindtap="clickEnrollBtn"> 
-   <block wx:if="{{enrollData.resultData.data.hasEnrolled}}">
+   <block wx:if="{{hasEnrolled}}">
      	<image src="../../images/icon6.png"></image>
      	<view>已参加</view>
      </block>
@@ -75,8 +75,7 @@
   </view>
   <view class="model-right">
     <view class="right1">开始时间：{{startTime.year}}年{{startTime.month}}月{{startTime.day}}日 {{startTime.hours}}</view>
-    <view class="right1">
-  结束时间：{{endTime.year}}年{{endTime.month}}月{{endTime.day}}日  {{endTime.hours}}
+    <view class="right1">结束时间：{{endTime.year}}年{{endTime.month}}月{{endTime.day}}日  {{endTime.hours}}
     </view>
    </view>
 </view>

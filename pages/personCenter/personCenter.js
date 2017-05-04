@@ -33,10 +33,23 @@ Page({
         that.setData({
         	nick:							data.nick,
         	headerImg:				data.headerImg,
-        	//isCertification:	data.isCertification,
+        	isCertification:	data.isCertification,
         	roleName:					data.roleName
         });
         wx.hideLoading();
+        if(!that.data.isCertification){
+        	 wx.showToast({
+                title: '您尚未身份认证！2秒后跳转认证界面！',
+                duration: 2000,
+                mask: true
+            });
+            setTimeout(function() {
+                wx.navigateTo({
+                url: '../verify/verify'
+                });
+            }, 2000);
+        }
+        
       },
       realFail: function(msg) {
         wx.hideLoading();
@@ -48,27 +61,15 @@ Page({
   },
   //我的卡片
   toMyCard: function(e){
-  	console.log(this.data.isCertification);
-  	//弹出认证提示
-  	if(!this.data.isCertification){
-  		this.showModal();
-  	}else{
   		wx.navigateTo({
 			  url: '../myCard/myCard'
 			});
-  	}
   },
   //我的关注
   toMyFollows: function(e){
-  	console.log(this.data.isCertification);
-  	//弹出认证提示
-  	if(!this.data.isCertification){
-  		this.showModal();
-  	}else{
-  		wx.navigateTo({
+  	wx.navigateTo({
 			  url: '../myFollows/myFollows'
-			});
-  	}
+		});
   },
   //我的发布
   toMyPublic: function(e){

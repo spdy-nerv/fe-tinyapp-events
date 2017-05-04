@@ -41,8 +41,8 @@
 	<text>角色</text>
 	<view class="right">
 	<radio-group class="radio-group" bindchange="radioChange">
-	  <label class="radio" wx:for="{{items}}">
-	    <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+	  <label class="radio" wx:for="{{roleList}}">
+	    <radio value="{{item.roleId}}" checked="true"/>{{item.roleName}}
 	  </label>
 	</radio-group>
 </view>

@@ -20,17 +20,16 @@ Page({
 	  ],
 	  declaration:''
   },
-  onLoad: function (options) {
-  	
-  	
+  onLoad: function () {
+  	console.log("onLoad");
   	wx.showLoading({
 	      mask: true,
 	      title: '数据加载中'
 	    });
-	    user.login(this.onLoadData(options), this, true);
+	    user.login(this.onLoadData(), this, true);
 	    
   },
-  onLoadData: function(opt){
+  onLoadData: function(){
   	var that = this;
   	var params = {
   		sid: wx.getStorageSync('sid')
@@ -52,18 +51,6 @@ Page({
         	declaration: data.declaration
         });
         console.log(that.data.photo);
-        if(opt.type==0){//0:宣言
-        	that.setData({
-			  		declaration:opt.declaration
-			  	});
-        }
-        if(opt.type==1){//1:兴趣爱好
-					var  h = opt.hobbies.split(",");
-					that.setData({
-			  		hobbies:h
-			  	});
-			  	console.log("hobbies",that.data.hobbies);
-		  	}
         wx.hideLoading();
       },
       realFail: function(msg) {
@@ -82,9 +69,6 @@ Page({
   		hobbies:this.data.hobbies
   	});
   },
-  
-  
-  
   
   chooseimage: function () {  
     var that = this;  
@@ -108,8 +92,8 @@ Page({
 				        	photo:img
 				        });
 				        wx.showToast({
-							    icon: "loading",
-							    title: "正在成功！"
+							    icon: "success",
+							    title: "上传成功！！"
 							  });
 							  console.log("上传后",that.data.photo);
 			       if (res.statusCode != 200) {
@@ -140,11 +124,11 @@ Page({
 				email: e.detail.value.email,
 				degree: e.detail.value.degree,
 				school: e.detail.value.school,
-				hobbies: that.data.hobbies,
-				declaration: that.data.declaration
+				hobbies: wx.getStorageSync("hobbies") || that.data.hobbies,
+				declaration: wx.getStorageSync("declaration") || that.data.declaration
 			}
 		};
-		console.log(params);
+		console.log("提交的数据",params);
 		var corr_email = validate.email(e.detail.value.email);
 		var corr_phone = validate.phone(e.detail.value.phone);
 		
@@ -170,6 +154,8 @@ Page({
           icon: 'success',
           duration: 2000,
       	});
+      	wx.removeStorageSync('declaration');
+      	wx.removeStorageSync('hobbies');
 			},
 			realFail: function(msg) {
 				wx.showToast({

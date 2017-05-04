@@ -8,25 +8,11 @@ var { request } = require('../../libs/request');
 var { validate } = require('../../libs/validate');
 Page({
 	data: {
-		items: [{
-			name: 'teacher',
-			value: '老师'
-		}, {
-			name: 'stu',
-			value: '学生',
-			checked: 'true'
-		}, {
-			name: 'schollF',
-			value: '校友'
-		}, {
-			name: 'un_schollF',
-			value: '非校友'
-		}],
+		roleList:[],
 		realName: "",
 		phone: "", //昵称
 		email: "",
 		code: "",
-		roleId: "stu",
 		tips:"",
 		isHideT:true,
 		isUP:true,
@@ -36,6 +22,7 @@ Page({
 	},
 	onLoad: function() {
 		//this.disableButton();
+		this.getRoleList();
 	},
 	//没有输入必填项提交按钮置灰色
 	/*disableButton: function(inputType,value){
@@ -128,11 +115,15 @@ Page({
 				data: {phone:this.data.phone},
 				method: 'POST',
 				realSuccess: function(res) {
-					that.setData({
-						plain: !that.data.plain,
-						disabled: !that.data.disabled,
-						loading: !that.data.loading
-					});
+					setTimeout(function() {
+					   that.setData({
+								plain: !that.data.plain,
+								disabled: !that.data.disabled,
+								loading: !that.data.loading
+							});
+				  }, 3000);
+		  
+					
 					console.log(res);
 				},
 				realFail: function(msg) {
@@ -145,6 +136,24 @@ Page({
 					});
 				}
 			}, false);
+	},
+	
+	getRoleList: function(){
+		  	var that = this;
+		    request({
+		      url: APIS.GET_ROLE_LIST,
+		      method: 'GET', 
+		      realSuccess: function(data){
+		        var list = data.list;
+		        list = list.map(function(r) {
+		            r.isChecked = true;
+		            return r;
+		        });
+		        that.setData({
+		          roleList: list
+		        });
+		      }
+		    }, false);
 	},
 	
 	formSubmit: function(e) {
@@ -161,29 +170,29 @@ Page({
 			}
 		};
 		if(that.verifyRealName(e.detail.value.realName) && that.verfyPhone(e.detail.value.phone) && that.verfyEmail(e.detail.value.email) ){
-			that.setData({
-				loading:!that.data.loading
-			});
-			request({
-				url: APIS.CERTIFICATION,
-				data: params,
-				method: 'POST',
-				realSuccess: function(res) {
-					that.setData({
-						loading:!that.data.loading
-					});
-					console.log(res);
-				},
-				realFail: function(msg) {
-					wx.hideLoading();
+
+		wx.request({
+		  	url: APIS.CERTIFICATION,
+			data: params,
+			method: 'POST',
+		  	success: function(res){
+					console.log(res.data.resultMsg);
 					wx.showToast({
-						title: msg
-					});
-					that.setData({
-						loading:!that.data.loading
-					});
-				}
-			}, false);
+		              title: res.data.resultMsg,
+		              icon: 'success',
+		          	});
+		          	wx.navigateBack({
+					  delta: 1
+					})
+		  	},
+		  	fail: function(res) {
+				wx.showToast({
+					title: res.msg
+				});
+		 	}
+		})
+
+			
 		}
 	},
 	

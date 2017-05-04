@@ -65,9 +65,13 @@ Page({
   },
   
 	formSubmit: function() {
-		wx.redirectTo({
-		  url: '../myCard/myCard?hobbies='+this.data.hobbies+'&type=1'
+		wx.setStorageSync('hobbies', this.data.hobbies);
+		wx.navigateBack({
+		  delta: 1
 		});
+		/*wx.redirectTo({
+		  url: '../myCard/myCard?hobbies='+this.data.hobbies+'&type=1'
+		});*/
 	}
 	
 })

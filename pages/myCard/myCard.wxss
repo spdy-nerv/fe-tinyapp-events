@@ -9,3 +9,6 @@
     width: 70%;
     text-align: right;
 }
+.save_button{
+	margin-bottom:200rpx;
+}

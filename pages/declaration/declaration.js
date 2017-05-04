@@ -22,9 +22,13 @@ Page({
 		this.setData({
 			declaration:dec
 		});
-		wx.redirectTo({
+		wx.setStorageSync('declaration', this.data.declaration);
+		wx.navigateBack({
+		  delta: 1
+		})
+		/*wx.redirectTo({
 		  url: '../myCard/myCard?declaration='+dec+'&type=0'
-		});
+		});*/
 	}
 	
 })

@@ -49,7 +49,7 @@ Page({
 		isStar: false, //是否点赞了
 		starCount: 0, //点赞总数，默认0
 		isAllow:true,
-		isEnrolled:false,
+		hasEnrolled:false,
 		enrollModuleId:"",
 		enrollData:{},
 		latitude:'',
@@ -60,6 +60,7 @@ Page({
 	},
 
 	onLoad: function(options){
+		
 		this.setData({
 			eventId:options.eventId
 		});
@@ -138,19 +139,26 @@ Page({
 					sid: wx.getStorageSync('sid') || '',
 					moduleId: that.data.modules[i].moduleId
 				};
-				wx.request({
+				
+				request({
 					url: APIS.GET_ENROLL_MODULE,
 					data: getEnrollModuleParams,
 					method: 'POST',
-					success: function(res) {
+					realSuccess: function(res) {
 						console.log("bm",res);
 						that.setData({
-							"detail.enrollData": res.data.resultData,
+							"hasEnrolled":res.data.hasEnrolled,
 							"enrollModuleId": that.data.modules[i].moduleId //把moduleId保存，报名的时候用到
 						});
-						console.log("获取报名模块数据！",that.data.detail);
+					},
+					realFail: function(msg) {
+						wx.showToast({
+							title: msg
+						});
 					}
-				})
+				}, false);
+				
+				
 				break;
 			}
 		}
@@ -180,7 +188,7 @@ Page({
 		          	});
 		          that.setData({
 		          		"isAllow": res.data.isAllow,
-						"hasEnrolled": res.data.isEnrolled
+						"isEnrolled": res.data.isEnrolled
 					});
 				}
 			})
@@ -261,7 +269,7 @@ Page({
 				console.log(res);
 				that.setData({
 					"starCount": res.data.resultData.starCount,
-					"isStar":!data.data.isStar
+					"isStar":!that.data.isStar
 				});
 				// success
 			}
