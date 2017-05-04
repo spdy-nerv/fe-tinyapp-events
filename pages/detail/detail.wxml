@@ -5,7 +5,7 @@
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
       <block wx:for="{{pictureUrls}}" wx:key="unique">  
         <swiper-item>  
-            <image src="{{item}}" class="slide-image" width="100%" height="100%"/>  
+            <image mode="aspectFit" src="{{item}}" class="slide-image" width="100%" height="100%"/>  
         </swiper-item>  
       </block>  
 </swiper>
@@ -161,10 +161,10 @@
 <!--此处为自定义图文详情内容区-->
 <view class="detail_box" hidden="{{isShowBottom}}">
 <block  wx:for="{{description.paragraphs}}">
-	<view wx:if="{{item.type==1}}" ><text>{{item.value}}</text></view>
-	<view wx:if="{{item.type==2}}">
-		 <image src="{{item.value}}" width="100%" height="100%"/> 
-	</view>
+	<view wx:if="{{item.type==1}}" class="detail_box_p"><text>{{item.value}}</text></view>
+  <view wx:if="{{item.type==2}}" class="detail_box_p">
+    <image src="{{item.value}}" mode="aspectFill"/> 
+  </view>
 </block>
 </view>
 </template>
@@ -214,7 +214,7 @@
           <view class="input_box">
           <navigator url="../commentSubmit/commentSubmit?moduleId={{moduleId}}">
            <image src="../../images/c_icon3.png"></image>
-             <input placeholder="写评论…"  placeholder-class="String"/>
+             <input placeholder="写评论…"  placeholder-class="String" disabled/>
           
            </navigator>
             </view>

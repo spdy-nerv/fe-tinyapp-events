@@ -14,6 +14,7 @@ Page({
     address: '广西南宁大学东路100号',
     eventTypeList: [],
     eventTypeIndex: 0,
+    eventTypeId: '',
     roleList: [],
     moduleTypeList: [
         {
@@ -79,9 +80,9 @@ Page({
     if (this.data.eventId) {
         user.login(this.renderBaseInfo, this, true);
     }
-    this.renderCal();
-    this.renderEventType();
-    this.renderEventRole();
+    //this.renderCal();
+    //this.renderEventType();
+    //this.renderEventRole();
   },
 
   renderBaseInfo: function() {
@@ -151,13 +152,23 @@ Page({
   },
 
   // TODO
-  handleEventType: function(typeId) {},
+  handleEventType: function(typeId) {
+    this.setData({
+      eventTypeId: typeId
+    });
+    if (this.data.eventTypeList.length >= 0) {
+      this.selectEventType();
+    }
+  },
 
   // TODO
   handleRole: function(roleIdLists) {
     this.setData({
       allowViewId: roleIdLists
     });
+    if (this.data.roleList.length > 0) {
+      this.selectEventRole();
+    }
   },
 
   handleModules: function(modules) {
@@ -246,10 +257,31 @@ Page({
       realSuccess: function(data){
         var list = data.list;
         that.setData({
-          eventTypeList: list
+          eventTypeList: list,
+          eventTypeIndex: 0
         });
+        if (that.eventTypeId) {
+          that.selectEventType();
+        }
       }
     }, false);
+  },
+
+  selectEventType: function() {
+    var id = this.data.eventTypeId;
+    var tl = this.data.eventTypeList;
+    var index = 0;
+    for (var i in tl) {
+      if (id == tl[i].typeId) {
+        index = i;
+        break;
+      }
+    }
+  
+    this.setData({
+      eventTypeIndex: index
+    });
+
   },
 
   onChangeEventType: function(e) {
@@ -272,8 +304,23 @@ Page({
         that.setData({
           roleList: list
         });
+        if (that.data.allowViewId.length > 0) {
+          that.selectEventRole();
+        }
       }
     }, false);
+  },
+
+  selectEventRole: function() {
+    var rl = this.data.roleList;
+    var allowViewId = this.data.allowViewId;
+    for (var i in rl) {
+      if (util.inArray(rl[i].roleId, allowViewId)) {
+        rl[i].isChecked = true;
+      } else {
+        rl[i].isChecked = false;
+      }
+    }
   },
 
   onRoleToggle: function(e) {

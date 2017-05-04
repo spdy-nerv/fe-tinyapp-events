@@ -93,7 +93,7 @@ Page({
 						"modules":datas.modules,
 						"eventName": datas.name,
 						"address": datas.address,
-						"formatedMonth": monthFormatList[en].simpleEng,
+						"formatedMonth": monthFormatList[en-1].simpleEng,
 						"startTime": { //开始时间
 							"year": datas.startTime.substring(0, 4), //年份
 							"month": datas.startTime.substring(5, 7),
@@ -336,7 +336,7 @@ Page({
 	},
 	//页面展示
 	onShow: function() {
-		
+		this.getCommentData();
 	},
 	onShareAppMessage: function() {
 		// 用户点击右上角分享

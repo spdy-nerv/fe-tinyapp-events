@@ -31,8 +31,15 @@ function request(obj, needLogin = true, ctx) {
             } else if (d.errCode == '0013') {
                 // TODO
                 wx.showToast({
-                    title: '跳转到个人中心！'
+                    title: '您尚未身份认证！2秒后跳转认证界面！',
+                    duration: 2000,
+                    mask: true
                 });
+                setTimeout(function() {
+                    wx.navigateTo({
+                    url: '../verify/verify'
+                    });
+                }, 2000);
             } else {
                 typeof obj.realFail == "function" && obj.realFail('数据获取失败！' + d.resultMsg || '', d.errCode);
             }

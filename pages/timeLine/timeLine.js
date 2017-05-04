@@ -53,11 +53,11 @@ Page({
       mask: true,
       title: '数据加载中'
     });
-    user.login(this.renderUI, this, true);
+    
   },
 
   onShow: function() {
-    this.getEventList();
+    user.login(this.renderUI, this, true);
   },
 
   renderUI: function () {
