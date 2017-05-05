@@ -30,6 +30,7 @@ Page({
       data: params,
       method: 'POST',
       realSuccess: function(data){
+      	console.log(data);
         that.setData({
         	nick:							data.nick,
         	headerImg:				data.headerImg,
@@ -59,6 +60,32 @@ Page({
       }
     }, true);
   },
+  
+  unBind: function(){
+  	var that = this;
+  	var unbindParam = {
+  		sid: wx.getStorageSync('sid')
+  	};
+    wx.request({
+    	url: APIS.UNBIND,
+      data: unbindParam,
+      method: 'POST',
+      success: function(res){
+      	if(res.data.errCode=='0000'){
+      		 that.setData({
+	        	isCertification:!that.data.isCertification,
+	        });
+	        wx.showToast({
+	            title: res.data.resultMsg,
+	            mask: true
+	        });
+	        that.showModal();
+      	}
+      
+      },
+    })
+  },
+  
   //我的卡片
   toMyCard: function(e){
   		wx.navigateTo({
@@ -73,21 +100,16 @@ Page({
   },
   //我的发布
   toMyPublic: function(e){
-  	console.log(this.data.isCertification);
-  	//弹出认证提示
-  	if(!this.data.isCertification){
-  		this.showModal();
-  	}else{
   		wx.navigateTo({
 			  url: '../myPublished/myPublished'
 			});
-  	}
   },
   
   showModal: function(){
   	wx.showModal({
 				 title: '温馨提示！',
 				 content: '您还没有身份认证，点击确认去认证',
+				 confirmText:'重新认证',
 				 success: function(res) {
 				  if (res.confirm) {
 				   wx.navigateTo({

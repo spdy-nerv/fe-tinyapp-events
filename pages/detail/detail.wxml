@@ -35,7 +35,7 @@
      	<image src="../../images/icon5.png"></image>     
      <view>分享</view>
    </view>
-   <view class="share-item" bindtap="clickEnrollBtn"> 
+   <view class="share-item" bindtap="clickEnrollBtn" hidden="{{isShowEnroll}}"> 
    <block wx:if="{{hasEnrolled}}">
      	<image src="../../images/icon6.png"></image>
      	<view>已参加</view>
@@ -233,3 +233,8 @@
         
 </view>
 </template>
+
+<!--分享-->
+<view class="modal-window" hidden="{{isShowShare}}" bindtap="hiddenShare">
+		<image src="../../images/share.png" />
+</view>

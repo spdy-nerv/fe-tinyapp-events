@@ -18,7 +18,11 @@ Page({
 	  	"篮球",
       "麻将"
 	  ],
-	  declaration:''
+	  declaration:'',
+	  plain: false,
+		disabled: false,
+		loading: false,
+		isHiddenCode:true
   },
   onLoad: function () {
   	console.log("onLoad");
@@ -41,12 +45,12 @@ Page({
       realSuccess: function(data){
       	console.log("pic",data);
       	that.setData({
-        	realName:	data.realName,
-        	photo:		data.photo,
-        	phone: 		data.phone,
-        	email:		data.email,
-        	degree:		data.degree,
-        	school:		data.school,
+        	realName: data.realName,
+        	photo:	data.photo,
+        	phone: 	data.phone,
+        	email:	data.email,
+        	degree:	data.degree,
+        	school:	data.school,
         	hobbies:	data.hobbies,
         	declaration: data.declaration
         });
@@ -62,20 +66,34 @@ Page({
     }, false);
   },
   
-  clickClose: function(e){
+  showCode:function(){
+  	this.setData({
+  		isHiddenCode:!this.data.isHiddenCode
+  	})
+  },
+  
+  bindInput: function(e){
+  	var cid = e.currentTarget.dataset.id;
+  	wx.setStorageSync(cid, e.detail.value);
+  },
+  
+/*  clickClose: function(e){
   	var cid = e.currentTarget.dataset.id;
     this.data.hobbies.splice(cid,1);
   	this.setData({
   		hobbies:this.data.hobbies
   	});
   },
-  
+*/  
   chooseimage: function () {  
     var that = this;  
     wx.chooseImage({
       count: 1, // 默认9  
 		  success: function(resp) {
 			    var tempFilePaths = resp.tempFilePaths;
+			    that.setData({
+				        	photo:tempFilePaths
+				        });
 			    wx.showToast({
 				    icon: "loading",
 				    title: "正在上传"
@@ -120,18 +138,16 @@ Page({
 			data: {
 				realName: e.detail.value.realName,
 				photo: that.data.photo,
-				phone: e.detail.value.phone,
+				phone: that.data.phone,
 				email: e.detail.value.email,
-				degree: e.detail.value.degree,
-				school: e.detail.value.school,
-				hobbies: wx.getStorageSync("hobbies") || that.data.hobbies,
-				declaration: wx.getStorageSync("declaration") || that.data.declaration
+				degree:  e.detail.value.degree,
+				school:  e.detail.value.school,
+				hobbies:  that.data.hobbies,
+				declaration:  that.data.declaration
 			}
 		};
 		console.log("提交的数据",params);
 		var corr_email = validate.email(e.detail.value.email);
-		var corr_phone = validate.phone(e.detail.value.phone);
-		
 		if(!corr_phone){
 			wx.showToast({
 			  title: '请输入正确手机号码'
@@ -154,14 +170,22 @@ Page({
           icon: 'success',
           duration: 2000,
       	});
-      	wx.removeStorageSync('declaration');
-      	wx.removeStorageSync('hobbies');
+      	wx.clearStorageSync();
 			},
 			realFail: function(msg) {
 				wx.showToast({
 					title: msg
 				});
 			}
-		}, false);
+		}, true);
+	},
+	
+	
+	onShow: function(){
+		console.log("show");
+		this.onLoadData();
+	},
+	onUnload:function(){
+		console.log("onUnload");
 	}
 })

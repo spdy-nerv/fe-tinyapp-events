@@ -51,9 +51,11 @@ Page({
 		isAllow:true,
 		hasEnrolled:false,
 		enrollModuleId:"",
+		isShowEnroll:false,//是否有参加模块
 		enrollData:{},
 		latitude:'',
 		longitude:'',
+		isShowShare:true,
 
 		//模块Id, moduleType 1:详情事件，2:评论，3：报名，4：投票，5:问卷，6：评价
 		modules: []
@@ -80,15 +82,13 @@ Page({
 			eventId: that.data.eventId
 		};
 		
-		
-		//获取事件详情
-		wx.request({
-			url: APIS.GET_EVENT_BASE,
-			data: getEventBaseParams,
-			method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-			success: function(res) {
-				console.log(res);
-				var datas=res.data.resultData;
+		request({
+	      url: APIS.GET_EVENT_BASE,
+	      data: getEventBaseParams,
+	      method: 'POST',
+	      realSuccess: function(data){
+	      		console.log("base",data);
+	        	var datas=data;
 				var en = parseInt(datas.startTime.substring(5, 7));
 				that.setData({
 						"modules":datas.modules,
@@ -114,18 +114,18 @@ Page({
 						"latitude":datas.latitude,
 						"longitude":datas.longitude
 				});
-				//设置导航条标题
-				/*wx.setNavigationBarTitle({
-				  title: datas.eventName
-				})*/
-				//获取报名模块数据
 				that.getEnrollModuleData();
 				that.getCommentData();
-				wx.hideLoading();
-				
-			}
-		});
-		
+	        	wx.hideLoading();
+	      },
+	      realFail: function(msg) {
+	        wx.hideLoading();
+	        wx.showToast({
+	          title: msg
+	        });
+	      }
+	    }, true);
+    
 	},
 
 	//获取报名模块数据
@@ -158,7 +158,6 @@ Page({
 					}
 				}, false);
 				
-				
 				break;
 			}
 		}
@@ -174,24 +173,25 @@ Page({
 			moduleId:that.data.enrollModuleId
 		};
 		
-		if(that.data.isAllow && !that.data.isEnrolled){
+		if(that.data.isAllow && !that.data.hasEnrolled){
 			wx.request({
-				url: APIS.ADD_ENROLL,
-				data: addEnrollParams,
-				method: 'POST', 
-				success: function(res) {
-					console.log("报名",res);
-					wx.showToast({
-		              title: res.data.resultMsg,
-		              icon: 'success',
-		              duration: 2000,
-		          	});
-		          that.setData({
-		          		"isAllow": res.data.isAllow,
-						"isEnrolled": res.data.isEnrolled
-					});
-				}
-			})
+					url: APIS.ADD_ENROLL,
+					data: addEnrollParams,
+					method: 'POST',
+					success: function(res) {
+						console.log("报名",res);
+						wx.showToast({
+			              title: res.data.resultMsg,
+			              icon: 'success',
+			              duration: 2000,
+			          	});
+			          	that.setData({
+			          		"isAllow": !that.data.isAllow,
+							"hasEnrolled": !that.data.hasEnrolled
+						});
+					},
+				});
+				
 		}else{
 			wx.showToast({
               title: "您已经报名！",
@@ -340,7 +340,15 @@ Page({
 	//点击分享
 	clickShareBtn:function(e){
 		console.log("分享",e);
-		wx.showShareMenu();
+		this.setData({
+			isShowShare:!this.data.isShowShare
+		})
+		//wx.showShareMenu();
+	},
+	hiddenShare:function(e){
+		this.setData({
+			isShowShare:!this.data.isShowShare
+		})
 	},
 	//页面展示
 	onShow: function() {

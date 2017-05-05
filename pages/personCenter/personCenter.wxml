@@ -13,7 +13,11 @@
 				<image src="../../images/verified.png" />
 				<text>{{roleName}}</text>
 			</view>
+			<view class="verified"> 
+				<text class="unBind" bindtap="unBind">解除绑定</text>
+			</view>
 		</block>
+		
 	</view>
 	<view class="center_bg">
 		<image src="../../images/center_bg.png" />

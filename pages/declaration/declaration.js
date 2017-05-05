@@ -19,13 +19,27 @@ Page({
 	formSubmit: function(e) {
 		var dec = e.detail.value.declaration;
 		var that = this;
-		this.setData({
-			declaration:dec
-		});
-		wx.setStorageSync('declaration', this.data.declaration);
-		wx.navigateBack({
-		  delta: 1
-		})
+		var params = {
+			sid: wx.getStorageSync('sid'),
+			data: {
+				declaration:dec
+			}
+		};
+		request({
+				url: APIS.EDIT_CARD,
+				data: params,
+				method: 'POST',
+				realSuccess: function(res) {
+					wx.navigateBack();
+				},
+				realFail: function(msg) {
+					wx.hideLoading();
+					wx.showToast({
+						title: msg
+					});
+				}
+			}, false);
+		
 		/*wx.redirectTo({
 		  url: '../myCard/myCard?declaration='+dec+'&type=0'
 		});*/

@@ -65,10 +65,27 @@ Page({
   },
   
 	formSubmit: function() {
-		wx.setStorageSync('hobbies', this.data.hobbies);
-		wx.navigateBack({
-		  delta: 1
-		});
+		var that = this;
+		var params = {
+			sid: wx.getStorageSync('sid'),
+			data: {
+				hobbies:that.data.hobbies
+			}
+		};
+		request({
+				url: APIS.EDIT_CARD,
+				data: params,
+				method: 'POST',
+				realSuccess: function(res) {
+					wx.navigateBack();
+				},
+				realFail: function(msg) {
+					wx.hideLoading();
+					wx.showToast({
+						title: msg
+					});
+				}
+			}, false);
 		/*wx.redirectTo({
 		  url: '../myCard/myCard?hobbies='+this.data.hobbies+'&type=1'
 		});*/
