@@ -185,10 +185,12 @@ Page({
 			              icon: 'success',
 			              duration: 2000,
 			          	});
-			          	that.setData({
-			          		"isAllow": !that.data.isAllow,
-							"hasEnrolled": !that.data.hasEnrolled
-						});
+			          	if(errCode=='0000'){
+				          	that.setData({
+				          		"isAllow": !that.data.isAllow,
+								"hasEnrolled": !that.data.hasEnrolled
+							});
+			          	}
 					},
 				});
 				

@@ -1,6 +1,6 @@
 {
   "pages":[
-           "pages/personCenter/personCenter",
+          
     "pages/timeLine/timeLine",
     "pages/eventPublish/eventPublish",
     "pages/modifyCode/modifyCode",
@@ -10,7 +10,7 @@
     "pages/enrollModuleAdd/enrollModuleAdd",
     "pages/hobbiesLable/hobbiesLable",
     "pages/map/map",
-   
+    "pages/personCenter/personCenter",
     "pages/myCard/myCard",
     "pages/declaration/declaration",
     "pages/verify/verify",
