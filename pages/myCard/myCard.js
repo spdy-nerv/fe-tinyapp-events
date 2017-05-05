@@ -44,15 +44,16 @@ Page({
       method: 'POST',
       realSuccess: function(data){
       	console.log("pic",data);
+      	wx.clearStorageSync();
+      	wx.setStorageSync("realName", data.realName);
+      	wx.setStorageSync("photo", data.photo);
+      	wx.setStorageSync("email", data.email);
+      	wx.setStorageSync("degree", data.degree);
+      	wx.setStorageSync("school", data.school);
       	that.setData({
-        	realName: data.realName,
-        	photo:	data.photo,
-        	phone: 	data.phone,
-        	email:	data.email,
-        	degree:	data.degree,
-        	school:	data.school,
+        	phone:	data.phone,
         	hobbies:	data.hobbies,
-        	declaration: data.declaration
+        	declaration:	data.declaration
         });
         console.log(that.data.photo);
         wx.hideLoading();
@@ -64,6 +65,19 @@ Page({
         });
       }
     }, false);
+    
+    	that.setData({
+        	realName: wx.getStorageSync("realName"),
+        	photo:	wx.getStorageSync("photo"),
+        	phone: 	wx.getStorageSync("phone"),
+        	email:	wx.getStorageSync("email"),
+        	degree:	wx.getStorageSync("degree"),
+        	school:	wx.getStorageSync("school"),
+        	hobbies:	wx.getStorageSync("hobbies"),
+        	declaration: wx.getStorageSync("declaration")
+        });
+    
+    
   },
   
   showCode:function(){
@@ -148,12 +162,6 @@ Page({
 		};
 		console.log("提交的数据",params);
 		var corr_email = validate.email(e.detail.value.email);
-		if(!corr_phone){
-			wx.showToast({
-			  title: '请输入正确手机号码'
-			})
-			return;
-		}
 		if(!corr_email){
 			wx.showToast({
 			  title: '请输入正确邮箱地址'

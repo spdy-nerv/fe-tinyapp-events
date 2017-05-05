@@ -75,11 +75,7 @@ Page({
       		 that.setData({
 	        	isCertification:!that.data.isCertification,
 	        });
-	        wx.showToast({
-	            title: res.data.resultMsg,
-	            mask: true
-	        });
-	        that.showModal();
+	        that.showModal(res.data.resultMsg);
       	}
       
       },
@@ -104,11 +100,13 @@ Page({
 			  url: '../myPublished/myPublished'
 			});
   },
-  
-  showModal: function(){
+  onShow:function(){
+  	this.onLoadData();
+  },
+  showModal: function(msg){
   	wx.showModal({
-				 title: '温馨提示！',
-				 content: '您还没有身份认证，点击确认去认证',
+				 title: msg,
+				 content: '您已经解除认证，是否重新认证？',
 				 confirmText:'重新认证',
 				 success: function(res) {
 				  if (res.confirm) {
