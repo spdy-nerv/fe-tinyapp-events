@@ -94,14 +94,14 @@ Page({
             var d = data.data;
             that.setData({
               isActive: cfg.active,
-              isAllowVote: cfg.allowVote,
-              //hasTested: d.hasTested,
+              isAllowTest: cfg.allowTest,
+              hasTested: d.hasTested,
               title: d.title,
               description: d.description,
-              //tapRadioFnName: cfg.active && cfg.allowTest && !d.hasTested ? 'onRadioCheck' : '',
-              //tapCheckboxFnName: cfg.active && cfg.allowTest && !d.hasTested ? 'onCheckboxCheck' : '',
-              //onInputFnName: cfg.active && cfg.allowTest && !d.hasTested ? 'onInput' : '',
-              //isInputDisabled: cfg.active && cfg.allowTest && !d.hasTested ? false : true
+              tapRadioFnName: cfg.active && !d.hasTested ? 'onRadioCheck' : '',
+              tapCheckboxFnName: cfg.active && !d.hasTested ? 'onCheckboxCheck' : '',
+              onInputFnName: cfg.active && !d.hasTested ? 'onInput' : '',
+              isInputDisabled: cfg.active && !d.hasTested ? false : true
             });
             that.renderTest(d.questions);
             wx.hideLoading();

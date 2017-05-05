@@ -23,9 +23,11 @@
         </scroll-view>
 
         <view class="panel-btn-area">
-            <view wx:if="{{isActive && isAllowTest && !hasTested}}" class="panel-btn" bindtap="onSubmitTest"></view>
+            <view wx:if="{{isActive  && !hasTested}}" class="panel-btn" bindtap="onSubmitTest"></view>
             <view wx:elif="{{!isActive}}" class="panel-disabled">当前不可提交</view>
+            <!--
             <view wx:elif="{{!isAllowTest}}" class="panel-disabled">没有投票提交问卷</view>
+            -->
             <view wx:elif="{{hasTested}}" class="panel-disabled">您已经提交过问卷</view>
         </view>
     </view>

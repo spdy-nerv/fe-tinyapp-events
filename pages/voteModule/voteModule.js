@@ -53,7 +53,7 @@ Page({
               votedId: d.hasVoted ? d.votedOptionId : '',
               title: d.title,
               description: d.description,
-              checkFnName: cfg.active && cfg.allowVote && !d.hasVoted ? 'onCheck' : ''
+              checkFnName: cfg.active  && !d.hasVoted ? 'onCheck' : ''
             });
             that.renderVote(d.options);
             wx.hideLoading();

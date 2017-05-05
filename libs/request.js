@@ -29,17 +29,24 @@ function request(obj, needLogin = true, ctx) {
                 user.login(obj.loginCallback, ctx);
             // 未认证或未绑定
             } else if (d.errCode == '0013') {
-                // TODO
                 wx.showToast({
-                    title: '您尚未身份认证！2秒后跳转认证界面！',
-                    duration: 2000,
+                    title: '您尚未身份认证，无法操作！',
+                    duration: 3000,
                     mask: true
                 });
                 setTimeout(function() {
                     wx.navigateTo({
                     url: '../verify/verify'
                     });
-                }, 2000);
+                }, 3000);
+            } else if (d.errCode == '3002') {
+                wx.showToast({
+                    title: '您的身份没有操作权限！',
+                });
+            } else if (d.errCode == '0020') {
+                wx.showToast({
+                    title: '身份认证审核中，无法操作！',
+                });
             } else {
                 typeof obj.realFail == "function" && obj.realFail('数据获取失败！' + d.resultMsg || '', d.errCode);
             }

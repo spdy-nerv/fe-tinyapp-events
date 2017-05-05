@@ -90,7 +90,7 @@
         </view>
     </view>
     <view class="bi-field bi-role">
-        <text class="bi-field-left">查看权限</text>
+        <text class="bi-field-left">操作权限</text>
         <view class="bi-field-mid bi-role-mid">
             <view wx:for="{{roleList}}" wx:key="unique" class="role-item">
                 <view class="role-check {{item.isChecked? 'role-check-selected' : ''}}" bindtap="onRoleToggle" data-index="{{index}}" data-roleid="{{item.roleId}}"></view>
@@ -156,4 +156,110 @@
 <view class="publish-btn-wrap">
         <view class="btn-save" bindtap="onTapSave">保存</view>
         <view class="btn-publish" bindtap="onTapPublish">发布</view>
+</view>
+
+<view class="address-mask" bindtap="onCloseAddressPanel" animation="{{addressMaskAnim}}" style="display:{{addressMaskDisplay}};"></view>
+<view class="address-edit-panel" animation="{{addressPanelAnim}}">
+
+    <view class="panel-wrap">
+        <view class="search-wrap">
+            <view class="search-input-wrap">
+                <input type="text" class="search-input" placeholder="请输入地点" placeholder-style="color:#878a99;"/>
+                <view class="search-icon"></view>
+            </view>
+            <view class="address-confirm">确认</view>
+        </view>
+        <view class="map-wrap">
+            <map />
+        </view>
+        <scroll-view class="address-list" scroll-y="true">
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+            <view class="address-item">
+                <view class="address-item-title">这是地址</view>
+                <view class="address-item-detail">
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                </view>
+                <view class="address-check"></view>
+            </view>
+
+        </scroll-view>
+    </view> 
+
 </view>

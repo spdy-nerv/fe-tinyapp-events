@@ -90,8 +90,11 @@ MY_FOLLOWS:								reqHost +'/myFollows',//我的关注
 	
 };
 
+var QQ_MAP_KEY = 'PLWBZ-AGPWS-LWBOA-6BJYO-ZUYYZ-O7FKK';
+
 module.exports = {
     monthFormatList: monthFormatList,
     dayFormatList: dayFormatList,
-    APIS: APIS
+    APIS: APIS,
+    QQ_MAP_KEY: QQ_MAP_KEY
 };

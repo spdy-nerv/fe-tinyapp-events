@@ -57,7 +57,11 @@ Page({
     endTime: '',
     createClock: '',
     startClock: '',
-    endClock: ''
+    endClock: '',
+    addressMaskDisplay: 'none',
+    addressMaskAnim: {},
+    addressPanelAnim: {},
+    addressListHeight: 0
   },
   onLoad:function(options){
     // 生命周期函数--监听页面加载
@@ -74,6 +78,8 @@ Page({
     this.renderCal();
     this.renderEventType();
     this.renderEventRole();
+
+    //this.fixPanelHeight();
   },
 
   onShow: function() {
@@ -83,6 +89,19 @@ Page({
     //this.renderCal();
     //this.renderEventType();
     //this.renderEventRole();
+  },
+
+  fixPanelHeight: function() {
+    var sysInfo = wx.getSystemInfoSync();
+    var winHeightRpx = sysInfo.windowHeight * sysInfo.pixelRatio;
+    console.log(sysInfo);
+    console.log(winHeightRpx);
+    this.setData({
+      addressListHeight: (winHeightRpx - 82 - 500) + 'rpx'
+    });
+    wx.showToast({
+      title: this.data.addressListHeight
+    });
   },
 
   renderBaseInfo: function() {
@@ -243,9 +262,9 @@ Page({
         createTime: util.formatDate(today),
         startTime: util.formatDate(today),
         endTime: util.formatDate(today),
-        createClock: util.formatClock(today),
-        startClock: util.formatClock(today),
-        endClock: util.formatClock(today)
+        createClock: '00:00',
+        startClock: '00:00',
+        endClock: '00:00'
       });
   },
 
