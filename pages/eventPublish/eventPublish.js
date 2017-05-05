@@ -1,9 +1,10 @@
-var { APIS } = require('../../const');
+var { APIS, QQ_MAP_KEY } = require('../../const');
 var util = require('../../utils/util');
 var user = require('../../libs/user');
 var { uploadPic } = require('../../libs/upload');
 var { request } = require('../../libs/request');
 var Q = require('../../libs/q/q');
+var QQMapWX = require('../../libs/qqmap/qqmap-wx-jssdk.js');
 
 Page({
   data:{
@@ -11,7 +12,7 @@ Page({
     swiperHeight: 0,
     picPaths: [],
     eventName: '',
-    address: '广西南宁大学东路100号',
+    address: '',
     eventTypeList: [],
     eventTypeIndex: 0,
     eventTypeId: '',
@@ -58,10 +59,11 @@ Page({
     createClock: '',
     startClock: '',
     endClock: '',
-    addressMaskDisplay: 'none',
-    addressMaskAnim: {},
-    addressPanelAnim: {},
-    addressListHeight: 0
+    addressTitle: '选择事件所在位置',
+    addressDetail: '',
+    latitude: 0,
+    longitude: 0,
+    isAddressDetailFocus: false
   },
   onLoad:function(options){
     // 生命周期函数--监听页面加载
@@ -78,6 +80,13 @@ Page({
     this.renderCal();
     this.renderEventType();
     this.renderEventRole();
+    //this.renderAddress();
+
+    /*
+    this.qqMap = new QQMapWX({
+      key: QQ_MAP_KEY
+    });
+    */
 
     //this.fixPanelHeight();
   },
@@ -89,19 +98,6 @@ Page({
     //this.renderCal();
     //this.renderEventType();
     //this.renderEventRole();
-  },
-
-  fixPanelHeight: function() {
-    var sysInfo = wx.getSystemInfoSync();
-    var winHeightRpx = sysInfo.windowHeight * sysInfo.pixelRatio;
-    console.log(sysInfo);
-    console.log(winHeightRpx);
-    this.setData({
-      addressListHeight: (winHeightRpx - 82 - 500) + 'rpx'
-    });
-    wx.showToast({
-      title: this.data.addressListHeight
-    });
   },
 
   renderBaseInfo: function() {
@@ -130,17 +126,36 @@ Page({
               });
               that.handleEventType(data.typeId);
               that.handleRole(data.allowRoleIds);
+              that.handleAddress({
+                address: data.address,
+                latitude: data.latitude,
+                longitude: data.longitude
+              });
               that.handleModules(data.modules);
               wx.hideLoading();
           },
           loginCallback: this.renderBaseInfo,
           realFail: function(msg) {
-            wx.hideLoading();
+            //wx.hideLoading();
             wx.showToast({
                 title: msg
             });
           }
       }, true, this);
+  },
+
+  handleAddress: function(data) {
+    var address = data.address.split(' ');
+    var addressTitle = address[0];
+    address.shift();
+    var addressDetail = address.join(' ');
+    this.setData({
+      addressTitle: addressTitle,
+      addressDetail: addressDetail,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      isAddressDetailFocus: false
+    });
   },
 
   handlePicsLoad: function(urls) {
@@ -342,6 +357,11 @@ Page({
     }
   },
 
+  renderAddress: function() {
+    var map = wx.createMapContext('J_map');
+    map.moveToLocation();
+  },
+
   onRoleToggle: function(e) {
       var list = this.data.roleList;
       var index= e.target.dataset.index;
@@ -539,7 +559,7 @@ Page({
           },
           loginCallback: this.removeModule,
           realFail: function(msg) {
-            wx.hideLoading();
+            //wx.hideLoading();
             wx.showToast({
                 title: msg
             });
@@ -598,12 +618,13 @@ Page({
       if (that.data.eventId) {
           d.eventId = that.data.eventId;
       }
+      console.log(d);
       request({
         url: APIS.ADD_EVENT_BASE,
         data: d,
         method: 'POST',
         realSuccess: function(data) {
-          wx.hideLoading();
+          //wx.hideLoading();
           wx.showToast({
             title: tips + '成功'
           });
@@ -619,7 +640,7 @@ Page({
             that.saveEventBase(isPublish);
         },
         realFail: function(msg, errCode) {
-          wx.hideLoading();
+          //wx.hideLoading();
           wx.showToast({
             title: msg
           });
@@ -627,7 +648,7 @@ Page({
       }, true, that);
     })
     .catch(function(e) {
-      wx.hideLoading();
+      //wx.hideLoading();
       wx.showToast({
         title: e.errMsg || '评论发布失败，请稍后重试！'
       });
@@ -639,7 +660,9 @@ Page({
       var d = this.data;
       var info = {
           eventName: d.eventName,
-          address: d.address,
+          address: d.addressTitle + ' ' + d.addressDetail,
+          latitude: d.latitude,
+          longitude: d.longitude,
           eventPics: [],
           createTime: d.createTime + ' ' + d.createClock + ':00',
           startTime: d.startTime + ' ' + d.startClock + ':00',
@@ -667,7 +690,7 @@ Page({
       if (info.eventName == '') {
           flag = false;
           tips = '事件名称不能为空！'
-      } else if (info.address == '') {
+      } else if (info.address == '' || !info.latitude || !info.longitude) {
           flag = false;
           tips = '事件地址不能为空！'
       } else if (info.typeId == '') {
@@ -678,7 +701,7 @@ Page({
           tips = '请选择查看权限！'             
       }
       if (!flag) {
-          wx.hideLoading();
+          //wx.hideLoading();
           wx.showToast({
             title: tips
           });
@@ -734,7 +757,7 @@ Page({
       },
       loginCallback: this.addCommentModule,
       realFail: function(msg, errCode) {
-        wx.hideLoading();
+        //wx.hideLoading();
         wx.showToast({
           title: msg
         });
@@ -772,11 +795,92 @@ Page({
       },
       loginCallback: this.addStarModule,
       realFail: function(msg, errCode) {
-        wx.hideLoading();
+        //wx.hideLoading();
         wx.showToast({
           title: msg
         });
       }
     }, true, this);
+  },
+
+  onSearchAddress: function(e) {
+    var that = this;
+    var key = e.detail.value;
+    this.qqMap.getSuggestion({
+      keyword: key,
+      success: function(res) {
+          var list = res.data || []
+          that. renderAddressList(list);
+      }
+    });
+  },
+
+  renderAddressList: function(list) {
+    this.setData({
+      addressList: list
+    });
+  },
+
+  onAddressSelect: function(e) {
+    var index = +e.target.dataset.index;
+    var al = this.data.addressList;
+    for (var i in al) {
+      if (i == index) {
+        al[i].isSelected = true;
+        this.setData({
+          addressTitle: al[i].title,
+          addressDetail: '',
+          latitude: al[i].location.lat,
+          longitude: al[i].location.lng
+        });
+      } else {
+        al[i].isSelected = false;
+      }
+    }
+
+    this.markLocation(this.data.latitude, this.data.longitude);
+
+    this.setData({
+      addressList: al
+    });
+
+    wx.chooseLocation({
+      success: function(res){
+        console.log(res);
+      },
+      fail: function(res) {
+        // fail
+      },
+      complete: function(res) {
+        // complete
+      }
+    })
+  },
+
+  markLocation: function() {
+
+  },
+
+  onTapAddressSelector: function() {
+    var that = this;
+    wx.chooseLocation({
+      success: function(res){
+        // success
+        that.setData({
+          addressTitle: res.name,
+          addressDetail: '',
+          latitude: res.latitude,
+          longitude: res.longitude,
+          isAddressDetailFocus: true
+        });
+      }
+    });
+  },
+
+  onAddressDetailInput: function(e) {
+    var detail = e.detail.value;
+    this.setData({
+      addressDetail: detail
+    });
   }
 })

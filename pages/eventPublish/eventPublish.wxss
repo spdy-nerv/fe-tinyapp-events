@@ -88,6 +88,7 @@ swiper-item {
     height: 100rpx;
     line-height: 100rpx;
     font-size: 30rpx;
+    width: 100%;
 }
 
 .bi-field-left {
@@ -250,6 +251,7 @@ swiper-item {
 .new-event-tips {
     padding: 50rpx 30rpx;
     color: #00b371;
+    line-height: 1.5;
 }
 
 .address-mask {
@@ -289,7 +291,7 @@ swiper-item {
 }
 
 .search-input-wrap {
-    width: 590rpx;
+    width: 100%;
     box-sizing: border-box;
     padding: 10rpx 32rpx;
     position: relative;
@@ -328,6 +330,8 @@ swiper-item {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: 0 10rpx 10rpx 10rpx;
+    background-color: #ffffff;
 }
 
 .map-wrap map {
@@ -336,5 +340,72 @@ swiper-item {
 }
 
 .address-list {
-    height: 650rpx;
+    height: 750rpx;
+}
+
+.address-item {
+    padding: 20rpx 90rpx 20rpx 32rpx;
+    border-bottom: 1px solid #d9d9d9;
+    background-color: #eeeff1;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.address-item-title {
+    font-size: 30rpx;
+    color: #2d2e33;
+    line-height: 48rpx; 
+}
+
+.address-item-detail {
+    font-size: 26rpx;
+    position: relative;
+    margin-bottom: 20rpx;
+}
+
+.detail-input {
+    padding-left: 45rpx;
+    box-sizing: border-box;
+}
+
+.address-item-detail-icon {
+    width: 30rpx;
+    height: 30rpx;
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/c_icon3.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0rpx;
+    top: 10rpx;
+}
+
+.address-check {
+    width: 30rpx;
+    height: 30rpx;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 20rpx;
+    top: 50%;
+    margin-top: -15rpx;
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/pub_check_selected.png);
+}
+
+.address-item-save {
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 24rpx;
+    color: #ffffff;
+    background-color: #c52424;
+    padding: 0 10rpx;
+    border-radius: 15rpx;
+    position: absolute;
+    right: 20rpx;
+    top: 50%;
+    margin-top: -25rpx;
+
+}
+
+.bi-address {
+    height: auto;
 }

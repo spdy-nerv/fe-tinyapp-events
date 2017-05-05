@@ -6,7 +6,7 @@
     "pages/modifyCode/modifyCode",
     "pages/descriptionModuleAdd/descriptionModuleAdd",
     "pages/voteModuleAdd/voteModuleAdd",
-    "pages/testModuleAdd/testModuleAdd",
+    "pages/testModuleAdd/testModuleAdd", 
     "pages/enrollModuleAdd/enrollModuleAdd",
     "pages/hobbiesLable/hobbiesLable",
     "pages/map/map",

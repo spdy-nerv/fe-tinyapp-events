@@ -1,7 +1,7 @@
 <view class="test-wrap">
     <input type="text" class="test-input test-title" placeholder="问卷标题（限20字内）" maxlength="20" placeholder-style="color:#b4b8cc;z-index:1;" value="{{title}}" bindinput="onInputTitle"/>
 
-    <textarea class="test-textarea" placeholder="请输入内容描述（限200字内）" maxlength="200" placeholder-style="color:#b4b8cc;z-index:1;" value="{{description}}" bindinput="onInputDescription"/>
+    <textarea hidden="{{isHideTextarea}}" class="test-textarea" placeholder="请输入内容描述（限200字内）" maxlength="200" placeholder-style="color:#b4b8cc;z-index:1;" value="{{description}}" bindinput="onInputDescription"/>
 
     <view wx:for="{{questions}}" wx:key="unique" wx:for-item="q" wx:for-index="qi" class="question-wrap clearfix">
         <view class="question-title">{{q.content}}</view>

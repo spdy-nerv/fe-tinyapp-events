@@ -42,11 +42,12 @@ Page({
         typeName: '多选题'
       }, {
         typeId: 3,
-        typeName: '填空题'
+        typeName: '填空题',
       }
     ],
     questionTypeIndex: 0,
-    editingQuestionIndex: -1
+    editingQuestionIndex: -1,
+    isHideTextarea: false
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -154,7 +155,8 @@ Page({
   openQuestionPanel: function() {
     this.questionPanelAnim.right(0).step();
     this.setData({
-      questionPanelAnim: this.questionPanelAnim.export()
+      questionPanelAnim: this.questionPanelAnim.export(),
+      isHideTextarea: true
     });
   },
 
@@ -162,7 +164,8 @@ Page({
   closeQuestionrPanel: function() {
     this.questionPanelAnim.right('-100%').step();
     this.setData({
-      questionPanelAnim: this.questionPanelAnim.export()
+      questionPanelAnim: this.questionPanelAnim.export(),
+      isHideTextarea: false
     });
   },
 

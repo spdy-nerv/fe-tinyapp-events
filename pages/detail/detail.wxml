@@ -1,11 +1,11 @@
 <!--detail.wxml-->
-
+<scroll-view class="content-wrap" scroll-y="true" scroll-into-view="{{scrollToId}}" scroll-with-animation="true">
 <view class="banner-container"> 
 <swiper indicator-dots="{{indicatorDots}}"  
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
       <block wx:for="{{pictureUrls}}" wx:key="unique">  
         <swiper-item>  
-            <image mode="aspectFit" src="{{item}}" class="slide-image" width="100%" height="100%"/>  
+            <image mode="aspectFill" src="{{item}}" class="slide-image" width="100%" height="100%"/>  
         </swiper-item>  
       </block>  
 </swiper>
@@ -21,10 +21,10 @@
   </view>
   <view class="title-box-right">
     <view class="right1">{{eventName}}</view>
-    <view class="right2">
-    <navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}" redirect>
+    <view class="right2" bindtap="openLocation">
+    <!--<navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}" redirect>-->
     	<text>{{address}}</text><image src="../../images/location1.png" />
-     </navigator>
+     <!--</navigator>-->
     </view>
    </view>
 </view>
@@ -81,8 +81,8 @@
 </view>
 
 
-<navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}">
- <view class=" model">
+<!--<navigator url="../map/map?latitude={{latitude}}&longitude={{longitude}}">-->
+ <view class=" model" bindtap="openLocation">
   <view class="model-left ">
      <image src="../../images/d-icon2.png" class="m-img2"></image>
   </view>
@@ -90,7 +90,7 @@
     <view class="right1">{{address}}</view>
    </view>
 </view>
-</navigator>
+<!--</navigator>-->
 <!--详情默认模块 end-->
 
 
@@ -98,6 +98,8 @@
 <block  wx:for="{{modules}}" wx:key="unique">
 <template is="{{item.moduleType}}" data="{{...des,...item}}"/>
 </block >
+
+</scroll-view>
 
 <!--事件投票模块 moduleType :4-->
 <template name="4">
@@ -152,7 +154,7 @@
 
 <template name="1">
 <!-- 上拉查看图文详情 -->
-<view class="pull-up-show-detail mg20" bindtap="clickShowInfo">
+<view class="pull-up-show-detail mg20" bindtap="clickShowInfo" id="J_detail">
   <view class="classname">
   <text class="{{isShowBottom?'wb_arrow_up':'wb_arrow_down'}}"></text>
   点击查看图文详情</view>
@@ -170,7 +172,7 @@
 <!--评论模块 ：moduleType:2-->
 <template name="2">
 <!--评论-->
-<view class="comment-container">
+<view class="comment-container" id="J_comment">
  <view class="comment_title">评论<text>({{commentData.data.totalCount}})</text></view>
 
 <block  wx:for="{{commentData.data.commentList}}" wx:for-item="item1">
@@ -208,20 +210,23 @@
 </view>
 
 <!--底部浮动评论输入框-->
+
+</template>
+
 <view class="footer_container mg20" hidden="{{isAllowComment}}">
         
 
         <view class="foot-item comment1">
-          <view class="input_box">
-          <navigator url="../commentSubmit/commentSubmit?moduleId={{moduleId}}">
+          <view class="input_box" bindtap="onToComment">
+          <!--<navigator url="../commentSubmit/commentSubmit?moduleId={{moduleId}}">-->
            <image src="../../images/c_icon3.png"></image>
-             <input placeholder="写评论…"  placeholder-class="String" disabled="true"/>
+             <view class="input">写评论...</view>
           
-           </navigator>
+           <!--</navigator>-->
             </view>
         </view>
-        <view class="foot-item comment2">
-          <text class="comment_num">{{commentData.data.totalCount}}</text>
+        <view class="foot-item comment2" bindtap="scrollToComment">
+          <text class="comment_num">{{des.commentData.data.totalCount}}</text>
           <image src="../../images/c_icon1.png"></image>
         </view>
         <view class="foot-item comment2 comment3" bindtap="clickFollowEventBtn"> 
@@ -234,7 +239,6 @@
         </view>
         
 </view>
-</template>
 
 <!--分享-->
 <view class="modal-window" hidden="{{isShowShare}}" bindtap="hiddenShare">

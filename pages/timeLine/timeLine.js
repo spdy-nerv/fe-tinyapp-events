@@ -146,7 +146,7 @@ Page({
       realSuccess: function(data){
         var list = data.list;
         that.setData({
-          eventTypeList: that.data.eventTypeList.concat(list)
+          eventTypeList: [{typeId: '', typeName: '全部'}].concat(list)
         });
       }
     }, false);
@@ -156,7 +156,7 @@ Page({
       realSuccess: function(data){
         var list = data.list;
         that.setData({
-          publisherTypeList: that.data.publisherTypeList.concat(list)
+          publisherTypeList: [{roleId: '', roleName: '全部'}].concat(list)
         });
       }
     }, false);

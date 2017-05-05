@@ -14,7 +14,7 @@ Page({
 	    indicatorDots: true,  
 	    autoplay: true,  
 	    interval: 5000,  
-	    duration: 1000,
+	    duration: 500,
    		offset: 0,
 		eventId: "",
 		
@@ -24,7 +24,9 @@ Page({
 			hasMore:false,
 			//评论数据
 			commentData: {
-				commentList:[]
+				data: {
+					commentList:[]
+				}
 			},
 			createAt:'',
 			isAllowComment:true
@@ -62,7 +64,8 @@ Page({
 		
 
 		//模块Id, moduleType 1:详情事件，2:评论，3：报名，4：投票，5:问卷，6：评价
-		modules: []
+		modules: [],
+		scrollToId: ''
 	},
 
 	onLoad: function(options){
@@ -94,8 +97,13 @@ Page({
 	      		console.log("base",data);
 	        	var datas=data;
 				var en = parseInt(datas.startTime.substring(5, 7));
+
+				// edit by 梁冬
+				// 依照ui图重新排列模块的渲染顺序
+				var modules = that.sortModulesByPriority(data.modules);
+
 				that.setData({
-						"modules":datas.modules,
+						"modules": modules,
 						"eventName": datas.name,
 						"address": datas.address,
 						"formatedMonth": monthFormatList[en-1].simpleEng,
@@ -311,7 +319,7 @@ Page({
 					success: function(res) {
 						console.log("获取评论数据！",res);
 						var moreData=res.data.resultData.data.commentList;
-						var data=that.data.des.commentData.commentList.concat(moreData);
+						var data=that.data.des.commentData.data.commentList.concat(moreData);
 						that.setData({
 							"des.hasMore":res.data.resultData.data.hasMore,
 							"des.commentData.commentList":data,
@@ -341,7 +349,8 @@ Page({
 		let that = this;
 		let mL = that.data.modules.length;
 		that.setData({
-			"des.isShowBottom":!that.data.des.isShowBottom
+			"des.isShowBottom":!that.data.des.isShowBottom,
+			scrollToId: !that.data.des.isShowBottom ? '' : 'J_detail'
 		});
 		for(let i=0;i<mL;i++){
 			if(that.data.modules[i].moduleType=="1"){
@@ -389,5 +398,50 @@ Page({
 			desc: '分享给大家看看吧', // 分享描述
 			path: '/detail/detail?eventId='+this.data.eventId+'&eventName='+this.data.eventName // 分享路径
 		}
+	},
+
+	openLocation: function() {
+		wx.openLocation({
+		  latitude: +this.data.latitude,
+		  longitude: +this.data.longitude,
+		  scale: 28, // 缩放比例
+		  name: this.data.address
+		})
+	},
+
+	// 重新排序modules
+	sortModulesByPriority: function(modules) {
+		// 详情1，投票4，问卷5，评价6，评论2
+		var priority = {
+			"3": 0,
+			"4": 1,
+			"5": 2,
+			"6": 3,
+			"1": 4,
+			"2": 5
+		};
+		modules.sort(function(mA, mB) {
+			return priority[mA.moduleType] - priority[mB.moduleType];
+		});
+
+		return modules;
+	},
+
+	onToComment: function() {
+		console.log('hahah');
+		for (var i in this.data.modules) {
+			if (this.data.modules[i].moduleType == 2) {
+				wx.navigateTo({
+				  url: '../commentSubmit/commentSubmit?moduleId=' + this.data.modules[i].moduleId
+				});
+			}
+		}
+	},
+
+	scrollToComment: function() {
+		console.log('hahaha');
+		this.setData({
+			scrollToId: 'J_comment'
+		});
 	}
 })

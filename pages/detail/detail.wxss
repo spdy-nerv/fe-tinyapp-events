@@ -1,4 +1,8 @@
 /**index.wxss**/
+page {
+  height: 100%;
+}
+
 .banner-container{
   width: 100%;
   height: 150px;
@@ -299,7 +303,7 @@ position: absolute;
 left: 20rpx;
 top:10rpx;
 }
-.comment1 .input_box input{
+.comment1 .input_box .input{
   height: 60rpx;
   line-height: 60rpx;
   border:none;
@@ -347,4 +351,10 @@ top:10rpx;
 .modal-window image{
   widows: 570rpx;
   height: 101rpx;
+}
+
+.content-wrap {
+  height: 100%;
+  box-sizing: border-box; 
+  overflow-y: hidden;
 }

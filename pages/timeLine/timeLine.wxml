@@ -16,7 +16,7 @@
       <view class="item-title">{{item.daySimpleName}}</view>
       <view class="item-value">
         <text wx:if="{{item.mode == 'last' || item.mode == 'next'}}" class="item-other-month">{{item.date}}</text>
-        <text wx:elif="{{item.date == todayDate && item.mode == 'current'}}" class="current-month current" data-date="{{item.date}}" bindtap="onSelectDate">{{item.date}}</text>
+        <text wx:elif="{{item.date == date && item.mode == 'current'}}" class="current-month current" data-date="{{item.date}}" bindtap="onSelectDate">{{item.date}}</text>
         <text wx:else class="current-month" data-date="{{item.date}}" bindtap="onSelectDate">{{item.date}}</text>
         <view wx:if="{{item.hasEvents}}" class="has-events"></view>
       </view>
@@ -39,7 +39,7 @@
   <block wx:for="{{calendar}}" wx:key="unique">
   <view class="item" id="{{item.initPos}}">
     <text wx:if="{{item.mode == 'last' || item.mode == 'next'}}" class="item-other-month">{{item.date}}</text>
-    <text wx:elif="{{item.date == todayDate && item.mode == 'current'}}" class="current-month current" data-date="{{item.date}}" bindtap="onSelectDate">{{item.date}}</text>
+    <text wx:elif="{{item.date == date && item.mode == 'current'}}" class="current-month current" data-date="{{item.date}}" bindtap="onSelectDate">{{item.date}}</text>
     <text wx:else class="current-month" data-date="{{item.date}}" bindtap="onSelectDate">{{item.date}}</text>
     <view wx:if="{{item.hasEvents}}" class="has-events"></view>
   </view>

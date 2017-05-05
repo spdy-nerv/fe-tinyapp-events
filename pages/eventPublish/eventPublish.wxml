@@ -1,8 +1,8 @@
 <view class="banner-container">
-    <swiper indicator-dots="true" autoplay="true" interval="5000" duration="1000" style="height:{{swiperHeight}}rpx;">
+    <swiper indicator-dots="true" autoplay="true" interval="5000" duration="500" style="height:{{swiperHeight}}rpx;">
       <block wx:for="{{picPaths}}" wx:key="unique">  
         <swiper-item>  
-            <image src="{{item}}" class="slide-image" mode="aspectFit"/> 
+            <image src="{{item}}" class="slide-image" mode="aspectFill"/> 
             <view class="preview-delete" bindtap="onDeletePreview" data-index="{{index}}" data-path="{{item}}"></view>
         </swiper-item>  
       </block>  
@@ -23,8 +23,14 @@
         <view class="bi-field-left">
             <view class="bi-address-icon"></view>
         </view>
-        <text class="bi-field-mid bi-address-mid">选择事件所在位置</text>
-        <view class="bi-field-right">
+        <view class="bi-field-mid bi-address-mid" bindtap="onTapAddressSelector">
+            <text>{{addressTitle}}</text>
+            <view wx:if="{{latitude}}" class="address-item-detail">
+                <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#b4b8cc;" value="{{addressDetail}}" bindinput="onAddressDetailInput" auto-focus="{{isAddressDetailFocus}}"/>
+                <view class="address-item-detail-icon"></view>
+            </view>
+        </view>
+        <view class="bi-field-right" bindtap="onTapAddressSelector">
             <text class="wb_arrow_right"></text>
         </view>
     </view>
@@ -100,7 +106,7 @@
     </view>
 </view>
 
-<view wx:if="{{!eventId}}" class="new-event-tips">新创建的事件点击“保存”后，可继续添加事件附加模块。</view>
+<view wx:if="{{!eventId}}" class="new-event-tips">* 新创建的事件点击“保存”后，可继续添加事件详情、评论、报名等附加模块。</view>
 
 <view wx:if="{{eventId}}" class="base-info-wrap ext-info">
     <view class="bi-marker-wrap">
@@ -158,108 +164,35 @@
         <view class="btn-publish" bindtap="onTapPublish">发布</view>
 </view>
 
+<!--
 <view class="address-mask" bindtap="onCloseAddressPanel" animation="{{addressMaskAnim}}" style="display:{{addressMaskDisplay}};"></view>
 <view class="address-edit-panel" animation="{{addressPanelAnim}}">
 
     <view class="panel-wrap">
         <view class="search-wrap">
             <view class="search-input-wrap">
-                <input type="text" class="search-input" placeholder="请输入地点" placeholder-style="color:#878a99;"/>
+                <input type="text" class="search-input" placeholder="请输入地点" placeholder-style="color:#878a99;" bindinput="onSearchAddress"/>
                 <view class="search-icon"></view>
             </view>
-            <view class="address-confirm">确认</view>
         </view>
         <view class="map-wrap">
-            <map />
+            <map show-location="true" id="J_map" latitude="{{latitude}}" longitude="{{longitude}}" />
         </view>
         <scroll-view class="address-list" scroll-y="true">
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
 
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
+            <view wx:for="{{addressList}}" wx:key="unique" class="address-item">
+                <view class="address-item-title" bindtap="onAddressSelect" data-index="{{index}}">{{item.title}}</view>
+                <block wx:if="{{item.isSelected}}">
                 <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
+                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;"/>
+                    <view class="address-item-detail-icon"></view>
                 </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
-            </view>
-            <view class="address-item">
-                <view class="address-item-title">这是地址</view>
-                <view class="address-item-detail">
-                    <input type="text" class="detail-input" placeholder="可输入更详细地址" placeholder-style="color:#878a99;" />
-                </view>
-                <view class="address-check"></view>
+                <view class="address-item-save">保存</view>
+                </block>
             </view>
 
         </scroll-view>
     </view> 
 
 </view>
+-->
