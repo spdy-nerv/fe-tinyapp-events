@@ -44,7 +44,6 @@ Page({
       method: 'POST',
       realSuccess: function(data){
       	console.log("pic",data);
-      	wx.clearStorageSync();
       	wx.setStorageSync("realName", data.realName);
       	wx.setStorageSync("photo", data.photo);
       	wx.setStorageSync("email", data.email);
@@ -178,7 +177,6 @@ Page({
           icon: 'success',
           duration: 2000,
       	});
-      	wx.clearStorageSync();
 			},
 			realFail: function(msg) {
 				wx.showToast({

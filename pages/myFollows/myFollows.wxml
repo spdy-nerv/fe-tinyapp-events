@@ -1,5 +1,6 @@
 <!--myFollows.wxml-->
 <block  wx:for="{{list}}" wx:key="unique">
+<navigator url="../detail/detail?eventId={{item.eventId}}">
 <view class="follow_list">
 	<view class="f_img">
 		<!--<view class="icon"></view>-->
@@ -13,8 +14,8 @@
 	 <image src="../../images/d-icon2.png"></image>{{item.address}}
 	</view>
 </view>
+</navigator>
 </block >
-
 <view class="no_event">{{isNoData}}</view>
 <!--
 class="publishing"

@@ -213,7 +213,7 @@
           <view class="input_box">
           <navigator url="../commentSubmit/commentSubmit?moduleId={{moduleId}}">
            <image src="../../images/c_icon3.png"></image>
-             <input placeholder="写评论…"  placeholder-class="String" disabled/>
+             <input placeholder="写评论…"  placeholder-class="String" disabled="true"/>
           
            </navigator>
             </view>

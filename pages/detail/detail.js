@@ -185,7 +185,7 @@ Page({
 			              icon: 'success',
 			              duration: 2000,
 			          	});
-			          	if(errCode=='0000'){
+			          	if(res.errCode=='0000'){
 				          	that.setData({
 				          		"isAllow": !that.data.isAllow,
 								"hasEnrolled": !that.data.hasEnrolled
