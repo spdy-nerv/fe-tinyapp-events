@@ -3,6 +3,7 @@ var {
 	APIS
 } = require('../../const');
 var user = require('../../libs/user');
+var { validate } = require('../../libs/validate');
 
 var { request } = require('../../libs/request');
 Page({
@@ -22,6 +23,14 @@ Page({
 	},
 	getCode:function(e){
 		var that = this;
+		var vp=validate.phone(this.data.phone);
+		if(!vp){
+			  wx.showToast({
+		          title: "请输入11位手机号码",
+		          icon: 'success',
+		      	});
+			return;
+		}
 		that.setData({
 			plain: !that.data.plain,
 			disabled: !that.data.disabled,

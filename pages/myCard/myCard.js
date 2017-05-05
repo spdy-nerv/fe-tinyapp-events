@@ -50,6 +50,12 @@ Page({
       	wx.setStorageSync("degree", data.degree);
       	wx.setStorageSync("school", data.school);
       	that.setData({
+      		realName: wx.getStorageSync("realName"),
+        	photo:	wx.getStorageSync("photo"),
+        	email:	wx.getStorageSync("email"),
+        	degree:	wx.getStorageSync("degree"),
+        	school:	wx.getStorageSync("school"),
+        	
         	phone:	data.phone,
         	hobbies:	data.hobbies,
         	declaration:	data.declaration
@@ -64,18 +70,7 @@ Page({
         });
       }
     }, false);
-    
-    	that.setData({
-        	realName: wx.getStorageSync("realName"),
-        	photo:	wx.getStorageSync("photo"),
-        	phone: 	wx.getStorageSync("phone"),
-        	email:	wx.getStorageSync("email"),
-        	degree:	wx.getStorageSync("degree"),
-        	school:	wx.getStorageSync("school"),
-        	hobbies:	wx.getStorageSync("hobbies"),
-        	declaration: wx.getStorageSync("declaration")
-        });
-    
+    console.log("dsaf",this.data);
     
   },
   
@@ -167,23 +162,18 @@ Page({
 			})
 			return;
 		}
-		request({
+		wx.request({
 			url: APIS.EDIT_CARD,
 			data: params,
 			method: 'POST',
-			realSuccess: function(res) {
+			success: function(res) {
 				wx.showToast({
-          title: "修改成功！",
+          title: res.data.resultMsg,
           icon: 'success',
           duration: 2000,
       	});
-			},
-			realFail: function(msg) {
-				wx.showToast({
-					title: msg
-				});
 			}
-		}, true);
+		});
 	},
 	
 	

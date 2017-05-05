@@ -195,14 +195,16 @@
 
 <!-- 查看更多评论 -->
 <view class="pull-up-show-detail">
-  <view class="classname">
   <block wx:if="{{hasMore}}">
-  查看更多评论<text class="wb_arrow_right"></text>
-  </block>
+	  <view class="classname"  bindtap="showMoreComment">
+	  查看更多评论<text class="wb_arrow_right"></text>
+	  </view>
+   </block>
   <block wx:else>
-   没有更多评论了
+	  <view class="classname">
+	   没有更多评论了
+	  </view>
   </block>
-  </view>
 </view>
 
 <!--底部浮动评论输入框-->

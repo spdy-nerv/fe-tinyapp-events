@@ -15,14 +15,17 @@ Page({
 	    autoplay: true,  
 	    interval: 5000,  
 	    duration: 1000,
-    
+   		offset: 0,
 		eventId: "",
 		
 		des:{
 			isShowBottom:true,
 			description:'',
+			hasMore:false,
 			//评论数据
-			commentData: {},
+			commentData: {
+				commentList:[]
+			},
 			createAt:'',
 			isAllowComment:true
 		},
@@ -56,6 +59,7 @@ Page({
 		latitude:'',
 		longitude:'',
 		isShowShare:true,
+		
 
 		//模块Id, moduleType 1:详情事件，2:评论，3：报名，4：投票，5:问卷，6：评价
 		modules: []
@@ -185,7 +189,7 @@ Page({
 			              icon: 'success',
 			              duration: 2000,
 			          	});
-			          	if(res.errCode=='0000'){
+			          	if(res.data.errCode=='0000'){
 				          	that.setData({
 				          		"isAllow": !that.data.isAllow,
 								"hasEnrolled": !that.data.hasEnrolled
@@ -262,6 +266,13 @@ Page({
 			sid: wx.getStorageSync('sid') || '',
 			eventId: that.data.eventId
 		};
+		if(that.data.isStar){
+			wx.showToast({
+              title:"您已经点赞！",
+              icon: 'success',
+          	});
+			return;
+		}
 		wx.request({
 			url: APIS.ADD_STAR,
 			data: addStarParams,
@@ -288,8 +299,8 @@ Page({
 				console.log(that.data.modules[i].moduleId);
 				const getCommentModuleParams = {
 					sid: wx.getStorageSync('sid') || '',
-					size: 20,   
-				    offset: 1,
+					size: 10,   
+				    offset: that.data.offset,
 					moduleId: that.data.modules[i].moduleId
 				};
 				wx.request({
@@ -299,16 +310,31 @@ Page({
 					// header: {}, // 设置请求的 header
 					success: function(res) {
 						console.log("获取评论数据！",res);
+						var moreData=res.data.resultData.data.commentList;
+						var data=that.data.des.commentData.commentList.concat(moreData);
 						that.setData({
+							"des.hasMore":res.data.resultData.data.hasMore,
+							"des.commentData.commentList":data,
 							"des.commentData": res.data.resultData,
 							"des.isAllowComment":!res.data.resultData.config.isAllowComment
 						});
+						
 						console.log(that.data.des.commentData);
 						// success
 					}
 				})
 				break;
 			}
+		}
+	},
+	showMoreComment:function(e){
+		var that=this;
+		console.log(e);
+		if(that.data.des.hasMore){
+			that.setData({
+				"offset":that.data.offset+1
+			});
+			that.getCommentData();
 		}
 	},
 	clickShowInfo: function() {

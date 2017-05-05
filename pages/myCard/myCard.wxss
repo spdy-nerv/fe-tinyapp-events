@@ -12,6 +12,7 @@
 .save_button{
 	margin-bottom:200rpx;
 }
+
 .code button{
 	padding: 0 20rpx;
 	font-size: 30rpx;
