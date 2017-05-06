@@ -1,6 +1,7 @@
 /**index.wxss**/
 page {
   height: 100%;
+  padding-bottom: 0;
 }
 
 .banner-container{
@@ -357,6 +358,7 @@ top:10rpx;
   height: 100%;
   box-sizing: border-box; 
   overflow-y: hidden;
+  padding-bottom: 100rpx;
 }
 
 .comment-text {
