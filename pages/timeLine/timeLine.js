@@ -39,7 +39,8 @@ Page({
     publisherTypeList: [
       {roleId: '', roleName: '全部'}
     ],
-    publisherTypeIndex: 0
+    publisherTypeIndex: 0,
+    listPaddingBottom: 120
   },
   //事件处理函数
   bindViewTap: function() {
@@ -53,7 +54,14 @@ Page({
       mask: true,
       title: '数据加载中'
     });
-    
+
+    // 处理兼容性
+    var sysInfo = wx.getSystemInfoSync();
+    if (sysInfo.system.toUpperCase().indexOf('IOS') != -1) {
+      this.setData({
+        listPaddingBottom: 170
+      });
+    }    
   },
 
   onShow: function() {
@@ -167,7 +175,7 @@ Page({
     this.setData({
       year: today.getFullYear(),
       month: today.getMonth() + 1,
-      formatedMonth: monthFormatList[today.getMonth()].eng,
+      formatedMonth: monthFormatList[today.getMonth()].arabic + '月',
       date: today.getDate(),
       todayDate: today.getDate()
     });
@@ -239,6 +247,12 @@ Page({
         isShowSimpleCal: 'block'
       });
     }
+  },
+
+  onHitTop: function() {
+    this.setData({
+        isShowSimpleCal: 'none'
+      });
   },
 
   // 通过日期选择器修改日期

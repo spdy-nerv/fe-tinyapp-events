@@ -97,7 +97,6 @@ page{
 
 .time-line-container{
   box-sizing: border-box;
-  padding-bottom: 170rpx;
   overflow-y: hidden;
   height: 100%;
 }
@@ -156,7 +155,7 @@ page{
 
 .anchor {
   position: relative;
-  top: -184rpx;
+  top: -170rpx;
 }
 
 .tody{
