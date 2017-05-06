@@ -25,6 +25,7 @@ Page({
 				declaration:dec
 			}
 		};
+		wx.setStorageSync("declaration", that.data.declaration);
 		request({
 				url: APIS.EDIT_CARD,
 				data: params,
@@ -38,7 +39,7 @@ Page({
 						title: msg
 					});
 				}
-			}, false);
+			}, true);
 		
 		/*wx.redirectTo({
 		  url: '../myCard/myCard?declaration='+dec+'&type=0'

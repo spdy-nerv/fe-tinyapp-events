@@ -15,7 +15,7 @@
 	
 </view>
 <navigator url="../modifyCode/modifyCode?phone={{phone}}">
-<view class="personCenter_list  border_bottom">
+<view class="personCenter_list  border_bottom" bindtap="toModifyPhone">
 	<view class="left"><text>手机号码</text></view>
 	<view class="fr" bindtap="showCode">
 		{{phone}}

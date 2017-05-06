@@ -105,14 +105,22 @@ Page({
 	
 	getCode:function(e){
 		var that = this;
+		var corr_phone = validate.phone(that.data.phone);
+		if(!corr_phone){
+			wx.showToast({
+				title: "请输入11位的手机号码！"
+			});
+			return;
+		}
 		that.setData({
 			plain: !that.data.plain,
 			disabled: !that.data.disabled,
 			loading: !that.data.loading
 		});
+		
 		request({
 				url: APIS.SEND_SMS,
-				data: {phone:this.data.phone},
+				data: {phone:that.data.phone},
 				method: 'POST',
 				realSuccess: function(res) {
 					setTimeout(function() {
@@ -177,11 +185,14 @@ Page({
 			method: 'POST',
 		  	success: function(res){
 				if(res.data.errCode=='0000'){
-					wx.showToast({
+					/*wx.showToast({
 		              title: res.data.resultMsg,
 		              icon: 'success',
-		          	});
-		          	wx.navigateBack();
+		          	});*/
+		          	that.setData({
+		          		isUP:!that.data.isUP
+		          	})
+		          	//wx.navigateBack();
 	          	}
 		  	},
 		  	fail: function(res) {
@@ -199,5 +210,6 @@ Page({
 		this.setData({
 			isUP:!this.data.isUP
 		});
+		wx.navigateBack();
 	}
 })
