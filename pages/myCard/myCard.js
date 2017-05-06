@@ -10,6 +10,7 @@ Page({
     },
     realName:"",  
 	  photo:"",   
+	  tempPhone:'',
 	  phone:"",   
 	  email:"",
 	  degree:"",
@@ -25,6 +26,15 @@ Page({
 		isHiddenCode:true
   },
   onLoad: function () {
+  	//wx.clearStorageSync()
+  	//清除缓存数据
+  	wx.removeStorageSync('realName');
+  	wx.removeStorageSync('photo');
+  	wx.removeStorageSync('school');
+  	wx.removeStorageSync('email');
+  	wx.removeStorageSync('degree');
+  	wx.removeStorageSync('hobbies');
+  	wx.removeStorageSync('declaration');
   	console.log("onLoad");
   	wx.showLoading({
 	      mask: true,
@@ -35,6 +45,7 @@ Page({
   },
   onLoadData: function(){
   	var that = this;
+  	
   	var params = {
   		sid: wx.getStorageSync('sid')
   	};
@@ -44,18 +55,12 @@ Page({
       method: 'POST',
       realSuccess: function(data){
       	console.log("pic",data);
-      	wx.setStorageSync("realName", data.realName);
-      	wx.setStorageSync("photo", data.photo);
-      	wx.setStorageSync("email", data.email);
-      	wx.setStorageSync("degree", data.degree);
-      	wx.setStorageSync("school", data.school);
       	that.setData({
-      		realName: wx.getStorageSync("realName"),
-        	photo:	wx.getStorageSync("photo"),
-        	email:	wx.getStorageSync("email"),
-        	degree:	wx.getStorageSync("degree"),
-        	school:	wx.getStorageSync("school"),
-        	
+      		realName: data.realName,
+        	photo:	 data.photo,
+        	email:	 data.email,
+        	degree:	 data.degree,
+        	school:	 data.school,
         	phone:	data.phone,
         	hobbies:	data.hobbies,
         	declaration:	data.declaration
@@ -115,13 +120,13 @@ Page({
 			        var img = JSON.parse(res.data).resultData.imgUrl;
 				       console.log(img);
 				       that.setData({
-				        	photo:img
+				        	tempPhone:img
 				        });
 				        wx.showToast({
 							    icon: "success",
 							    title: "上传成功！！"
 							  });
-							  console.log("上传后",that.data.photo);
+							  console.log("上传后",that.data.tempPhone);
 			       if (res.statusCode != 200) {
 			          wx.showModal({
 			            title: '提示',
@@ -130,9 +135,6 @@ Page({
 			          })
 			          return;
 			        }
-			        /*_this.setData({  
-			          photo:res.tempFilePaths  
-			        })*/
 			      }
 			    })
 			  }
@@ -145,7 +147,7 @@ Page({
 			sid: wx.getStorageSync('sid'),
 			data: {
 				realName: e.detail.value.realName,
-				photo: that.data.photo,
+				photo: that.data.tempPhone,
 				phone: that.data.phone,
 				email: e.detail.value.email,
 				degree:  e.detail.value.degree,
@@ -167,19 +169,36 @@ Page({
 			data: params,
 			method: 'POST',
 			success: function(res) {
-				wx.showToast({
-          title: res.data.resultMsg,
-          icon: 'success',
-          duration: 2000,
-      	});
+				if(res.data.errCode=='0000'){
+					wx.showToast({
+	          title: res.data.resultMsg,
+	          icon: 'success',
+	      	});
+	      	setTimeout(function() {
+					  wx.navigateBack();
+				  }, 2000);
+	      	
+				}
 			}
 		});
 	},
 	
+	getStorageData: function(){
+		var that = this;
+		that.setData({
+      		realName:  wx.getStorageSync('realName')|| that.data.realName,
+        	email:	   wx.getStorageSync('email')|| that.data.email,
+        	degree:	   wx.getStorageSync('degree')|| that.data.degree,
+        	school:	   wx.getStorageSync('school')|| that.data.school,
+        	declaration:	   wx.getStorageSync('declaration')|| that.data.declaration,
+        	hobbies:	   wx.getStorageSync('hobbies')|| that.data.hobbies
+        });
+	},
 	
 	onShow: function(){
 		console.log("show");
-		this.onLoadData();
+		//页面返回时候读取缓存数据
+		this.getStorageData();
 	},
 	onUnload:function(){
 		console.log("onUnload");

@@ -63,7 +63,7 @@ Page({
   	});
   	console.log(this.data.hobbies);
   },
-  
+ 	
 	formSubmit: function() {
 		var that = this;
 		var params = {
@@ -72,6 +72,7 @@ Page({
 				hobbies:that.data.hobbies
 			}
 		};
+		 wx.setStorageSync("hobbies", that.data.hobbies);
 		request({
 				url: APIS.EDIT_CARD,
 				data: params,
@@ -85,7 +86,7 @@ Page({
 						title: msg
 					});
 				}
-			}, false);
+			}, true);
 		/*wx.redirectTo({
 		  url: '../myCard/myCard?hobbies='+this.data.hobbies+'&type=1'
 		});*/
