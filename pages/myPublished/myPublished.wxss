@@ -41,6 +41,10 @@
     vertical-align: middle;
     margin-right: 10rpx;
 }
+.follow_list .t3 image{
+width:30rpx;
+height:36rpx;
+}
 .f_button button{
   width:180rpx;
   font-size: 36rpx;
@@ -78,4 +82,15 @@
     text-align: center;
     margin: 30rpx auto;
     
+}
+button{
+font-size:30rpx;
+background-color:#eeeff1;
+color:#666666;
+}
+button::after {
+border:none;
+}
+button[disabled] {
+color:#999999;
 }

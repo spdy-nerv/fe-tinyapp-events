@@ -176,18 +176,17 @@ Page({
 			data: params,
 			method: 'POST',
 		  	success: function(res){
-					console.log(res.data.resultMsg);
+				if(res.data.errCode=='0000'){
 					wx.showToast({
 		              title: res.data.resultMsg,
 		              icon: 'success',
 		          	});
-		          	wx.navigateBack({
-					  delta: 1
-					})
+		          	wx.navigateBack();
+	          	}
 		  	},
 		  	fail: function(res) {
 				wx.showToast({
-					title: res.msg
+					title: res.data.resultMsg
 				});
 		 	}
 		})

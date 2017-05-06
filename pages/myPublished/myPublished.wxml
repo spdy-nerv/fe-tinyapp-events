@@ -10,8 +10,8 @@
 	 	{{item.name}}
 	</view>
 	<view class="t2"><image src="../../images/d-icon1.png"></image> {{item.year}}年{{item.mouth}}月{{item.date}}号    {{item.startTime}}</view>
-	 <view class="t2">
-	 <image src="../../images/d-icon2.png"></image> {{item.address}}       1.5km
+	 <view class="t2 t3">
+	 <image src="../../images/d-icon2.png"></image> {{item.address}}
 	 <view class="f_button fr">
 	 	<button formType="submit" type="primary" >已发布</button>
 	 </view>
@@ -19,6 +19,9 @@
 </view>
 </navigator>
 </block >
+<view class="no_event" hidden="{{isNoData}}">
+	<button type="" loading="{{loading}}" disabled="{{disabled}}" bindtap="showMore" >{{loadText}}</button> 
+</view>
 <view class="no_event">{{isNoData}}</view>
 <!--
 class="publishing"

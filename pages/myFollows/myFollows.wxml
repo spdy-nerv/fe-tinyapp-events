@@ -10,12 +10,15 @@
 	 	{{item.name}}
 	</view>
 	<view class="t2"><image src="../../images/d-icon1.png"></image> 06月18号    19: 00</view>
-	 <view class="t2">
+	 <view class="t2 t3">
 	 <image src="../../images/d-icon2.png"></image>{{item.address}}
 	</view>
 </view>
 </navigator>
 </block >
+<view class="no_event" hidden="{{isNoData}}">
+	<button type="" loading="{{loading}}" disabled="{{disabled}}" bindtap="showMore" >{{loadText}}</button> 
+</view>
 <view class="no_event">{{isNoData}}</view>
 <!--
 class="publishing"

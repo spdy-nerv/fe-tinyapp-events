@@ -2,41 +2,70 @@
 var { APIS } = require('../../const');
 var user = require('../../libs/user');
 var { request } = require('../../libs/request');
+var { validate } = require('../../libs/validate');
+
 Page({
   data: {
 		footerConfig: { 
       pagePersonal: true
     },
+    offset: 1,
+    loading:false,
+    disabled:false,
+    hasMore:'',
   	isNoData:"",
+  	loadText:'点击加载更多...',
   	list:[]
-		 //status:'0' //0审核中 1 已发布 2未通过 3已完成
+  	
   },
   onLoad: function () {
   	wx.showLoading({
 	      mask: true,
 	      title: '数据加载中'
 	    });
-	    user.login(this.onLoadData, this, false);
+	    user.login(this.onLoadData(false), this, false);
   },
-  onLoadData: function(){
+  
+  onLoadData: function(load){
   	var that = this;
   	var params = {
   		sid: wx.getStorageSync('sid'),
-  		offset:0,
-			size:20
+  		size: 2,   
+	    offset: that.data.offset,
   	};
+  	if(load){
+  		that.setData({
+  			loading:!that.data.loading,
+		    disabled:!that.data.disabled,
+		  	loadText:'加载中...',
+  		})
+  	}
   	 request({
       url: APIS.MY_PUBLISHED,
       data: params,
       method: 'POST',
       realSuccess: function(data){
-      	console.log("我的发布",data);
+      	console.log("published",data);
+      	var resList=data.list;
       	that.setData({
-      		list:data.list
+      		list:that.data.list.concat(resList),
+      		hasMore:data.hadMore
       	});
+      	if(load){
+      		that.setData({
+      			loading:!that.data.loading,
+				    disabled:!that.data.disabled,
+				  	loadText:'点击加载更多...'
+      		})
+      	}
+      	if(!that.data.hasMore){
+      		that.setData({
+				  	loadText:'没有更多数据了'
+      		})
+      	}
       	if(data.list.length==0){
       		that.setData({
-	      		isNoData:"暂时没有发布任何事件！"
+	      		isNoData:"暂时没有关注任何事件！"
 	      	});
       	}
         wx.hideLoading();
@@ -48,5 +77,15 @@ Page({
         });
       }
     }, false);
-  }
+  },
+  
+  showMore:function(e){
+		var that=this;
+		if(that.data.hasMore){
+			that.setData({
+				offset:that.data.offset+1,
+			});
+			that.onLoadData(true);
+		}
+	}
 })
