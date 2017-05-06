@@ -2,7 +2,7 @@
 <form bindsubmit="formSubmit" bindreset="formReset">
 <view class="center_top">
 	<view class="center_info" bindtap="chooseimage">
-		<image src ="{{photo}}" class="icon" />
+		<image src ="{{photo || '../../images/nomal.jpg'}}" class="icon" />
 		<view>上传头像</view>
 	</view>
 </view>
