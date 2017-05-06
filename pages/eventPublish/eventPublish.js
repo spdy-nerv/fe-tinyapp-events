@@ -733,6 +733,10 @@ Page({
   },
 
   addCommentModule: function() {
+    wx.showLoading({
+        mask: true,
+        title: '添加模块中'
+    });
     var that = this;
     var d = {
       eventId: this.data.eventId,
@@ -743,6 +747,9 @@ Page({
       allowRoleIds: this.data.allowViewId
     };
     d.config = config;
+    if (this.data.commentModuleId) {
+      d.moduleId = this.data.commentModuleId
+    }
     request({
       url: APIS.ADD_COMMENT_CONFIG,
       method: 'POST',

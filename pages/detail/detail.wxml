@@ -185,9 +185,9 @@
   <view class="comment_cont">
   <block  wx:for="{{item1.content}}" wx:for-item="itemC">
     <text wx:if="{{itemC.type==1}}">​​{{itemC.value}}</text>
-	<text wx:if="{{itemC.type==2}}">
+	<view wx:if="{{itemC.type==2}}">
 		 <image src="{{itemC.value}}" width="100%" height="100%"/> 
-	</text>
+	</view>
   </block>
   </view>
   </view>
