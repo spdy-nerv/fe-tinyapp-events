@@ -53,7 +53,7 @@ Page({
           },
           loginCallback: this.renderDescription,
           realFail: function(msg) {
-            wx.hideLoading();
+            //wx.hideLoading();
             wx.showToast({
                 title: msg
             });
@@ -191,14 +191,14 @@ Page({
           // TODO
           // 成功后返回上一页
           wx.navigateBack();
-          wx.hideLoading();
+          //wx.hideLoading();
           wx.showToast({
             title: '成功'
           });
         },
         loginCallback: that.onPublish,
         realFail: function(msg, errCode) {
-          wx.hideLoading();
+          //wx.hideLoading();
           wx.showToast({
             title: msg
           });
@@ -206,7 +206,7 @@ Page({
       }, true, that);
     })
     .catch(function(e) {
-      wx.hideLoading();
+      //wx.hideLoading();
       wx.showToast({
         title: e.errMsg || '事件详情提交失败，请稍后重试！'
       });
