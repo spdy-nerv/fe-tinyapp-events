@@ -161,14 +161,14 @@ Page({
           // 成功后返回上一页
           wx.navigateBack();
           //console.log('success');
-          wx.hideLoading();
+          //wx.hideLoading();
           wx.showToast({
             title: '成功'
           });
         },
         loginCallback: that.onPublish,
         realFail: function(msg, errCode) {
-          wx.hideLoading();
+          //wx.hideLoading();
           wx.showToast({
             title: msg
           });
@@ -176,7 +176,7 @@ Page({
       }, true, that);
     })
     .catch(function(e) {
-      wx.hideLoading();
+      //wx.hideLoading();
       wx.showToast({
         title: e.errMsg || '评论发布失败，请稍后重试！'
       });

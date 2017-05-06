@@ -15,7 +15,7 @@ Page({
 	    autoplay: true,  
 	    interval: 5000,  
 	    duration: 500,
-   		offset: 0,
+   		offset: 1,
 		eventId: "",
 		
 		des:{
@@ -299,7 +299,20 @@ Page({
 	},
 	
 	//请求评论模块数据
-	getCommentData:function(){
+	getCommentData:function(isReloadComment){
+
+		// 重新刷新评论列表
+		if (isReloadComment) {
+			this.setData({
+				offset: 1,
+				"des.commentData": {
+					data: {
+						commentList:[]
+					}
+				}
+			});
+		}
+
 		let that = this;
 		let mL = that.data.modules.length;
 		for(let i=0;i<mL;i++){
@@ -319,11 +332,15 @@ Page({
 					success: function(res) {
 						console.log("获取评论数据！",res);
 						var moreData=res.data.resultData.data.commentList;
+						for (var i in moreData) {
+							moreData[i].picNum = moreData[i].content.length - 1;
+						}
 						var data=that.data.des.commentData.data.commentList.concat(moreData);
 						that.setData({
 							"des.hasMore":res.data.resultData.data.hasMore,
-							"des.commentData.commentList":data,
+							//"des.commentData.commentList":data,
 							"des.commentData": res.data.resultData,
+							"des.commentData.data.commentList": data,
 							"des.isAllowComment":!res.data.resultData.config.isAllowComment
 						});
 						
@@ -389,7 +406,7 @@ Page({
 	},
 	//页面展示
 	onShow: function() {
-		this.getCommentData();
+		this.getCommentData(true);
 	},
 	onShareAppMessage: function() {
 		// 用户点击右上角分享

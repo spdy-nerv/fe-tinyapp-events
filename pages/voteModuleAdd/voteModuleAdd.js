@@ -60,7 +60,7 @@ Page({
           },
           loginCallback: this.renderVote,
           realFail: function(msg) {
-            wx.hideLoading();
+            //wx.hideLoading();
             wx.showToast({
                 title: msg
             });
@@ -150,14 +150,14 @@ Page({
         // TODO
         // 成功后返回上一页
         wx.navigateBack();
-        wx.hideLoading();
+        //wx.hideLoading();
         wx.showToast({
           title: '成功'
         });
       },
       loginCallback: this.onTapPublish,
       realFail: function(msg, errCode) {
-        wx.hideLoading();
+        //wx.hideLoading();
         wx.showToast({
           title: msg
         });
