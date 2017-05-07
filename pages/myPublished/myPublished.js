@@ -27,8 +27,16 @@ Page({
 	      mask: true,
 	      title: '数据加载中'
 	    });
-	    user.login(this.onLoadData(false), this, false);
+	    //user.login(this.onLoadData(false), this, false);
   },
+
+	onShow: function() {
+		this.setData({
+			list: [],
+			offset: 1
+		});
+		user.login(this.onLoadData(false), this, false);
+	},
   
   onLoadData: function(load){
   	var that = this;
