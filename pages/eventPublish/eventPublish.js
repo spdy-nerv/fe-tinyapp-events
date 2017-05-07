@@ -606,9 +606,12 @@ Page({
         //info.eventPics.push(picUrls[i]);
         picPaths[localPicIndexArr[i]] = picUrls[i]
       }
-      that.setData({
-        picPaths: picPaths
-      });
+      setTimeout(function() {
+        that.setData({
+          picPaths: picPaths
+        });
+
+      }, 0);
       info.eventPics = picPaths;
       info.isPublish = isP;
       d.data = info;
@@ -871,13 +874,19 @@ Page({
     wx.chooseLocation({
       success: function(res){
         // success
-        that.setData({
-          addressTitle: res.name,
-          addressDetail: '',
-          latitude: res.latitude,
-          longitude: res.longitude,
-          isAddressDetailFocus: true
-        });
+        if (res.name && res.latitude && res.longitude) {
+          that.setData({
+            addressTitle: res.name,
+            addressDetail: '',
+            latitude: res.latitude,
+            longitude: res.longitude,
+            isAddressDetailFocus: true
+          });
+        } else {
+          wx.showToast({
+            title: '您选择的地址异常，请重新选择！'
+          });
+        }
       }
     });
   },

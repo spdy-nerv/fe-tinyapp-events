@@ -42,7 +42,7 @@ Page({
   	var that = this;
   	var params = {
   		sid: wx.getStorageSync('sid'),
-  		size: 2,   
+  		size: 10,   
 	    offset: that.data.offset,
   	};
   	if(load){

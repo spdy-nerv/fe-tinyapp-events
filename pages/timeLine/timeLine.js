@@ -40,7 +40,7 @@ Page({
       {roleId: '', roleName: '全部'}
     ],
     publisherTypeIndex: 0,
-    listPaddingBottom: 120
+    listPaddingBottom: 100
   },
   //事件处理函数
   bindViewTap: function() {
@@ -59,7 +59,7 @@ Page({
     var sysInfo = wx.getSystemInfoSync();
     if (sysInfo.system.toUpperCase().indexOf('IOS') != -1) {
       this.setData({
-        listPaddingBottom: 170
+        listPaddingBottom: 150
       });
     }    
   },
@@ -213,11 +213,16 @@ Page({
     });
     setTimeout(function() {
       that.setData({
-        scrollLeft: currentOffset,
+        //scrollLeft: currentOffset,
         scrollIntoViewId: 'initPos',
         onBindScroll: 'onInitScroll'
       });
     }, 0);
+    setTimeout(function() {
+      that.setData({
+        scrollLeft: currentOffset
+      });
+    }, 2000);
 
   },
 
@@ -262,7 +267,7 @@ Page({
       year: +dateArr[0],
       month: +dateArr[1],
       date: +dateArr[2],
-      formatedMonth: monthFormatList[+dateArr[1]-1].eng
+      formatedMonth: monthFormatList[+dateArr[1]-1].arabic + '月'
     });
     
     this.getEventList();

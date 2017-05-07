@@ -164,7 +164,7 @@
 <block  wx:for="{{description.paragraphs}}">
 	<view wx:if="{{item.type==1}}" class="detail_box_p"><text>{{item.value}}</text></view>
   <view wx:if="{{item.type==2}}" class="detail_box_p">
-    <image src="{{item.value}}" mode="aspectFill"/> 
+    <image src="{{item.value}}" mode="widthFix"/> 
   </view>
 </block>
 </view>
