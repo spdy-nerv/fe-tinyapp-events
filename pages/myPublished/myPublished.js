@@ -15,8 +15,12 @@ Page({
     hasMore:'',
   	isNoData:"",
   	loadText:'点击加载更多...',
-  	list:[]
-  	
+  	list:[],
+		statusList: {
+			statusListData: [
+				'未发布', '审核中', '已发布', '不通过', '已结束'
+			]
+		}	
   },
   onLoad: function () {
   	wx.showLoading({

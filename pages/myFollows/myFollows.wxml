@@ -4,7 +4,7 @@
 <view class="follow_list">
 	<view class="f_img">
 		<!--<view class="icon"></view>-->
-		<image class="img" src="{{item.pictureUrl}}" />
+		<image class="img" src="{{item.pictureUrl}}" mode="aspectFill" />
 	</view>
 	<view class="t1">
 	 	{{item.name}}

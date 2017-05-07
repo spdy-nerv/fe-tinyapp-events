@@ -1,23 +1,33 @@
 <!--myFollows.wxml-->
 <block  wx:for="{{list}}" wx:key="unique">
-<navigator url="../detail/detail?eventId={{item.eventId}}">
-<view class="follow_list">
-	<view class="f_img">
-		<view class="icon"></view>
-		<image class="img" src="{{item.pictureUrl}}" />
-	</view>
-	<view class="t1">
-	 	{{item.name}}
-	</view>
-	<view class="t2"><image src="../../images/d-icon1.png"></image> {{item.year}}年{{item.mouth}}月{{item.date}}号    {{item.startTime}}</view>
-	 <view class="t2 t3">
-	 <image src="../../images/d-icon2.png"></image> {{item.address}}
-	 <view class="f_button fr">
-	 	<button formType="submit" type="primary" >已发布</button>
-	 </view>
-	</view>
-</view>
+
+<!-- //0提交未发布  1已提交待审核  2 已发布  3审核失败  4截止 \结束-->
+<block wx:if="{{item.status == '0'}}">
+<navigator url="../eventPublish/eventPublish?eventId={{item.eventId}}">
+<template is="event-item" data="{{...item, ...statusList}}"/>
 </navigator>
+</block>
+
+<block wx:elif="{{item.status == '1'}}">
+<template is="event-item" data="{{...item, ...statusList}}"/>
+</block>
+
+<block wx:elif="{{item.status == '2'}}">
+<navigator url="../detail/detail?eventId={{item.eventId}}">
+<template is="event-item" data="{{...item, ...statusList}}"/>
+</navigator>
+</block>
+
+<block wx:if="{{item.status == '3'}}">
+<navigator url="../eventPublish/eventPublish?eventId={{item.eventId}}">
+<template is="event-item" data="{{...item, ...statusList}}"/>
+</navigator>
+</block>
+
+<block wx:elif="{{item.status == '4'}}">
+<template is="event-item" data="{{...item, ...statusList}}"/>
+</block>
+
 </block >
 <view class="no_event" hidden="{{isNoData}}">
 	<button type="" loading="{{loading}}" disabled="{{disabled}}" bindtap="showMore" >{{loadText}}</button> 
@@ -28,4 +38,23 @@ class="publishing"
 class="no_publish" 
 <icon type="clear" size="20" color="#d7dcf5"/>
 -->
+
+<template name="event-item">
+<view class="follow_list">
+	<view class="f_img">
+		<view class="icon"></view>
+		<image class="img" src="{{pictureUrl}}" mode="aspectFill"/>
+	</view>
+	<view class="t1">
+	 	{{name}}
+	</view>
+	<view class="t2"><image src="../../images/d-icon1.png"></image> {{year}}年{{mouth}}月{{date}}号    {{startTime}}</view>
+	 <view class="t2 t3">
+	 <image src="../../images/d-icon2.png"></image> {{address}}
+	 <view class="f_button fr">
+	 	<button formType="submit" class="status-tag-{{status}}">{{statusListData[status]}}</button>
+	 </view>
+	</view>
+</view>
+</template>
 
