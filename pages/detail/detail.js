@@ -413,7 +413,7 @@ Page({
 		console.log('onShareAppMessage')
 		return {
 			desc: '分享给大家看看吧', // 分享描述
-			path: '/detail/detail?eventId='+this.data.eventId+'&eventName='+this.data.eventName // 分享路径
+			path: '/pages/detail/detail?eventId='+this.data.eventId+'&eventName='+this.data.eventName // 分享路径
 		}
 	},
 

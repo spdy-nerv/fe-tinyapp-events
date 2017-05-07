@@ -68,11 +68,9 @@ Page({
   onLoad:function(options){
     // 生命周期函数--监听页面加载
     //user.login(null, this, true);
-    /*
     this.setData({
-      eventId: options.eventId
+      eventId: options.eventId || ''
     });
-    */
     // 如果有eventId，认为是修改，此时需要获取事件的基础信息
     if (this.data.eventId) {
         user.login(this.renderBaseInfo, this, true);

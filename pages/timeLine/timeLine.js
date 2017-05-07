@@ -361,5 +361,13 @@ Page({
       eventTypeIndex: 0,
       publisherTypeIndex: 0
     });
-  }
+  },
+
+  onShareAppMessage: function() {
+		// 用户点击右上角分享
+		return {
+			desc: '分享给大家看看吧', // 分享描述
+			path: '/pages/timeLine/timeLine'
+		}
+	},
 })
