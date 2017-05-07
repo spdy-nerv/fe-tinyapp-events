@@ -185,14 +185,14 @@ Page({
 			method: 'POST',
 		  	success: function(res){
 				if(res.data.errCode=='0000'){
-					/*wx.showToast({
+					wx.showToast({
 		              title: res.data.resultMsg,
 		              icon: 'success',
-		          	});*/
-		          	that.setData({
+		          	});
+		          	/*that.setData({
 		          		isUP:!that.data.isUP
-		          	})
-		          	//wx.navigateBack();
+		          	})*/
+		          	wx.navigateBack();
 	          	}
 		  	},
 		  	fail: function(res) {

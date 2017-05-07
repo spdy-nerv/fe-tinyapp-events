@@ -66,20 +66,32 @@ Page({
   	var unbindParam = {
   		sid: wx.getStorageSync('sid')
   	};
-    wx.request({
-    	url: APIS.UNBIND,
-      data: unbindParam,
-      method: 'POST',
-      success: function(res){
-      	if(res.data.errCode=='0000'){
-      		 that.setData({
-	        	isCertification:!that.data.isCertification,
-	        });
-	        that.showModal(res.data.resultMsg);
-      	}
-      
-      },
-    })
+    wx.showModal({
+				 title: "温馨提示",
+				 content: '是否解除绑定？',
+				 confirmText:'确定',
+				 success: function(res) {
+				  if (res.confirm) {
+				   wx.request({
+			    	url: APIS.UNBIND,
+			      data: unbindParam,
+			      method: 'POST',
+			      success: function(res){
+			      	if(res.data.errCode=='0000'){
+			      		 that.setData({
+				        	isCertification:!that.data.isCertification,
+				        });
+				         wx.showToast({
+				          title: res.data.resultMsg
+				        });
+				        that.onLoadData();
+				       // that.showModal(res.data.resultMsg);
+			      	}
+			      }
+			    })
+				  }
+				 }
+			})
   },
   
   //我的卡片

@@ -31,8 +31,9 @@ Page({
 				data: params,
 				method: 'POST',
 				realSuccess: function(res) {
-					wx.navigateBack();
 					wx.setStorageSync("declaration", e.detail.value.declaration);
+					wx.navigateBack();
+					
 				},
 				realFail: function(msg) {
 					wx.hideLoading();
