@@ -49,7 +49,7 @@ Page({
       	var resList=data.list;
       	that.setData({
       		list:that.data.list.concat(resList),
-      		hasMore:data.hadMore
+      		hasMore:data.hasMore
       	});
       	if(load){
       		that.setData({
