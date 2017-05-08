@@ -5,7 +5,7 @@
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
       <block wx:for="{{pictureUrls}}" wx:key="unique">  
         <swiper-item>  
-            <image mode="aspectFill" src="{{item}}" class="slide-image" width="100%" height="100%"/>  
+            <image mode="aspectFill" src="{{item}}" class="slide-image" width="100%" height="100%" bindtap="onPreviewSlider" data-url="{{item}}"/>  
         </swiper-item>  
       </block>  
 </swiper>
@@ -17,7 +17,7 @@
 <view class="title-box">
   <view class="title-box-left">
      <view class="eng">{{formatedMonth}}</view>
-     <view class="chiness">{{startTime.month}}</view>
+     <view class="chiness">{{startTime.day}}</view>
   </view>
   <view class="title-box-right">
     <view class="right1">{{eventName}}</view>
@@ -27,6 +27,11 @@
      <!--</navigator>-->
     </view>
    </view>
+   <view wx:if="{{fromShare == 1}}" class="go-to-home-wrap">
+    <navigator url="../timeLine/timeLine" open-type="redirect">
+      <view class="go-to-home"></view>
+    </navigator>
+  </view>
 </view>
 
 <!--分享、点赞部分-->
@@ -187,19 +192,19 @@
     <view class="comment-text">​​{{item1.content[0].value}}</view>
 
     <view wx:if="{{item1.picNum == 1}}" class="comment-img-wrap">
-      <image src="{{item1.content[1].value}}" width="100%" height="100%" class="comment-img-item1" mode="aspectFill"/>
+      <image src="{{item1.content[1].value}}" width="100%" height="100%" class="comment-img-item1" mode="aspectFill" bindtap="onPreviewComment" data-url="{{item1.content[1].value}}" data-index="{{index}}"/>
     </view>
 
     <view wx:if="{{item1.picNum == 2}}" class="comment-img-wrap">
-      <image src="{{item1.content[1].value}}" width="100%" height="100%" class="comment-img-item2" mode="aspectFill"/>
-      <image src="{{item1.content[2].value}}" width="100%" height="100%" class="comment-img-item2" mode="aspectFill"/>
+      <image src="{{item1.content[1].value}}" width="100%" height="100%" class="comment-img-item2" mode="aspectFill"  bindtap="onPreviewComment" data-url="{{item1.content[1].value}}" data-index="{{index}}"/>
+      <image src="{{item1.content[2].value}}" width="100%" height="100%" class="comment-img-item2" mode="aspectFill"  bindtap="onPreviewComment" data-url="{{item1.content[2].value}}" data-index="{{index}}"/>
     </view>
 
     <view wx:if="{{item1.picNum == 3}}" class="comment-img-wrap">
-      <image src="{{item1.content[1].value}}" width="100%" height="100%" class="comment-img-item3" mode="aspectFill"/>
+      <image src="{{item1.content[1].value}}" width="100%" height="100%" class="comment-img-item3" mode="aspectFill"  bindtap="onPreviewComment" data-url="{{item1.content[1].value}}" data-index="{{index}}"/>
       <view class="comment-img-right">
-        <image src="{{item1.content[2].value}}" width="100%" height="100%" class="comment-img-item4" mode="aspectFill"/>
-        <image src="{{item1.content[3].value}}" width="100%" height="100%" class="comment-img-item4 img-clear" mode="aspectFill"/>
+        <image src="{{item1.content[2].value}}" width="100%" height="100%" class="comment-img-item4" mode="aspectFill"  bindtap="onPreviewComment" data-url="{{item1.content[2].value}}" data-index="{{index}}"/>
+        <image src="{{item1.content[3].value}}" width="100%" height="100%" class="comment-img-item4 img-clear" mode="aspectFill"  bindtap="onPreviewComment" data-url="{{item1.content[3].value}}" data-index="{{index}}"/>
       </view>
     </view>
 

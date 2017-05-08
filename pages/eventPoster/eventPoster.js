@@ -7,12 +7,14 @@ var { request } = require('../../libs/request');
 Page({
   data:{
     eventId: '',
-    poster: ''
+    poster: '',
+    fromShare: 0
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     this.setData({
-      eventId: options.eventId || ''
+      eventId: options.eventId || '',
+      fromShare: options.fromShare || 0
     });
     user.login(this.getEventPoster, this, true);
   },

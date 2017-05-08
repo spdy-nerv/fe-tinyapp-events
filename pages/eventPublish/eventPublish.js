@@ -278,8 +278,8 @@ Page({
         startTime: util.formatDate(today),
         endTime: util.formatDate(today),
         createClock: '00:00',
-        startClock: '00:00',
-        endClock: '00:00'
+        startClock: '01:00',
+        endClock: '02:00'
       });
   },
 
@@ -402,36 +402,66 @@ Page({
     this.setData({
       createTime: e.detail.value
     });
+    this.validateTime();
   },
 
   bindStartTimeChange: function(e) {
     this.setData({
       startTime: e.detail.value
     });
+    this.validateTime();
   },
 
   bindEndTimeChange: function(e) {
     this.setData({
       endTime: e.detail.value
     });
+    this.validateTime();
   },
 
   bindCreateClockChange: function(e) {
     this.setData({
       createClock: e.detail.value
     });
+    this.validateTime();
   },
 
   bindStartClockChange: function(e) {
     this.setData({
       startClock: e.detail.value
     });
+    this.validateTime();
   },
 
   bindEndClockChange: function(e) {
     this.setData({
       endClock: e.detail.value
     });
+    this.validateTime();
+  },
+
+  validateTime: function() {
+    var d = this.data;
+    var ct = d.createTime + ' ' + d.createClock;
+    var st = d.startTime + ' ' + d.startClock;
+    var et = d.endTime + ' ' + d.endClock;
+    var tips = '';
+    var flag = true;
+
+    if (ct > st) {
+      tips = '发布时间不能晚于开始时间，请调整！'
+      flag = false;
+    } else if (st >= et) {
+      tips = '开始时间不能晚于结束时间，请调整！'
+      flag = false;
+    }
+    if (!flag) {
+      wx.showToast({
+        title: tips,
+        duration: 2000
+      });
+    }
+    return flag;
   },
 
   onInputName: function(e) {
@@ -698,6 +728,11 @@ Page({
   },
 
   validateBaseInfo: function(info) {
+
+      if (!this.validateTime()) {
+        return false;
+      }
+
       var flag = true;
       var tips = '';
       if (info.eventName == '') {

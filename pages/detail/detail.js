@@ -66,13 +66,15 @@ Page({
 
 		//模块Id, moduleType 1:详情事件，2:评论，3：报名，4：投票，5:问卷，6：评价
 		modules: [],
-		scrollToId: ''
+		scrollToId: '',
+		fromShare: 0
 	},
 
 	onLoad: function(options){
 		
 		this.setData({
-			eventId:options.eventId
+			eventId:options.eventId,
+			fromShare: options.fromShare || 0
 		});
 		
 		wx.showLoading({
@@ -108,7 +110,7 @@ Page({
 						"eventName": datas.name,
 						"address": datas.address,
 						"poster": datas.poster,
-						"formatedMonth": monthFormatList[en-1].simpleEng,
+						"formatedMonth": monthFormatList[en-1].arabic + '月',
 						"startTime": { //开始时间
 							"year": datas.startTime.substring(0, 4), //年份
 							"month": datas.startTime.substring(5, 7),
@@ -420,7 +422,7 @@ Page({
 		}
 		return {
 			desc: '分享给大家看看吧', // 分享描述
-			path: path + '?eventId='+this.data.eventId+'&eventName='+this.data.eventName // 分享路径
+			path: path + '?eventId='+this.data.eventId+'&eventName='+this.data.eventName+'&fromShare=1' // 分享路径
 		}
 	},
 
@@ -466,6 +468,28 @@ Page({
 		console.log('hahaha');
 		this.setData({
 			scrollToId: 'J_comment'
+		});
+	},
+
+	onPreviewSlider: function(e) {
+		wx.previewImage({
+		  current: e.target.dataset.url, // 当前显示图片的链接，不填则默认为 urls 的第一张
+		  urls: this.data.pictureUrls
+		});
+	},
+
+	onPreviewComment: function(e) {
+		var i = +e.target.dataset.index;
+		var pics = this.data.des.commentData.data.commentList[i].content;
+		var rtPics = [];
+		for (var i in pics) {
+			if (pics[i].type == 2) {
+				rtPics.push(pics[i].value);
+			}
+		}
+		wx.previewImage({
+		  current: e.target.dataset.url, // 当前显示图片的链接，不填则默认为 urls 的第一张
+		  urls: rtPics
 		});
 	}
 })

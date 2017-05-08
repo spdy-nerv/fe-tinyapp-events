@@ -3,15 +3,17 @@ page {
   height: 100%;
   padding-bottom: 0;
 }
-
+swiper {
+  height: 390rpx;
+}
 .banner-container{
   width: 100%;
-  height: 150px;
+  height: 390rpx;
   background: #666666;
 }
 .banner-container image{
   width: 100%;
-  height: 150px;
+  height: 390rpx;
 }
 .slide-image{  
     width: 100%; 
@@ -47,7 +49,8 @@ page {
 .title-box-right{
   line-height: 50rpx;
   padding-left: 20rpx;
-  width: 80%;
+  flex: 1;
+  margin-right: 30rpx;
 }
 .title-box-right .right1{
   font-weight: bolder;
@@ -409,4 +412,20 @@ top:10rpx;
 
 .img-clear {
   margin-bottom: 0;
+}
+
+.go-to-home-wrap {
+  width: 40rpx;
+  height: 50rpx;
+  margin-right: 30rpx;
+}
+
+
+.go-to-home {
+  width: 40rpx;
+  height: 50rpx;
+  background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/go_home.png);
+  background-repeat: no-repeat;
+  background-size: 40rpx 32rpx;
+  background-position: center;
 }
