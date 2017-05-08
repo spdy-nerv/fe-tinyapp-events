@@ -46,6 +46,13 @@
 width:30rpx;
 height:36rpx;
 }
+
+.f_button {
+    position: absolute;
+    top: 15rpx;
+    right: 20rpx;
+}
+
 .f_button button{
   width:180rpx;
   font-size: 36rpx;

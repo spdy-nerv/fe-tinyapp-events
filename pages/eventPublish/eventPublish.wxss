@@ -409,3 +409,39 @@ swiper-item {
 .bi-address {
     height: auto;
 }
+
+.bi-poster-left {
+    width: 4em;
+}
+
+.bi-poster-mid {
+    position: relative;
+}
+
+.bi-poster-mid text {
+    color:#b4b8cc;
+}
+
+.bi-poster {
+    height: auto;
+    min-height: 100rpx;
+}
+
+.bi-poster-mid image {
+    width: 400rpx;
+    height: 400rpx;
+    margin-top: 20rpx;
+    margin-bottom: -20rpx;
+    background-color: #666666;
+}
+
+.delete-poster {
+    position: absolute;
+    width: 30rpx;
+    height: 30rpx;
+    background-image: url(http://eventsocial-1253427581.cossh.myqcloud.com/v1.0/delete_pic.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    bottom: 30rpx;
+    right: 30rpx;
+}

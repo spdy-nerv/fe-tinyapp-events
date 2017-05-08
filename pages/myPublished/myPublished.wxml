@@ -51,10 +51,10 @@ class="no_publish"
 	<view class="t2"><image src="../../images/d-icon1.png"></image> {{year}}年{{mouth}}月{{date}}号    {{startTime}}</view>
 	 <view class="t2 t3">
 	 <image src="../../images/d-icon2.png"></image> {{address}}
-	 <view class="f_button fr">
-	 	<button formType="submit" class="status-tag-{{status}}">{{statusListData[status]}}</button>
-	 </view>
 	</view>
+	<view class="f_button fr">
+		<button formType="submit" class="status-tag-{{status}}">{{statusListData[status]}}</button>
+	 </view>
 </view>
 </template>
 

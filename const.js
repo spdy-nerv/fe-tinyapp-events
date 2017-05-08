@@ -87,7 +87,10 @@ var APIS = {
   ADD_EVALUATION_CONFIG: reqHost + '/addEvaluationConfig',
 
   // 删除模块关联
-  REMOVE_MODULE: reqHost + '/removeModule'
+  REMOVE_MODULE: reqHost + '/removeModule',
+
+  // 获取事件首页图片
+  GET_EVENT_POSTER: reqHost + '/getEventPoster'
 	
 };
 

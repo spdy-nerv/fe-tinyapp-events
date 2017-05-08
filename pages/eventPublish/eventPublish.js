@@ -13,6 +13,7 @@ Page({
     picPaths: [],
     eventName: '',
     address: '',
+    poster: '',
     eventTypeList: [],
     eventTypeIndex: 0,
     eventTypeId: '',
@@ -33,10 +34,10 @@ Page({
         }, {
             moduleTypeId: 5,
             moduleTypeName: '问卷模块'
-        }, {
+        }/*, {
             moduleTypeId: 6,
             moduleTypeName: '评价模块'
-        }
+        }*/
     ],
     needDescriptionModule: false,
     descriptionModuleId: '',
@@ -114,7 +115,8 @@ Page({
           realSuccess: function(data) {
               that.setData({
                 eventName: data.name,
-                address: data.address
+                address: data.address,
+                poster: data.poster || ''
               });
               that.handlePicsLoad(data.pictureUrls);
               that.handleTime({
@@ -598,13 +600,23 @@ Page({
         localPicIndexArr.push(i);
       }
     }
+    if (this.data.poster.indexOf('wxfile://') == 0) {
+      fnArr.push(uploadPic(this.data.poster));
+    }
     Q.all(fnArr)
     .then(function(picUrls) {
       var d = {};
       var picPaths = that.data.picPaths;
       for (var i in picUrls) {
         //info.eventPics.push(picUrls[i]);
-        picPaths[localPicIndexArr[i]] = picUrls[i]
+        if (that.data.poster.indexOf('wxfile://') == 0 && i == picUrls.length - 1) {
+          that.setData({
+            poster: picUrls[i]
+          });
+          break;
+        }
+        picPaths[localPicIndexArr[i]] = picUrls[i];
+
       }
       setTimeout(function() {
         that.setData({
@@ -613,13 +625,13 @@ Page({
 
       }, 0);
       info.eventPics = picPaths;
+      info.poster = that.data.poster;
       info.isPublish = isP;
       d.data = info;
       d.sid = wx.getStorageSync('sid');
       if (that.data.eventId) {
           d.eventId = that.data.eventId;
       }
-      console.log(d);
       request({
         url: APIS.ADD_EVENT_BASE,
         data: d,
@@ -777,7 +789,7 @@ Page({
     var that = this;
     var d = {
       eventId: this.data.eventId,
-      moduleType: 2,
+      moduleType: 6,
       sid: wx.getStorageSync('sid')
     };
     var config = {
@@ -895,6 +907,28 @@ Page({
     var detail = e.detail.value;
     this.setData({
       addressDetail: detail
+    });
+  },
+
+  onTapSelectPoster: function() {
+    var that = this;
+    wx.chooseImage({
+      count: 1, // 最多可以选择的图片张数，默认9
+      sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+      success: function(res){
+        // success
+        var tempFilePaths = res.tempFilePaths;
+        that.setData({
+          poster: tempFilePaths[0]
+        });
+      }
+    })
+  },
+
+  onDeletePoster: function() {
+    this.setData({
+      poster: ''
     });
   }
 })

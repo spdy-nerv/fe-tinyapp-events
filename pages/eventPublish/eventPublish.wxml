@@ -34,6 +34,19 @@
             <text class="wb_arrow_right"></text>
         </view>
     </view>
+
+    <view class="bi-field bi-poster">
+        <text class="bi-field-left bi-poster-left">事件海报</text>
+        <view class="bi-field-mid bi-poster-mid" >
+            <text wx:if="{{poster == ''}}" bindtap="onTapSelectPoster">事件的首页显示（375px*500px）</text>
+            <image wx:if="{{poster != ''}}" src="{{poster}}" mode="aspectFill" bindtap="onTapSelectPoster"></image>
+            <view wx:if="{{poster != ''}}" class="delete-poster" bindtap="onDeletePoster"></view>
+        </view>
+        <view class="bi-field-right" bindtap="onTapSelectPoster">
+            <text class="wb_arrow_right"></text>
+        </view>
+    </view>
+
     <view class="bi-field bi-createtime">
         <text class="bi-field-left">发布时间</text>
         <view class="bi-field-mid bi-createtime-mid">

@@ -36,6 +36,7 @@ Page({
 		startTime: "",
 		endTime: "",
 		address: "",
+		poster: '',
 		formatedMonth: '',
 		
 		startTime: { //开始时间
@@ -106,6 +107,7 @@ Page({
 						"modules": modules,
 						"eventName": datas.name,
 						"address": datas.address,
+						"poster": datas.poster,
 						"formatedMonth": monthFormatList[en-1].simpleEng,
 						"startTime": { //开始时间
 							"year": datas.startTime.substring(0, 4), //年份
@@ -410,10 +412,15 @@ Page({
 	},
 	onShareAppMessage: function() {
 		// 用户点击右上角分享
-		console.log('onShareAppMessage')
+		var path = '';
+		if (this.data.poster) {
+			path = '/pages/eventPoster/eventPoster';
+		} else {
+			path = '/pages/detail/detail';
+		}
 		return {
 			desc: '分享给大家看看吧', // 分享描述
-			path: '/pages/detail/detail?eventId='+this.data.eventId+'&eventName='+this.data.eventName // 分享路径
+			path: path + '?eventId='+this.data.eventId+'&eventName='+this.data.eventName // 分享路径
 		}
 	},
 

@@ -56,6 +56,7 @@
 	</view>
 </view>
 </navigator>
+<!--
 <navigator url="../declaration/declaration?declaration={{declaration}}">
 <view class="personCenter_list ">
 	<text>加友宣言</text>
@@ -64,6 +65,7 @@
 	</view>
 </view>
 </navigator>
+-->
 <view class="save_button">
 	<button formType="submit" type="primary"> 保存 </button>
 </view>

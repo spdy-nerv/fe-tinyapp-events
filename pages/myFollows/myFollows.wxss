@@ -24,6 +24,7 @@
 .follow_list .f_img .img{
     width: 100%;
     max-height: 300rpx;
+    background-color: #666666;
 }
 .follow_list .t1{
     margin-top: 20rpx;
