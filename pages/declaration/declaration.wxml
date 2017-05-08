@@ -10,7 +10,7 @@
 	<button formType="submit" > 保存 </button>
 	</view>
 </view>
-<view class="section">
-  <textarea name="declaration" value="{{declaration}}"   auto-height placeholder="说点啥！" />
+<view class="declaration">
+  <textarea name="declaration" value="{{declaration}}"  auto-height placeholder="{{declaration?declaration:'说点啥！'}}" />
 </view>
 </form>
