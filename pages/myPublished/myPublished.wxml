@@ -56,10 +56,10 @@ class="no_publish"
 		<button formType="submit" class="status-tag-{{status}}">{{statusListData[status]}}</button>
 	 </view>
 	 <view class="f_button2" catchtap="toggleHidden" data-eventId="{{eventId}}">
-	 <block wx:if="{{toggle=='0'}}">
+	 <block wx:if="{{toggle=='0' && status == '2'}}">
 		<button formType="submit" class="status-tag-hidden">隐藏</button>
 	 </block>
-	<block wx:if="{{toggle=='1'}}">
+	<block wx:if="{{toggle=='1' && status == '2'}}">
 		<button formType="submit" class="status-tag-show">已展示</button>
 	 </block>
 	 </view>
