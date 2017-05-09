@@ -491,5 +491,22 @@ Page({
 		  current: e.target.dataset.url, // 当前显示图片的链接，不填则默认为 urls 的第一张
 		  urls: rtPics
 		});
+	},
+
+	onPreviewDetail: function(e) {
+		var i = +e.target.dataset.index;
+		var pics = this.data.des.description.paragraphs;
+		var rtPics = [];
+		
+		for (var i in pics) {
+			if (pics[i].type == 2) {
+				rtPics.push(pics[i].value);
+			}
+		}
+		console.log(rtPics);
+		wx.previewImage({
+		  current: e.target.dataset.url, // 当前显示图片的链接，不填则默认为 urls 的第一张
+		  urls: rtPics
+		});		
 	}
 })

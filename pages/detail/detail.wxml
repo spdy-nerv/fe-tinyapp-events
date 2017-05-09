@@ -169,7 +169,7 @@
 <block  wx:for="{{description.paragraphs}}">
 	<view wx:if="{{item.type==1}}" class="detail_box_p"><text>{{item.value}}</text></view>
   <view wx:if="{{item.type==2}}" class="detail_box_p">
-    <image src="{{item.value}}" mode="widthFix"/> 
+    <image src="{{item.value}}" mode="widthFix" bindtap="onPreviewDetail" data-url="{{item.value}}" data-index="{{index}}"/> 
   </view>
 </block>
 </view>
