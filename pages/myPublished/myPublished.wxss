@@ -111,6 +111,6 @@ color:#999999;
 }
 
 .status-tag-show {
-    background-color: red;
+    background-color: #c52424;
     color: #ffffff;
 }
