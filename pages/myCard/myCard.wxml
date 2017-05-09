@@ -34,7 +34,7 @@
 <view class="personCenter_list mg_top30 border_bottom">
 	<view class="left"><text>毕业院校</text></view>
 	<view class="fr" >
-		<input name="school" bindinput="bindInput" data-id="school" value="{{school}}" placeholder="请输入您的毕业院校" />
+		<input name="school" bindinput="bindInput" data-id="school" value="{{school?school:'中欧商学院'}}" placeholder="请输入您的毕业院校" />
 	<text class="wb_arrow_right "></text>
 	</view>
 </view>

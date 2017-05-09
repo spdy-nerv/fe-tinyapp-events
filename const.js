@@ -48,6 +48,7 @@ var APIS = {
 	EDIT_CARD: 							 	reqHost +'/editCard',// 编辑我的名片
 	MY_FOLLOWS:								reqHost +'/myFollows',//我的关注
 	MY_PUBLISHED:							reqHost +'/myPublished',//我的发布
+	TOGGLEEVENT:      reqHost +'/toggleEvent',
 	UNBIND: reqHost +'/unBind', //解绑
   // 获取投票模块
   GET_VOTE_MODULE: reqHost +'/getVoteModule',

@@ -12,6 +12,7 @@ Page({
     offset: 1,
     loading:false,
     disabled:false,
+    toggle:'0',
     hasMore:'',
   	isNoData:"",
   	loadText:'点击加载更多...',
@@ -77,7 +78,7 @@ Page({
       	}
       	if(data.list.length==0){
       		that.setData({
-	      		isNoData:"暂时没有关注任何事件！"
+	      		isNoData:"暂时没有发布任何事件！"
 	      	});
       	}
         wx.hideLoading();
@@ -89,6 +90,26 @@ Page({
         });
       }
     }, false);
+  },
+  toggleHidden: function(e){
+  	console.log(e);
+  	var that =this;
+  	var eventId=e.currentTarget.dataset.eventid;
+  	wx.request({
+      url: APIS.TOGGLEEVENT,
+      data: {eventId:eventId},
+      method: 'POST',
+      success: function(res){
+      	if(res.data.errCode == '0000'){
+      		console.log("data",res.data.resultMsg);
+      		wx.showToast({
+	          title: res.data.resultMsg
+	        });
+	        that.onShow();
+      	}
+      }
+    })
+     
   },
   
   showMore:function(e){
