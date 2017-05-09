@@ -421,7 +421,7 @@ Page({
 			path = '/pages/detail/detail';
 		}
 		return {
-			desc: '分享给大家看看吧', // 分享描述
+			title: '中欧商学院-' + this.data.eventName, // 分享描述
 			path: path + '?eventId='+this.data.eventId+'&eventName='+this.data.eventName+'&fromShare=1' // 分享路径
 		}
 	},

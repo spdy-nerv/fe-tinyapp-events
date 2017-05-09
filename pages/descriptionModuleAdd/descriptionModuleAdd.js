@@ -122,7 +122,7 @@ Page({
     this.setData({
       paragraphs: pArr
     });
-    if (dP.type == 2) {
+    if (dP[0].type == 2) {
       this.picCount--;
     }
   },

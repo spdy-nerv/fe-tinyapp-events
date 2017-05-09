@@ -20,6 +20,7 @@ Page({
   },
 
   getEventPoster: function() {
+    var that = this;
     request({
           url: APIS.GET_EVENT_POSTER,
           method: 'POST',
@@ -40,5 +41,13 @@ Page({
             });
           }
       }, true, this);
-  }
+  },
+
+  onShareAppMessage: function() {
+		// 用户点击右上角分享
+		return {
+			title: '中欧商学院小程序', // 分享描述
+			path: '/pages/eventPoster/eventPoster?eventId='+this.data.eventId+'&fromShare=1' // 分享路径
+		}
+	},
 })

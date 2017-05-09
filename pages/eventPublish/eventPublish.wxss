@@ -428,7 +428,7 @@ swiper-item {
 }
 
 .bi-poster-mid image {
-    width: 400rpx;
+    width: 300rpx;
     height: 400rpx;
     margin-top: 20rpx;
     margin-bottom: -20rpx;
