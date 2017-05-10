@@ -8,13 +8,17 @@ Page({
   data:{
     eventId: '',
     poster: '',
-    fromShare: 0
+    fromShare: 0,
+    winHeight: 0
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    var sysInfo = wx.getSystemInfoSync();
+    console.log(sysInfo);
     this.setData({
       eventId: options.eventId || '',
-      fromShare: options.fromShare || 0
+      fromShare: options.fromShare || 0,
+      winHeight: sysInfo.windowHeight
     });
     user.login(this.getEventPoster, this, true);
   },

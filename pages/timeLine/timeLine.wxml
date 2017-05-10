@@ -53,7 +53,7 @@
       <view class="events-list-title">{{item.month}}月{{item.date}}日，{{item.dayName}}</view>
       <view class="anchor" id="anchor{{item.date}}"></view>
     </view>
-    <navigator url="../detail/detail?eventId={{item.eventId}}">
+    <navigator url="../eventPoster/eventPoster?eventId={{item.eventId}}">
     <view class="events-list-container">
       <text wx:if="{{item.date == todayDate && item.isFirstEventInDay}}" class="tody">今天</text>
       <view class="events-list-left">{{item.startTime}}</view>
