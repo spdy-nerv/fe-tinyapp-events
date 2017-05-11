@@ -22,6 +22,7 @@ Page({
 			isShowBottom:true,
 			description:'',
 			hasMore:false,
+			isFollow:true,
 			//评论数据
 			commentData: {
 				data: {
@@ -125,6 +126,7 @@ Page({
 						},
 						"pictureUrls" :datas.pictureUrls,
 						"isFollow": datas.isFollow, //是否关注了事件，默认false
+						"des.isFollow": datas.isFollow, 
 						"isStar": datas.isStar, //是否点赞了
 						"starCount": datas.starCount, //点赞总数，默认0
 						"latitude":datas.latitude,
@@ -247,7 +249,8 @@ Page({
 		              duration: 2000,
 		          	});
 		          that.setData({
-						"isFollow": !that.data.isFollow
+						"isFollow": !that.data.isFollow,
+						"des.isFollow": !that.data.isFollow
 					});
 				}
 			})
@@ -265,7 +268,8 @@ Page({
 		              duration: 2000,
 		          	});
 		          	that.setData({
-						"isFollow": !that.data.isFollow
+						"isFollow": !that.data.isFollow,
+						"des.isFollow": !that.data.isFollow
 					});
 				}
 			})

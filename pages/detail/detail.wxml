@@ -231,7 +231,7 @@
 
 <!--底部浮动评论输入框-->
 
-</template>
+
 
 <view class="footer_container mg20" hidden="{{isAllowComment}}">
         
@@ -246,7 +246,7 @@
             </view>
         </view>
         <view class="foot-item comment2" bindtap="scrollToComment">
-          <text class="comment_num">{{des.commentData.data.totalCount}}</text>
+          <text class="comment_num">{{commentData.data.totalCount}}</text>
           <image src="../../images/c_icon1.png"></image>
         </view>
         <view class="foot-item comment2 comment3" bindtap="clickFollowEventBtn"> 
@@ -259,7 +259,7 @@
         </view>
         
 </view>
-
+</template>
 <!--分享-->
 <view class="modal-window" hidden="{{isShowShare}}" bindtap="hiddenShare">
 		<image src="../../images/share.png" />
