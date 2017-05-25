@@ -134,6 +134,7 @@ Page({
 				that.getCommentData();
 	        	wx.hideLoading();
 	      },
+		  loginCallback: this.onLoadData,
 	      realFail: function(msg) {
 	        wx.hideLoading();
 	        wx.showToast({

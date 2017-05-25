@@ -29,9 +29,11 @@
 </block>
 
 </block >
+<block wx:if="{{hasMore}}">
 <view class="no_event" hidden="{{isNoData}}">
-	<button type="" loading="{{loading}}" disabled="{{disabled}}" bindtap="showMore" >{{loadText}}</button> 
+	<button type="" loading="{{loading}}" disabled="{{disabled}}" bindtap="showMore" >点击加载更多...</button> 
 </view>
+</block>
 <view class="no_event">{{isNoData}}</view>
 <!--
 class="publishing"

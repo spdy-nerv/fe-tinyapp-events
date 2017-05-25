@@ -1,6 +1,6 @@
 <view class="banner-container">
-    <swiper indicator-dots="true" autoplay="true" interval="5000" duration="500" style="height:{{swiperHeight}}rpx;">
-      <block wx:for="{{picPaths}}" wx:key="unique">  
+    <swiper indicator-dots="true" autoplay="true" interval="5000" duration="500" style="height:{{swiperHeight}}rpx;" current="{{swiperCurr}}">
+      <block wx:for="{{picPaths}}">  
         <swiper-item>  
             <image src="{{item}}" class="slide-image" mode="aspectFill"/> 
             <view class="preview-delete" bindtap="onDeletePreview" data-index="{{index}}" data-path="{{item}}"></view>

@@ -233,7 +233,7 @@
 
 </template>
 
-<view class="footer_container mg20" hidden="{{isAllowComment}}">
+<view class="footer_container mg20" hidden="{{des.isAllowComment}}">
         
 
         <view class="foot-item comment1">

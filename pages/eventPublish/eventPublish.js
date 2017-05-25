@@ -64,7 +64,8 @@ Page({
     addressDetail: '',
     latitude: 0,
     longitude: 0,
-    isAddressDetailFocus: false
+    isAddressDetailFocus: false,
+    swiperCurr: 0
   },
   onLoad:function(options){
     // 生命周期函数--监听页面加载
@@ -73,13 +74,19 @@ Page({
       eventId: options.eventId || ''
     });
     // 如果有eventId，认为是修改，此时需要获取事件的基础信息
+    /*
     if (this.data.eventId) {
         user.login(this.renderBaseInfo, this, true);
     }
+    */
     this.renderCal();
     this.renderEventType();
     this.renderEventRole();
     //this.renderAddress();
+
+    // 解决android和ios下关闭图片选择器后触发onShow的差异
+    this.needOnShow = true;
+    this.system = wx.getSystemInfoSync().system.toUpperCase();
 
     /*
     this.qqMap = new QQMapWX({
@@ -91,6 +98,13 @@ Page({
   },
 
   onShow: function() {
+
+    // 如果是android，并且标记了不需要onshow
+    if (this.system.indexOf('ANDROID') != -1 && !this.needOnShow) {
+      this.needOnShow = true;
+      return;
+    }
+
     if (this.data.eventId) {
         user.login(this.renderBaseInfo, this, true);
     }
@@ -355,6 +369,9 @@ Page({
         rl[i].isChecked = false;
       }
     }
+    this.setData({
+      roleList: rl
+    });
   },
 
   renderAddress: function() {
@@ -381,6 +398,7 @@ Page({
 
     var that = this;
     var count = 5 - this.data.picPaths.length;
+    this.needOnShow = false;
     wx.chooseImage({
       count: count, // 最多可以选择的图片张数，默认9
       sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
@@ -771,7 +789,8 @@ Page({
     var paths = this.data.picPaths;
     paths.splice(index, 1);
     this.setData({
-      picPaths: paths
+      picPaths: paths,
+      swiperCurr: 0
     });
     if (this.data.picPaths.length == 0) {
         this.setData({
@@ -947,6 +966,7 @@ Page({
 
   onTapSelectPoster: function() {
     var that = this;
+    this.needOnShow = false;
     wx.chooseImage({
       count: 1, // 最多可以选择的图片张数，默认9
       sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
