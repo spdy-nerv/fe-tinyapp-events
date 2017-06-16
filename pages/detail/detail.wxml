@@ -1,5 +1,5 @@
 <!--detail.wxml-->
-<scroll-view class="content-wrap" scroll-y="true" scroll-into-view="{{scrollToId}}" scroll-with-animation="true">
+<scroll-view class="content-wrap" scroll-y="true" scroll-into-view="{{scrollToId}}" scroll-with-animation="true" style="padding-bottom: {{scrollPadding}}rpx;">
 <view class="banner-container"> 
 <swiper indicator-dots="{{indicatorDots}}"  
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  

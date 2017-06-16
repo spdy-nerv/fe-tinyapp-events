@@ -361,7 +361,6 @@ top:10rpx;
   height: 100%;
   box-sizing: border-box; 
   overflow-y: hidden;
-  padding-bottom: 100rpx;
 }
 
 .comment-text {

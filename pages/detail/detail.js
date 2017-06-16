@@ -63,6 +63,7 @@ Page({
 		latitude:'',
 		longitude:'',
 		isShowShare:true,
+    scrollPadding: 100,
 		
 
 		//模块Id, moduleType 1:详情事件，2:评论，3：报名，4：投票，5:问卷，6：评价
@@ -350,7 +351,8 @@ Page({
 							//"des.commentData.commentList":data,
 							"des.commentData": res.data.resultData,
 							"des.commentData.data.commentList": data,
-							"des.isAllowComment":!res.data.resultData.config.isAllowComment
+							"des.isAllowComment":!res.data.resultData.config.isAllowComment,
+              scrollPadding: res.data.resultData.config.isAllowComment ? '100': '0'
 						});
 						
 						console.log(that.data.des.commentData);
